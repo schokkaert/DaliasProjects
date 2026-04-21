@@ -1,0 +1,26 @@
+{
+  "lastUpdated": "2026-04-21",
+  "name": "project-name",
+  "host": "example.com",
+  "port": 22,
+  "protocol": "sftp",
+  "connectTimeout": 20000,
+  "username": "your-username",
+  "password": "your-password",
+  "remotePath": "/var/www/html/",
+  "uploadOnSave": false,
+  "debug": false,
+  "trace": false,
+  "ignore": [
+    ".vscode",
+    ".git",
+    "uploads",
+    "Objects",
+    "sftp.json",
+    "*.code-workspace",
+    ".gitignore",
+    "README.md",
+    "*.docx"
+  ]
+}
+
