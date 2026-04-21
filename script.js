@@ -1,8 +1,7 @@
 const SITE = {
   brand: {
     title: "CHATEAUX REAL ESTATE",
-    logo:
-      "https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/d18c598e-bd26-4aee-8f3b-18853eaa0af4/CRE.png",
+    logo: "./Webimages/chateaux-logo.svg",
   },
   nav: [
     { label: "Home", href: "./index.html", key: "home" },

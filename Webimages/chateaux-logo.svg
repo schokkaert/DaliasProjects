@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 220" role="img" aria-labelledby="title desc">
+  <title id="title">Chateaux Real Estate logo</title>
+  <desc id="desc">Monochrome wordmark with a geometric emblem for Chateaux Real Estate.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2b2b2b"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+  </defs>
+  <rect width="860" height="220" fill="none"/>
+  <g transform="translate(36 28)" fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M70 18 118 46v56l-48 28-48-28V46z" stroke-width="10"/>
+    <path d="M58 58 90 76 58 94z" fill="url(#g)" stroke="none"/>
+    <path d="M118 36h20" stroke-width="8"/>
+    <path d="M118 58h36" stroke-width="8"/>
+    <circle cx="162" cy="36" r="10" fill="none" stroke-width="8"/>
+    <circle cx="136" cy="58" r="10" fill="none" stroke-width="8"/>
+  </g>
+  <g fill="#2b2b2b" transform="translate(246 60)">
+    <text x="0" y="54" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="70" font-weight="400" letter-spacing="-2">chateaux</text>
+    <text x="0" y="126" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="66" font-weight="300" letter-spacing="-1.5">real estate</text>
+  </g>
+</svg>
