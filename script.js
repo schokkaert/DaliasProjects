@@ -424,10 +424,10 @@ function renderFooter() {
     <div class="site-footer__inner container">
       <div class="site-footer__column">
         <strong>Chateaux Real Estate</strong>
-        <p>Thonissenlaan 71</p>
-        <p>3500 Hasselt</p>
-        <a href="tel:+3211260480">+32 (0)11 260 480</a>
-        <a href="mailto:info@grouponclin.be">info@grouponclin.be</a>
+        <p>Bannerlaan 50</p>
+        <p>2280 Grobbendonk</p>
+        <a href="tel:+3214302100">+32 (0)1 430 21 00</a>
+        <a href="mailto:sales@disseurope.be">sales@disseurope.be</a>
       </div>
       <div class="site-footer__column">
         <strong>Overzicht</strong>
