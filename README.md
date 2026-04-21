@@ -12,10 +12,12 @@ Static rebuild of the Chateaux Real Estate website in plain HTML/CSS/JS.
 - `cookies.html`
 - `voorwaarden.html`
 - `project.html?slug=...`
+- `admin.html`
 
 ## Notes
 
 - The design uses the same warm paper background, dark typography and red accent language as the live site.
 - The project cards and project detail pages are data-driven in `script.js`.
 - The cookie banner is local-only and stored in `localStorage`.
-
+- The admin area is a front-end demo with localStorage persistence for project edits and inquiry status changes.
+- Demo admin login: `admin` / `chateaux2026`.

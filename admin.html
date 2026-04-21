@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin — CHATEAUX REAL ESTATE</title>
+    <meta
+      name="description"
+      content="Beheeromgeving voor Chateaux Real Estate: projecten, aanvragen en statusupdates."
+    />
+    <link rel="canonical" href="./admin.html" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body data-page="admin" data-active-nav="admin">
+    <div class="announcement">
+      <div class="container announcement__inner">
+        <span>Beheeromgeving</span>
+        <span>Demo login: admin / chateaux2026</span>
+      </div>
+    </div>
+
+    <main class="site-main admin-page">
+      <section class="admin-hero">
+        <div class="container admin-hero__grid">
+          <div class="admin-hero__copy">
+            <p class="eyebrow">Admin dashboard</p>
+            <h1>Projecten, leads en statusbeheer in één overzicht.</h1>
+            <p class="lead">
+              Deze beheerlaag laat je projecten bijwerken, aanvragen opvolgen en
+              de catalogus in een herkenbare Chateaux-stijl beheren.
+            </p>
+            <div class="button-row">
+              <a class="btn btn--secondary" href="./index.html">Terug naar site</a>
+              <button class="btn btn--primary" type="button" data-admin-logout hidden>Afbmelden</button>
+            </div>
+          </div>
+
+          <article class="admin-auth" data-admin-auth>
+            <p class="eyebrow">Toegang</p>
+            <h2>Admin login</h2>
+            <p>Gebruik de demo-inlog om de beheeromgeving te openen.</p>
+            <form class="admin-auth__form" data-admin-login-form>
+              <label>
+                Gebruikersnaam
+                <input type="text" name="username" autocomplete="username" placeholder="admin" />
+              </label>
+              <label>
+                Wachtwoord
+                <input type="password" name="password" autocomplete="current-password" placeholder="chateaux2026" />
+              </label>
+              <p class="admin-message" data-admin-login-message></p>
+              <button class="btn btn--primary" type="submit">Inloggen</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" data-admin-dashboard hidden>
+        <div class="container admin-layout">
+          <aside class="admin-sidebar">
+            <article class="admin-panel">
+              <p class="eyebrow">Snelkoppelingen</p>
+              <div class="admin-links">
+                <a href="#admin-projecten">Projectbeheer</a>
+                <a href="#admin-aanvragen">Aanvragen</a>
+                <a href="#admin-editor">Editor</a>
+              </div>
+            </article>
+
+            <article class="admin-panel">
+              <p class="eyebrow">Status</p>
+              <div class="admin-kpi-grid" data-admin-kpis></div>
+            </article>
+
+            <article class="admin-panel">
+              <p class="eyebrow">Onderhoud</p>
+              <p>
+                Hier beheer je de zichtbare projectcatalogus. Aanpassingen worden
+                lokaal opgeslagen en zijn meteen zichtbaar op de publieke pagina’s.
+              </p>
+              <button class="btn btn--secondary btn--small" type="button" data-admin-reset>
+                Reset demo-data
+              </button>
+            </article>
+          </aside>
+
+          <div class="admin-content">
+            <section class="admin-panel" id="admin-projecten">
+              <div class="section__heading">
+                <div>
+                  <p class="eyebrow">Projectbeheer</p>
+                  <h2>Catalogus en zichtbaarheid</h2>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table class="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Project</th>
+                      <th>Type</th>
+                      <th>Status</th>
+                      <th>Bron</th>
+                      <th>Actie</th>
+                    </tr>
+                  </thead>
+                  <tbody data-admin-project-table></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="admin-panel" id="admin-editor">
+              <div class="section__heading">
+                <div>
+                  <p class="eyebrow">Editor</p>
+                  <h2>Pas de geselecteerde projectkaart aan</h2>
+                </div>
+              </div>
+
+              <div class="admin-editor__top">
+                <label class="admin-select">
+                  Selecteer project
+                  <select data-admin-project-select></select>
+                </label>
+                <span class="admin-muted" data-admin-status>Wijzigingen worden lokaal opgeslagen.</span>
+              </div>
+
+              <form class="admin-editor__form" data-admin-project-form>
+                <label>
+                  Titel
+                  <input type="text" name="title" />
+                </label>
+                <label>
+                  Locatie
+                  <input type="text" name="location" />
+                </label>
+                <label>
+                  Type
+                  <input type="text" name="type" />
+                </label>
+                <label>
+                  Status
+                  <input type="text" name="status" />
+                </label>
+                <label class="admin-span-2">
+                  Samenvatting
+                  <textarea name="summary" rows="4"></textarea>
+                </label>
+                <label class="admin-span-2">
+                  Quote
+                  <textarea name="quote" rows="3"></textarea>
+                </label>
+                <label class="admin-span-2">
+                  Context
+                  <textarea name="context" rows="4"></textarea>
+                </label>
+                <label>
+                  CTA label
+                  <input type="text" name="ctaLabel" />
+                </label>
+                <label class="admin-span-2">
+                  CTA link
+                  <input type="text" name="cta" />
+                </label>
+                <label class="admin-span-2">
+                  Hero image URL
+                  <input type="text" name="hero" />
+                </label>
+                <div class="admin-span-2 button-row">
+                  <button class="btn btn--primary" type="submit" data-admin-project-save>
+                    Opslaan
+                  </button>
+                </div>
+              </form>
+            </section>
+
+            <section class="admin-panel" id="admin-aanvragen">
+              <div class="section__heading">
+                <div>
+                  <p class="eyebrow">Aanvragen</p>
+                  <h2>Lead inbox en opvolging</h2>
+                </div>
+              </div>
+              <div class="admin-inquiry-grid" data-admin-inquiries></div>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

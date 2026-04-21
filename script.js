@@ -16,6 +16,13 @@ const SITE = {
     { label: "Facebook", href: "https://www.facebook.com/ChateauxRealEstate.Hasselt" },
     { label: "LinkedIn", href: "https://www.linkedin.com/company/chateaux-real-estate/" },
   ],
+  admin: {
+    sessionKey: "cre-admin-session",
+    projectKey: "cre-admin-projects",
+    inquiryKey: "cre-admin-inquiries",
+    username: "admin",
+    password: "chateaux2026",
+  },
   projects: [
     {
       slug: "paal",
@@ -261,7 +268,38 @@ const PAGE_TITLES = {
   legal: "CHATEAUX REAL ESTATE",
   land-search: "Grond gezocht — CHATEAUX REAL ESTATE",
   project: "Project — CHATEAUX REAL ESTATE",
+  admin: "Admin — CHATEAUX REAL ESTATE",
 };
+
+const DEFAULT_INQUIRIES = [
+  {
+    id: "lead-001",
+    name: "Verantwoordelijke bouwgrond",
+    email: "info@voorbeeld.be",
+    project: "Grond gezocht",
+    status: "Nieuw",
+    message: "Interesse in een discreet gesprek over een site in de regio Hasselt.",
+    date: "2026-04-21",
+  },
+  {
+    id: "lead-002",
+    name: "Investeerder residentieel",
+    email: "hello@voorbeeld.be",
+    project: "Quartier Bleu",
+    status: "In behandeling",
+    message: "Vraag naar beschikbaarheid van gelijkaardige residentiële opportuniteiten.",
+    date: "2026-04-19",
+  },
+  {
+    id: "lead-003",
+    name: "Projectpartner",
+    email: "contact@voorbeeld.be",
+    project: "Bunderhof",
+    status: "Afgesloten",
+    message: "Afspraak ingepland voor verdere afstemming over ontwikkeling en timing.",
+    date: "2026-04-16",
+  },
+];
 
 function escapeHtml(value) {
   return String(value)
@@ -271,8 +309,65 @@ function escapeHtml(value) {
     .replace(/"/g, "&quot;");
 }
 
+function safeParse(json, fallback) {
+  try {
+    return JSON.parse(json);
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function safeStorageGet(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? safeParse(value, fallback) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function safeStorageSet(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+function getProjectCatalog() {
+  const stored = safeStorageGet(SITE.admin.projectKey, null);
+  if (!Array.isArray(stored)) {
+    return SITE.projects.map((project) => ({ ...project }));
+  }
+
+  const overrides = new Map(stored.map((project) => [project.slug, project]));
+  return SITE.projects.map((project) => ({
+    ...project,
+    ...(overrides.get(project.slug) || {}),
+  }));
+}
+
+function getInquiryQueue() {
+  const stored = safeStorageGet(SITE.admin.inquiryKey, null);
+  if (Array.isArray(stored) && stored.length) {
+    return stored;
+  }
+  return DEFAULT_INQUIRIES.map((item) => ({ ...item }));
+}
+
+function saveInquiryQueue(items) {
+  safeStorageSet(SITE.admin.inquiryKey, items);
+}
+
+function saveProjectCatalog(items) {
+  safeStorageSet(SITE.admin.projectKey, items);
+}
+
 function renderHeader() {
   const active = document.body.dataset.activeNav || "home";
+  const mount = document.getElementById("site-header");
+  if (!mount) return;
   const links = SITE.nav
     .map(
       (item) => `
@@ -320,10 +415,12 @@ function renderHeader() {
     </div>
   `;
 
-  document.getElementById("site-header").innerHTML = header;
+  mount.innerHTML = header;
 }
 
 function renderFooter() {
+  const mount = document.getElementById("site-footer");
+  if (!mount) return;
   const footer = `
     <div class="site-footer__inner container">
       <div class="site-footer__column">
@@ -350,17 +447,19 @@ function renderFooter() {
         <strong>Website</strong>
         <p>Gemaakt door COCO media</p>
         <a href="./cookies.html">Cookiebeleid</a>
+        <a href="./admin.html">Admin</a>
       </div>
     </div>
     <div class="site-footer__bottom container">
       <span>© <span data-year></span> CHATEAUX REAL ESTATE. Alle rechten zijn voorbehouden.</span>
     </div>
   `;
-  document.getElementById("site-footer").innerHTML = footer;
+  mount.innerHTML = footer;
 }
 
 function renderProjectCards(target, projects, featuredOnly = false) {
-  const selected = featuredOnly ? projects.slice(0, 6) : projects;
+  const catalog = projects && projects.length ? projects : getProjectCatalog();
+  const selected = featuredOnly ? catalog.slice(0, 6) : catalog;
   target.innerHTML = selected
     .map(
       (project) => `
@@ -381,7 +480,7 @@ function renderProjectCards(target, projects, featuredOnly = false) {
 }
 
 function renderGalleryRail(target) {
-  const railProjects = SITE.projects.slice(1, 7);
+  const railProjects = getProjectCatalog().slice(1, 7);
   target.innerHTML = railProjects
     .map(
       (project) => `
@@ -400,7 +499,8 @@ function getSlug() {
 
 function renderProjectPage() {
   const slug = getSlug();
-  const project = SITE.projects.find((item) => item.slug === slug) || SITE.projects[0];
+  const catalog = getProjectCatalog();
+  const project = catalog.find((item) => item.slug === slug) || catalog[0];
   document.title = `${project.title} — CHATEAUX REAL ESTATE`;
 
   const location = document.querySelector("[data-project-location]");
@@ -490,13 +590,13 @@ function initPageContent() {
 
   if (page === "home") {
     const grid = document.querySelector('[data-project-grid="featured"]');
-    if (grid) renderProjectCards(grid, SITE.projects, true);
+    if (grid) renderProjectCards(grid, getProjectCatalog(), true);
   }
 
   if (page === "projects") {
     const grid = document.querySelector('[data-project-grid="all"]');
     const rail = document.querySelector("[data-gallery-rail]");
-    if (grid) renderProjectCards(grid, SITE.projects, false);
+    if (grid) renderProjectCards(grid, getProjectCatalog(), false);
     if (rail) renderGalleryRail(rail);
   }
 
@@ -515,10 +615,273 @@ function initLinks() {
   });
 }
 
-renderHeader();
-renderFooter();
-setYear();
-initMenu();
-initCookieBanner();
-initPageContent();
-initLinks();
+function isAdminSignedIn() {
+  return safeStorageGet(SITE.admin.sessionKey, false) === true;
+}
+
+function setAdminSignedIn(value) {
+  safeStorageSet(SITE.admin.sessionKey, value === true);
+}
+
+function renderAdminKpis(container, projects, inquiries) {
+  const active = projects.filter((project) => !/verkocht/i.test(project.status)).length;
+  const sold = projects.filter((project) => /verkocht/i.test(project.status)).length;
+  const external = projects.filter((project) => project.external).length;
+  const newLeads = inquiries.filter((item) => item.status === "Nieuw").length;
+
+  container.innerHTML = `
+    <article class="admin-kpi">
+      <span>Projecten</span>
+      <strong>${projects.length}</strong>
+      <small>Opgenomen in de catalogus</small>
+    </article>
+    <article class="admin-kpi">
+      <span>Actief</span>
+      <strong>${active}</strong>
+      <small>Niet als verkocht gemarkeerd</small>
+    </article>
+    <article class="admin-kpi">
+      <span>Verkocht</span>
+      <strong>${sold}</strong>
+      <small>Projecten in afronding</small>
+    </article>
+    <article class="admin-kpi">
+      <span>Extern</span>
+      <strong>${external}</strong>
+      <small>Doorverwijzingen naar microsites</small>
+    </article>
+    <article class="admin-kpi">
+      <span>Nieuwe leads</span>
+      <strong>${newLeads}</strong>
+      <small>Onbehandelde aanvragen</small>
+    </article>
+  `;
+}
+
+function renderAdminProjectTable(container, projects) {
+  container.innerHTML = projects
+    .map(
+      (project) => `
+        <tr>
+          <td>
+            <strong>${escapeHtml(project.title)}</strong>
+            <div class="admin-muted">${escapeHtml(project.location)}</div>
+          </td>
+          <td>${escapeHtml(project.type)}</td>
+          <td><span class="status-pill">${escapeHtml(project.status)}</span></td>
+          <td>${project.external ? "Extern" : "Intern"}</td>
+          <td>
+            <button class="text-link" type="button" data-admin-select="${escapeHtml(project.slug)}">Bewerken</button>
+          </td>
+        </tr>
+      `
+    )
+    .join("");
+}
+
+function renderAdminInquiries(container, inquiries) {
+  container.innerHTML = inquiries
+    .map(
+      (item) => `
+        <article class="admin-inquiry">
+          <div class="admin-inquiry__head">
+            <div>
+              <strong>${escapeHtml(item.name)}</strong>
+              <p>${escapeHtml(item.email)}</p>
+            </div>
+            <span class="status-pill">${escapeHtml(item.status)}</span>
+          </div>
+          <p class="admin-inquiry__project">${escapeHtml(item.project)}</p>
+          <p>${escapeHtml(item.message)}</p>
+          <div class="admin-inquiry__foot">
+            <time>${escapeHtml(item.date)}</time>
+            <button class="text-link" type="button" data-admin-inquiry="${escapeHtml(item.id)}">
+              Status wisselen
+            </button>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function fillAdminProjectForm(form, project) {
+  if (!form || !project) return;
+  form.dataset.selected = project.slug;
+  form.querySelector('[name="title"]').value = project.title || "";
+  form.querySelector('[name="location"]').value = project.location || "";
+  form.querySelector('[name="type"]').value = project.type || "";
+  form.querySelector('[name="status"]').value = project.status || "";
+  form.querySelector('[name="summary"]').value = project.summary || "";
+  form.querySelector('[name="quote"]').value = project.quote || "";
+  form.querySelector('[name="context"]').value = project.context || "";
+  form.querySelector('[name="ctaLabel"]').value = project.ctaLabel || "";
+  form.querySelector('[name="cta"]').value = project.cta || "";
+  const hero = form.querySelector('[name="hero"]');
+  if (hero) hero.value = project.hero || "";
+}
+
+function readAdminProjectForm(form, currentProject) {
+  return {
+    ...currentProject,
+    title: form.querySelector('[name="title"]').value.trim(),
+    location: form.querySelector('[name="location"]').value.trim(),
+    type: form.querySelector('[name="type"]').value.trim(),
+    status: form.querySelector('[name="status"]').value.trim(),
+    summary: form.querySelector('[name="summary"]').value.trim(),
+    quote: form.querySelector('[name="quote"]').value.trim(),
+    context: form.querySelector('[name="context"]').value.trim(),
+    ctaLabel: form.querySelector('[name="ctaLabel"]').value.trim(),
+    cta: form.querySelector('[name="cta"]').value.trim(),
+    hero: form.querySelector('[name="hero"]').value.trim(),
+  };
+}
+
+function initAdminPage() {
+  const authCard = document.querySelector("[data-admin-auth]");
+  const dashboard = document.querySelector("[data-admin-dashboard]");
+  const loginForm = document.querySelector("[data-admin-login-form]");
+  const loginMessage = document.querySelector("[data-admin-login-message]");
+  const logoutButton = document.querySelector("[data-admin-logout]");
+  const kpis = document.querySelector("[data-admin-kpis]");
+  const table = document.querySelector("[data-admin-project-table]");
+  const inquiryList = document.querySelector("[data-admin-inquiries]");
+  const select = document.querySelector("[data-admin-project-select]");
+  const form = document.querySelector("[data-admin-project-form]");
+  const saveButton = document.querySelector("[data-admin-project-save]");
+  const resetButton = document.querySelector("[data-admin-project-reset]");
+
+  const syncDashboard = () => {
+    const currentProjects = getProjectCatalog();
+    const currentInquiries = getInquiryQueue();
+    const currentSelection = select?.value || form?.dataset.selected || currentProjects[0]?.slug;
+
+    if (select) {
+      select.innerHTML = currentProjects
+        .map(
+          (project) =>
+            `<option value="${escapeHtml(project.slug)}">${escapeHtml(project.title)} — ${escapeHtml(project.status)}</option>`
+        )
+        .join("");
+      select.value = currentSelection;
+    }
+
+    if (kpis) renderAdminKpis(kpis, currentProjects, currentInquiries);
+    if (table) renderAdminProjectTable(table, currentProjects);
+    if (inquiryList) renderAdminInquiries(inquiryList, currentInquiries);
+
+    const selectedSlug = select?.value || currentSelection;
+    const selected = currentProjects.find((project) => project.slug === selectedSlug) || currentProjects[0];
+    fillAdminProjectForm(form, selected);
+  };
+
+  const showDashboard = () => {
+    if (authCard) authCard.hidden = true;
+    if (dashboard) dashboard.hidden = false;
+    if (logoutButton) logoutButton.hidden = false;
+    syncDashboard();
+  };
+
+  const showAuth = () => {
+    if (authCard) authCard.hidden = false;
+    if (dashboard) dashboard.hidden = true;
+    if (logoutButton) logoutButton.hidden = true;
+  };
+
+  if (isAdminSignedIn()) {
+    showDashboard();
+  } else {
+    showAuth();
+  }
+
+  loginForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const username = loginForm.querySelector('[name="username"]').value.trim();
+    const password = loginForm.querySelector('[name="password"]').value.trim();
+
+    if (username === SITE.admin.username && password === SITE.admin.password) {
+      setAdminSignedIn(true);
+      if (loginMessage) loginMessage.textContent = "";
+      showDashboard();
+      return;
+    }
+
+    if (loginMessage) {
+      loginMessage.textContent = "Onjuiste toegangsgegevens. Gebruik de demo inlog.";
+    }
+  });
+
+  logoutButton?.addEventListener("click", () => {
+    setAdminSignedIn(false);
+    showAuth();
+  });
+
+  select?.addEventListener("change", () => {
+    const currentProjects = getProjectCatalog();
+    const selectedSlug = select.value;
+    const selected = currentProjects.find((project) => project.slug === selectedSlug) || currentProjects[0];
+    fillAdminProjectForm(form, selected);
+  });
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const currentProjects = getProjectCatalog();
+    const selectedSlug = form.dataset.selected || select?.value || currentProjects[0]?.slug;
+    const nextProjects = currentProjects.map((project) =>
+      project.slug === selectedSlug ? readAdminProjectForm(form, project) : project
+    );
+
+    saveProjectCatalog(nextProjects);
+    if (saveButton) {
+      const original = saveButton.textContent;
+      saveButton.textContent = "Opgeslagen";
+      window.setTimeout(() => {
+        saveButton.textContent = original;
+      }, 1200);
+    }
+    syncDashboard();
+  });
+
+  table?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-admin-select]");
+    if (!trigger) return;
+    const slug = trigger.getAttribute("data-admin-select");
+    if (select) select.value = slug;
+    const currentProjects = getProjectCatalog();
+    const selected = currentProjects.find((project) => project.slug === slug) || currentProjects[0];
+    fillAdminProjectForm(form, selected);
+  });
+
+  inquiryList?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-admin-inquiry]");
+    if (!trigger) return;
+    const id = trigger.getAttribute("data-admin-inquiry");
+    const currentQueue = getInquiryQueue().map((item) => {
+      if (item.id !== id) return item;
+      const cycle = { Nieuw: "In behandeling", "In behandeling": "Afgesloten", Afgesloten: "Nieuw" };
+      return { ...item, status: cycle[item.status] || "In behandeling" };
+    });
+    saveInquiryQueue(currentQueue);
+    syncDashboard();
+  });
+
+  resetButton?.addEventListener("click", () => {
+    localStorage.removeItem(SITE.admin.projectKey);
+    localStorage.removeItem(SITE.admin.inquiryKey);
+    syncDashboard();
+  });
+}
+
+const activePage = document.body.dataset.page;
+
+if (activePage === "admin") {
+  initAdminPage();
+} else {
+  renderHeader();
+  renderFooter();
+  setYear();
+  initMenu();
+  initCookieBanner();
+  initPageContent();
+  initLinks();
+}
