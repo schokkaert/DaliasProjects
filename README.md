@@ -1,22 +1,21 @@
-# Dalias Projects
+# Chateaux Real Estate rebuild
 
-Fresh starter for a new website project.
+Static rebuild of the Chateaux Real Estate website in plain HTML/CSS/JS.
 
-## Structure
+## Pages
 
-- `index.html` - main page
-- `styles.css` - layout and visual design
-- `script.js` - small interactions
-- `Images/` - local image assets
-- `Webimages/` - web-ready image assets
+- `index.html`
+- `projecten.html`
+- `over.html`
+- `grond-gezocht.html`
+- `contact.html`
+- `cookies.html`
+- `voorwaarden.html`
+- `project.html?slug=...`
 
-## Local setup
+## Notes
 
-Open `index.html` in a browser or serve the folder with any static server.
-
-## Git and deploy
-
-- Git is initialized on `main`.
-- The SFTP config is kept local in `.vscode/sftp.json` and ignored by git.
-- Copy `.vscode/sftp.example.json` if you need a clean deployment template for a new machine or a GitHub clone.
+- The design uses the same warm paper background, dark typography and red accent language as the live site.
+- The project cards and project detail pages are data-driven in `script.js`.
+- The cookie banner is local-only and stored in `localStorage`.
 
