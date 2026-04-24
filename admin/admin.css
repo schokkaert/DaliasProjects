@@ -743,8 +743,44 @@ body.admin-app {
   align-items: start;
   justify-content: space-between;
   gap: 10px;
+  position: sticky;
+  top: 10px;
+  z-index: 3;
+  margin: -2px -2px 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 251, 245, 0.94);
+  box-shadow: 0 10px 22px rgba(43, 34, 22, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.admin-project-card.is-active .admin-project-card__top {
+  background: rgba(244, 250, 245, 0.96);
+}
+
+.admin-project-card.is-inactive .admin-project-card__top {
+  background: rgba(251, 247, 240, 0.96);
+}
+
+.admin-project-card__top::before {
+  content: "Bezig met";
+  position: absolute;
+  left: 12px;
+  top: -9px;
+  padding: 2px 8px;
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  color: rgba(43, 43, 43, 0.52);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-project-card__top {
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
 }
 
 .admin-project-card__summary {

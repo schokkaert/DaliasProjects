@@ -680,8 +680,8 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
     <title><?= maatlas_admin_e($title) ?> - Dalia Projects Admin</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="../Webimages/Logo.png" />
-    <link rel="stylesheet" href="../styles.css?v=20260424-project-menu-modern" />
-    <link rel="stylesheet" href="./admin.css?v=20260424-project-menu-modern" />
+    <link rel="stylesheet" href="../styles.css?v=20260424-project-sticky-head" />
+    <link rel="stylesheet" href="./admin.css?v=20260424-project-sticky-head" />
   </head>
   <body class="admin-app">
     <header class="admin-topbar">
@@ -768,7 +768,7 @@ function maatlas_admin_render_footer(): void
       document.querySelectorAll('[data-floating-submit]').forEach((form) => {
         if (form.querySelector('.admin-floating-submit')) return;
 
-        const submit = form.querySelector('button[type="submit"], input[type="submit"]');
+        const submit = form.querySelector('[data-floating-submit-source]') || form.querySelector('button[type="submit"], input[type="submit"]');
         if (!submit) return;
 
         const dock = document.createElement('div');

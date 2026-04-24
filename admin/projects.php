@@ -745,7 +745,7 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
             </div>
             <div class="admin-actions admin-actions--project">
               <button class="btn btn--secondary btn--small" type="submit" name="toggle_project" value="<?= maatlas_admin_e($index) ?>" formnovalidate>
-                <?= $isActive ? 'Deactiveer' : 'Activeer' ?>
+                <?= $isActive ? 'Verberg op site' : 'Toon op site' ?>
               </button>
               <button class="btn btn--danger btn--small" type="submit" name="delete_project" value="<?= maatlas_admin_e($index) ?>" formnovalidate onclick="return confirm('Project verwijderen? Niet-gedeelde lokale projectbeelden worden ook verwijderd.');">
                 Verwijder
@@ -886,7 +886,7 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
       <?php endif; ?>
 
       <div id="opslaan" class="button-row admin-settings-section">
-        <button class="btn btn--primary" type="submit">Projecten opslaan</button>
+        <button class="btn btn--primary" type="submit" data-floating-submit-source>Projecten opslaan</button>
       </div>
     </form>
   </article>
