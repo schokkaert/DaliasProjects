@@ -206,7 +206,7 @@ maatlas_admin_render_header('Admin', $currentAdmin);
 
       <fieldset id="titelbalk" class="admin-settings-section">
         <legend>Titelbalk onder de header</legend>
-        <div class="admin-short-fields" data-columns="4">
+        <div class="admin-short-fields">
           <label class="admin-short-field">
             Hoogte titelbalk
             <input type="number" name="pageTitleBarHeight" min="44" max="140" step="1" inputmode="numeric" value="<?= maatlas_admin_e($settings['pageTitleBarHeight'] ?? 72) ?>" />
