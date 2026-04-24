@@ -560,6 +560,12 @@ body.admin-app {
   min-width: 0;
 }
 
+.admin-settings-panel > h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: 1.1;
+}
+
 .admin-form--single {
   grid-template-columns: 1fr;
 }
