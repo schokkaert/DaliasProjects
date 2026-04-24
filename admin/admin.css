@@ -334,6 +334,25 @@ body.admin-app {
   font-size: 0.94rem;
 }
 
+.admin-short-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  align-items: end;
+}
+
+.admin-short-field {
+  flex: 0 1 9rem;
+  width: 9rem;
+  min-width: 7.5rem;
+}
+
+.admin-short-field input,
+.admin-short-field select,
+.admin-short-field textarea {
+  width: 100%;
+}
+
 .admin-form input,
 .admin-form select,
 .admin-form textarea {
@@ -683,6 +702,11 @@ body.admin-app {
     position: static;
   }
 
+  .admin-short-field {
+    flex-basis: calc(50% - 6px);
+    width: auto;
+  }
+
   .admin-session-indicator,
   .admin-floating-submit {
     left: 12px;
@@ -700,5 +724,9 @@ body.admin-app {
 
   .admin-floating-submit .btn {
     width: 100%;
+  }
+
+  .admin-short-field {
+    flex-basis: 100%;
   }
 }

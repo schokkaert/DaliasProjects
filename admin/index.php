@@ -206,18 +206,20 @@ maatlas_admin_render_header('Admin', $currentAdmin);
 
       <fieldset id="titelbalk" class="admin-settings-section">
         <legend>Titelbalk onder de header</legend>
-        <label>
-          Hoogte titelbalk
-          <input type="number" name="pageTitleBarHeight" min="44" max="140" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarHeight'] ?? 72) ?>" />
-        </label>
-        <label>
-          Afronding links onderaan
-          <input type="number" name="pageTitleBarRadiusLeft" min="0" max="80" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusLeft'] ?? 18) ?>" />
-        </label>
-        <label>
-          Afronding rechts onderaan
-          <input type="number" name="pageTitleBarRadiusRight" min="0" max="80" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusRight'] ?? 18) ?>" />
-        </label>
+        <div class="admin-short-fields" data-columns="4">
+          <label class="admin-short-field">
+            Hoogte titelbalk
+            <input type="number" name="pageTitleBarHeight" min="44" max="140" step="1" inputmode="numeric" value="<?= maatlas_admin_e($settings['pageTitleBarHeight'] ?? 72) ?>" />
+          </label>
+          <label class="admin-short-field">
+            Afronding links onderaan
+            <input type="number" name="pageTitleBarRadiusLeft" min="0" max="80" step="1" inputmode="numeric" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusLeft'] ?? 18) ?>" />
+          </label>
+          <label class="admin-short-field">
+            Afronding rechts onderaan
+            <input type="number" name="pageTitleBarRadiusRight" min="0" max="80" step="1" inputmode="numeric" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusRight'] ?? 18) ?>" />
+          </label>
+        </div>
         <p class="admin-help">De bovenkant blijft altijd recht zodat de balk visueel aan de header hangt. Alleen de onderste linker- en rechterhoek zijn instelbaar.</p>
       </fieldset>
 
