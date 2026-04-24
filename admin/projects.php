@@ -673,7 +673,7 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
   <article class="admin-stat">
     <span>Lopend</span>
     <strong><?= maatlas_admin_e(dalia_admin_project_stat_count($projects, 'current')) ?></strong>
-    <small>Projecten in uitvoering</small>
+    <small>Projecten in groep lopend</small>
   </article>
 </section>
 
