@@ -465,6 +465,27 @@ body.admin-app {
   margin-bottom: 6px;
 }
 
+.admin-settings-menu__group {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-settings-menu__group + .admin-settings-menu__group {
+  margin-top: 4px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(43, 43, 43, 0.08);
+}
+
+.admin-settings-menu__title {
+  margin: 0;
+  padding: 0 4px;
+  color: rgba(43, 43, 43, 0.58);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .admin-settings-menu a {
   position: relative;
   display: flex;
@@ -541,6 +562,51 @@ body.admin-app {
 
 .admin-form--single {
   grid-template-columns: 1fr;
+}
+
+.admin-settings-group {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(43, 43, 43, 0.1);
+  border-radius: 18px;
+}
+
+.admin-settings-group--layout {
+  background:
+    linear-gradient(180deg, rgba(248, 244, 237, 0.92), rgba(255, 255, 255, 0.68));
+}
+
+.admin-settings-group--content {
+  background:
+    linear-gradient(180deg, rgba(244, 249, 244, 0.92), rgba(255, 255, 255, 0.68));
+}
+
+.admin-settings-group__intro {
+  display: grid;
+  gap: 6px;
+  padding: 0 2px 4px;
+}
+
+.admin-settings-group__eyebrow {
+  margin: 0;
+  color: rgba(43, 43, 43, 0.56);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.admin-settings-group__intro h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+}
+
+.admin-settings-group__intro p {
+  margin: 0;
+  max-width: 64ch;
+  color: rgba(43, 43, 43, 0.72);
+  line-height: 1.55;
 }
 
 .admin-settings-section {
@@ -756,6 +822,10 @@ body.admin-app {
 
   .admin-settings-menu {
     position: static;
+  }
+
+  .admin-settings-group {
+    padding: 14px;
   }
 
   .admin-short-fields {
