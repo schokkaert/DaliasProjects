@@ -724,18 +724,26 @@ body.admin-app {
 
 .admin-project-card {
   gap: 10px !important;
-  padding: 12px !important;
-  border-radius: 16px;
+  padding: 14px !important;
+  border-radius: 22px;
+  border-width: 1px;
+  box-shadow:
+    0 18px 36px rgba(43, 34, 22, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .admin-project-card.is-active {
-  border-color: rgba(29, 122, 63, 0.2);
-  background: linear-gradient(180deg, rgba(244, 250, 245, 0.96), rgba(255, 255, 255, 0.72));
+  border-color: rgba(29, 122, 63, 0.14);
+  background:
+    radial-gradient(circle at top right, rgba(29, 122, 63, 0.07), transparent 28%),
+    linear-gradient(180deg, rgba(248, 252, 249, 0.98), rgba(255, 255, 255, 0.78));
 }
 
 .admin-project-card.is-inactive {
-  border-color: rgba(161, 101, 19, 0.18);
-  background: linear-gradient(180deg, rgba(251, 247, 240, 0.96), rgba(255, 255, 255, 0.72));
+  border-color: rgba(161, 101, 19, 0.14);
+  background:
+    radial-gradient(circle at top right, rgba(161, 101, 19, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(252, 249, 244, 0.98), rgba(255, 255, 255, 0.78));
 }
 
 .admin-project-card__top {
@@ -751,7 +759,7 @@ body.admin-app {
   border: 1px solid rgba(43, 43, 43, 0.08);
   border-radius: 14px;
   background: rgba(255, 251, 245, 0.94);
-  box-shadow: 0 10px 22px rgba(43, 34, 22, 0.06);
+  box-shadow: 0 12px 24px rgba(43, 34, 22, 0.06);
   backdrop-filter: blur(10px);
 }
 
@@ -815,6 +823,10 @@ body.admin-app {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
+  padding: 10px 12px 12px;
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.56);
 }
 
 .admin-project-grid--meta {
@@ -851,10 +863,10 @@ body.admin-app {
 .admin-project-images {
   display: grid;
   gap: 8px;
-  padding: 10px 12px;
-  border: 1px solid rgba(43, 43, 43, 0.1);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.56);
+  padding: 12px 14px;
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
 }
 
 .admin-project-images__head {
@@ -939,9 +951,9 @@ body.admin-app {
 }
 
 .admin-project-extra {
-  border: 1px solid rgba(43, 43, 43, 0.1);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
 }
 
 .admin-project-extra summary {
@@ -985,7 +997,8 @@ body.admin-app {
   gap: 12px;
   padding: 14px 16px;
   border: 1px dashed rgba(43, 43, 43, 0.18);
-  background: rgba(255, 255, 255, 0.62);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.68);
 }
 
 .admin-project-empty p {
@@ -1044,6 +1057,27 @@ body.admin-app {
   padding: 14px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.62);
+}
+
+.admin-stat--soft {
+  border-color: rgba(43, 43, 43, 0.08);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 243, 236, 0.82));
+  box-shadow:
+    0 18px 34px rgba(43, 34, 22, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74);
+}
+
+.admin-stat--wide {
+  grid-column: span 2;
+}
+
+.admin-stat__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .admin-stat span,
@@ -1137,6 +1171,10 @@ body.admin-app {
   .admin-card--wide {
     grid-column: auto;
   }
+
+  .admin-stat--wide {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1173,6 +1211,10 @@ body.admin-app {
 
   .admin-settings-menu {
     position: static;
+  }
+
+  .admin-stat--wide {
+    grid-column: auto;
   }
 
   .admin-project-toolbar,
