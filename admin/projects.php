@@ -645,9 +645,6 @@ $activeProjectCount = count(array_filter(
     static fn (array $project): bool => !empty($project['active'])
 ));
 $inactiveProjectCount = count($projects) - $activeProjectCount;
-$currentProjectCount = dalia_admin_project_stat_count($projects, 'current');
-$futureProjectCount = dalia_admin_project_stat_count($projects, 'future');
-$realizedProjectCount = dalia_admin_project_stat_count($projects, 'realized');
 
 maatlas_admin_render_header('Projecten beheren', $currentAdmin);
 ?>
@@ -659,28 +656,19 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
 
 <section class="admin-stats">
   <article class="admin-stat admin-stat--soft">
-    <span>Projecten</span>
+    <span>Totaal</span>
     <strong><?= maatlas_admin_e(count($projects)) ?></strong>
     <small>Totaal in beheer</small>
   </article>
   <article class="admin-stat admin-stat--soft">
-    <span>Publicatie</span>
+    <span>Actief</span>
     <strong><?= maatlas_admin_e($activeProjectCount) ?></strong>
     <small>Zichtbaar op de site</small>
-    <div class="admin-stat__meta">
-      <span class="admin-pill is-on">Actief <?= maatlas_admin_e($activeProjectCount) ?></span>
-      <span class="admin-pill is-off">Uit <?= maatlas_admin_e($inactiveProjectCount) ?></span>
-    </div>
   </article>
-  <article class="admin-stat admin-stat--soft admin-stat--wide">
-    <span>Projectgroepen</span>
-    <strong><?= maatlas_admin_e($currentProjectCount) ?></strong>
-    <small>Lopend is een groep, niet een publicatiestatus</small>
-    <div class="admin-stat__meta">
-      <span class="admin-pill">Lopend <?= maatlas_admin_e($currentProjectCount) ?></span>
-      <span class="admin-pill">Toekomstig <?= maatlas_admin_e($futureProjectCount) ?></span>
-      <span class="admin-pill">Gerealiseerd <?= maatlas_admin_e($realizedProjectCount) ?></span>
-    </div>
+  <article class="admin-stat admin-stat--soft">
+    <span>Verborgen</span>
+    <strong><?= maatlas_admin_e($inactiveProjectCount) ?></strong>
+    <small>Niet zichtbaar op de site</small>
   </article>
 </section>
 
@@ -690,11 +678,9 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
     <div class="admin-settings-menu__group">
       <p class="admin-settings-menu__title">Beheer</p>
       <div class="admin-project-menu-summary">
+        <span class="admin-pill">Totaal <?= maatlas_admin_e(count($projects)) ?></span>
         <span class="admin-pill is-on">Actief <?= maatlas_admin_e($activeProjectCount) ?></span>
-        <span class="admin-pill is-off">Uit <?= maatlas_admin_e($inactiveProjectCount) ?></span>
-        <span class="admin-pill">Lopend <?= maatlas_admin_e($currentProjectCount) ?></span>
-        <span class="admin-pill">Toekomstig <?= maatlas_admin_e($futureProjectCount) ?></span>
-        <span class="admin-pill">Gerealiseerd <?= maatlas_admin_e($realizedProjectCount) ?></span>
+        <span class="admin-pill is-off">Verborgen <?= maatlas_admin_e($inactiveProjectCount) ?></span>
       </div>
       <?php if ($projects === []): ?>
         <p class="admin-muted">Nog geen projecten beschikbaar.</p>
