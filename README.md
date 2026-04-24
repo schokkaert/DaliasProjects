@@ -1,23 +1,25 @@
-# Chateaux Real Estate rebuild
+# Dalia Projects rebuild
 
-Static rebuild of the Chateaux Real Estate website in plain HTML/CSS/JS.
+PHP-based rebuild of the Dalia Projects website with shared includes and admin-backed content.
 
 ## Pages
 
-- `index.html`
-- `projecten.html`
-- `over.html`
-- `grond-gezocht.html`
-- `contact.html`
-- `cookies.html`
-- `voorwaarden.html`
-- `project.html?slug=...`
-- `admin.html`
+- `index.php`
+- `projecten.php`
+- `over.php`
+- `grond-gezocht.php`
+- `contact.php`
+- `cookies.php`
+- `voorwaarden.php`
+- `project.php?slug=...`
+- `admin/`
 
 ## Notes
 
 - The design uses the same warm paper background, dark typography and red accent language as the live site.
-- The project cards and project detail pages are data-driven in `script.js`.
+- Shared public layout is handled through `includes/header.php`, `includes/footer.php` and `includes/site.php`.
+- The project cards and project detail pages are data-driven through the PHP storage layer.
 - The cookie banner is local-only and stored in `localStorage`.
-- The admin area is a front-end demo with localStorage persistence for project edits and inquiry status changes.
-- Demo admin login: `admin` / `chateaux2026`.
+- The admin area is a separate PHP folder with session-based login, CSRF checks, hashed passwords and activation links.
+- On first run, `/admin/login.php` creates a temporary `admin` / `admin` login until the first real superadmin is created.
+- Social links are managed from `/admin/` and exposed to the public site through `admin/settings.php`.

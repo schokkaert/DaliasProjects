@@ -1,26 +1,26 @@
 const SITE = {
   brand: {
-    title: "CHATEAUX REAL ESTATE",
-    logo: "./Webimages/chateaux-logo.svg",
+    title: "Dalia Projects",
+    logo: "./Webimages/Logo.png",
   },
   nav: [
-    { label: "Home", href: "./index.html", key: "home" },
-    { label: "Projecten", href: "./projecten.html", key: "projecten" },
-    { label: "Over", href: "./over.html", key: "over" },
-    { label: "Grond gezocht", href: "./grond-gezocht.html", key: "grond-gezocht" },
-    { label: "Contact", href: "./contact.html", key: "contact" },
+    { label: "Home", href: "./index.php", key: "home" },
+    { label: "Projecten", href: "./projecten.php", key: "projecten" },
+    { label: "Over", href: "./over.php", key: "over" },
+    { label: "Grond te koop?", href: "./grond-gezocht.php", key: "grond-gezocht" },
+    { label: "Contact", href: "./contact.php", key: "contact" },
   ],
   socials: [
-    { label: "Instagram", href: "https://www.instagram.com/grouponclin/" },
-    { label: "Facebook", href: "https://www.facebook.com/ChateauxRealEstate.Hasselt" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/chateaux-real-estate/" },
+    { label: "LinkedIn", href: "https://be.linkedin.com/company/diss-europe-bv" },
   ],
   admin: {
     sessionKey: "cre-admin-session",
     projectKey: "cre-admin-projects",
     inquiryKey: "cre-admin-inquiries",
-    username: "admin",
-    password: "chateaux2026",
+    settingsKey: "cre-admin-settings",
+    settingsEndpoint: "./admin/settings.php",
+    projectsEndpoint: "./admin/projects-data.php",
+    personnelEndpoint: "./admin/personnel-data.php",
   },
   projects: [
     {
@@ -39,8 +39,8 @@ const SITE = {
       quote:
         "Een project start met de juiste locatie en eindigt met een leefomgeving die nog jaren relevant blijft.",
       context:
-        "De kaart van Paal past in de bredere strategie van Chateaux Real Estate: kwalitatieve projecten op plekken met structureel potentieel.",
-      cta: "./contact.html",
+        "De kaart van Paal past in de bredere strategie van Dalia Projects: kwalitatieve projecten op plekken met structureel potentieel.",
+      cta: "./contact.php",
       ctaLabel: "Meer info aanvragen",
     },
     {
@@ -59,7 +59,7 @@ const SITE = {
         "We zoeken telkens een evenwicht tussen karakter, context en het comfort van vandaag.",
       context:
         "Oud-Rekem wordt in de huidige site als aankomend project gepositioneerd en past in de rij van toekomstige ontwikkelingen.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Interesse melden",
     },
     {
@@ -79,7 +79,7 @@ const SITE = {
         "Bunderhof combineert rust, privacy en een sterke ruimtelijke samenhang.",
       context:
         "Het project sluit aan op de lokale eigenheid van Kuringen en vertaalt die naar een hedendaagse woonvorm.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Vraag brochure",
     },
     {
@@ -98,7 +98,7 @@ const SITE = {
       quote:
         "Rongese Park zet in op open leefruimtes, groen en privacy aan de rand van de stad.",
       context:
-        "Dit project toont de typische Chateaux-mix van stedelijke bereikbaarheid en een zachte woonomgeving.",
+        "Dit project toont de typische Dalia Projects-mix van stedelijke bereikbaarheid en een zachte woonomgeving.",
       cta: "https://www.rongese-park.be/",
       ctaLabel: "Ontdek het project",
       external: true,
@@ -119,7 +119,7 @@ const SITE = {
         "Paulina Park koppelt ruimte, comfort en een context aan het water.",
       context:
         "De projectsite benadrukt de mix van moderne en landelijke architectuur met een rustige sfeer.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Meer weten",
     },
     {
@@ -157,8 +157,8 @@ const SITE = {
       quote:
         "The Mill vertaalt stadswonen naar een rustige, verfijnde woonervaring.",
       context:
-        "Het project is een voorbeeld van hoe Chateaux waarde creëert op een drukke, centrale locatie.",
-      cta: "./contact.html",
+        "Het project is een voorbeeld van hoe Dalia Projects waarde creëert op een drukke, centrale locatie.",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
     {
@@ -177,7 +177,7 @@ const SITE = {
         "Stadshaven bracht klassieke stadsvormen samen met hedendaagse woonkwaliteit.",
       context:
         "Het project versterkt de overgang tussen centrum, water en nieuwe stadsontwikkeling.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
     {
@@ -195,8 +195,8 @@ const SITE = {
       quote:
         "Quartier Bleu is een stadsontwikkeling waarin water, wonen en beleving samenkomen.",
       context:
-        "Dit is een van de meest herkenbare projecten in de Chateaux-portefeuille en positioneert het merk sterk in Hasselt.",
-      cta: "./contact.html",
+        "Dit is een van de meest herkenbare projecten in de portfolio van Dalia Projects en positioneert het merk sterk in Hasselt.",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
     {
@@ -215,7 +215,7 @@ const SITE = {
         "Hassaporta koppelt hoge zichtbaarheid aan een duidelijke stedelijke identiteit.",
       context:
         "De site toont dit project als een gevestigde referentie in de Blauwe Boulevard-context.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
     {
@@ -234,7 +234,7 @@ const SITE = {
         "Heerenhof legt nadruk op historische context en een rustige woonomgeving.",
       context:
         "Dit project laat zien hoe karaktervolle locaties opnieuw relevant worden gemaakt.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
     {
@@ -253,21 +253,42 @@ const SITE = {
         "Heerenhuys sluit aan op de meer klassieke, rustige identiteit van de site.",
       context:
         "Ook hier is de focus duidelijk: kleinschaligheid, afwerking en een goed gekozen ligging.",
-      cta: "./contact.html",
+      cta: "./contact.php",
       ctaLabel: "Meer info",
     },
   ],
 };
 
+document.documentElement.classList.add("js-ready");
+
+const DEFAULT_HOME_HERO_IMAGE =
+  "https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/23413f2c-1b56-4540-b1da-c6d19755084a/Chateaux+real+estate+%2844+van+86%29.jpg";
+
+const DEFAULT_SITE_SETTINGS = {
+  heroVideoUrl: "/Webimages/dalia-hero-building-timelapse.mp4",
+  heroPosterUrl: "/Webimages/dalia-hero-building-timelapse-poster.jpg",
+  public_email: "info@daliasprojects.be",
+  public_phone: "Jens 0499/10.50.11",
+  contact_address_line_1: "",
+  contact_address_line_2: "",
+  maps_embed_url: "",
+  maps_link_url: "",
+  socials: [
+    { label: "LinkedIn", url: "https://be.linkedin.com/company/diss-europe-bv", active: true },
+  ],
+};
+
+let currentSiteSettings = { ...DEFAULT_SITE_SETTINGS };
+
 const PAGE_TITLES = {
-  home: "CHATEAUX REAL ESTATE | Ontdek duurzame vastgoedmogelijkheden",
-  projects: "Projecten — CHATEAUX REAL ESTATE",
-  about: "Over — CHATEAUX REAL ESTATE",
-  contact: "Contact — CHATEAUX REAL ESTATE",
-  legal: "CHATEAUX REAL ESTATE",
-  land-search: "Grond gezocht — CHATEAUX REAL ESTATE",
-  project: "Project — CHATEAUX REAL ESTATE",
-  admin: "Admin — CHATEAUX REAL ESTATE",
+  home: "Dalia Projects | Ontdek duurzame vastgoedmogelijkheden",
+  projects: "Projecten — Dalia Projects",
+  about: "Over — Dalia Projects",
+  contact: "Contact — Dalia Projects",
+  legal: "Dalia Projects",
+  land-search: "Grond gezocht — Dalia Projects",
+  project: "Project — Dalia Projects",
+  admin: "Admin — Dalia Projects",
 };
 
 const DEFAULT_INQUIRIES = [
@@ -334,6 +355,70 @@ function safeStorageSet(key, value) {
   }
 }
 
+function normalizeSocials(socials) {
+  if (!Array.isArray(socials)) return [];
+  return socials
+    .map((item) => ({
+      label: String(item.label || "").trim(),
+      href: String(item.href || item.url || "").trim(),
+      active: item.active !== false,
+    }))
+    .filter((item) => item.label && item.href && item.active);
+}
+
+function applyPublicSettings(settings) {
+  if (!settings || typeof settings !== "object") return DEFAULT_SITE_SETTINGS;
+  const merged = {
+    ...DEFAULT_SITE_SETTINGS,
+    ...settings,
+  };
+  currentSiteSettings = merged;
+  const socials = normalizeSocials(merged.socials);
+  if (socials.length) {
+    SITE.socials = socials;
+  }
+  return merged;
+}
+
+function getContactInfo() {
+  const settings = currentSiteSettings || DEFAULT_SITE_SETTINGS;
+  return {
+    email: String(settings.public_email || DEFAULT_SITE_SETTINGS.public_email).trim(),
+    phone: String(settings.public_phone || DEFAULT_SITE_SETTINGS.public_phone).trim(),
+    addressLine1: String(settings.contact_address_line_1 || DEFAULT_SITE_SETTINGS.contact_address_line_1).trim(),
+    addressLine2: String(settings.contact_address_line_2 || DEFAULT_SITE_SETTINGS.contact_address_line_2).trim(),
+    mapsEmbedUrl: String(settings.maps_embed_url || DEFAULT_SITE_SETTINGS.maps_embed_url).trim(),
+    mapsLinkUrl: String(settings.maps_link_url || DEFAULT_SITE_SETTINGS.maps_link_url).trim(),
+  };
+}
+
+function getPhoneHref(phone) {
+  const normalized = String(phone || "").replace(/\(0\)/g, "").replace(/[^\d+]/g, "");
+  return normalized ? `tel:${normalized}` : "#";
+}
+
+function fetchPublicSettings() {
+  const endpoint = SITE.admin.settingsEndpoint || "./admin/settings.php";
+  return fetch(endpoint, { cache: "no-store" })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((settings) => applyPublicSettings(settings))
+    .catch(() => DEFAULT_SITE_SETTINGS);
+}
+
+function getSiteSettings() {
+  return {
+    ...DEFAULT_SITE_SETTINGS,
+    ...safeStorageGet(SITE.admin.settingsKey, {}),
+  };
+}
+
+function saveSiteSettings(settings) {
+  return safeStorageSet(SITE.admin.settingsKey, {
+    ...DEFAULT_SITE_SETTINGS,
+    ...settings,
+  });
+}
+
 function getProjectCatalog() {
   const stored = safeStorageGet(SITE.admin.projectKey, null);
   if (!Array.isArray(stored)) {
@@ -345,6 +430,117 @@ function getProjectCatalog() {
     ...project,
     ...(overrides.get(project.slug) || {}),
   }));
+}
+
+function normalizeProject(project) {
+  const slug = String(project.slug || project.title || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  const gallery = Array.isArray(project.gallery)
+    ? project.gallery
+    : String(project.gallery || "")
+        .split(/\r?\n|,/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+
+  return {
+    ...project,
+    slug,
+    title: String(project.title || "Project").trim(),
+    location: String(project.location || "").trim(),
+    type: String(project.type || "Residentieel").trim(),
+    status: String(project.status || "").trim(),
+    group: String(project.group || "").trim(),
+    summary: String(project.summary || "").trim(),
+    hero: String(project.hero || DEFAULT_HOME_HERO_IMAGE).trim(),
+    gallery,
+    quote: String(project.quote || "").trim(),
+    context: String(project.context || "").trim(),
+    highlight: String(project.highlight || "").trim(),
+    salesOffice: String(project.salesOffice || project.sales_office || "").trim(),
+    salesUrl: String(project.salesUrl || project.sales_url || project.cta || "").trim(),
+    salesStart: String(project.salesStart || project.sales_start || "").trim(),
+    ctaLabel: String(project.ctaLabel || project.cta_label || "Contacteer ons").trim(),
+    external: Boolean(project.external || /^https?:\/\//i.test(String(project.salesUrl || project.sales_url || project.cta || ""))),
+    active: project.active !== false,
+  };
+}
+
+function applyPublicProjects(payload) {
+  const items = Array.isArray(payload) ? payload : Array.isArray(payload?.projects) ? payload.projects : [];
+  const projects = items.map(normalizeProject).filter((project) => project.slug && project.active !== false);
+  if (projects.length) {
+    SITE.projects = projects;
+  }
+  return getProjectCatalog();
+}
+
+function fetchPublicProjects() {
+  const endpoint = SITE.admin.projectsEndpoint || "./admin/projects-data.php";
+  return fetch(endpoint, { cache: "no-store" })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((payload) => applyPublicProjects(payload))
+    .catch(() => getProjectCatalog());
+}
+
+function normalizePersonnel(person) {
+  const roles = Array.isArray(person.roles)
+    ? person.roles
+    : String(person.roles || "")
+        .split(/\r?\n|,/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+
+  return {
+    id: String(person.id || person.name || "").trim(),
+    name: String(person.name || "").trim(),
+    roles,
+    biv: String(person.biv || "").trim(),
+    phone: String(person.phone || "").trim(),
+    email: String(person.email || "").trim(),
+    photo: String(person.photo || "").trim(),
+    active: person.active !== false,
+  };
+}
+
+function applyPublicPersonnel(payload) {
+  const items = Array.isArray(payload) ? payload : Array.isArray(payload?.personnel) ? payload.personnel : [];
+  return items.map(normalizePersonnel).filter((person) => person.name && person.active !== false);
+}
+
+function fetchPublicPersonnel() {
+  const endpoint = SITE.admin.personnelEndpoint || "./admin/personnel-data.php";
+  return fetch(endpoint, { cache: "no-store" })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((payload) => applyPublicPersonnel(payload))
+    .catch(() => []);
+}
+
+function getPortfolioGroup(project) {
+  const explicit = String(project.group || "").toLowerCase();
+  if (["current", "future", "realized"].includes(explicit)) return explicit;
+  const status = String(project.status || "").toLowerCase();
+  if (status.includes("verkocht")) return "realized";
+  if (status.includes("verwacht") || status.includes("binnenkort")) return "future";
+  return "current";
+}
+
+function getProjectHighlight(project) {
+  return project.highlight || (getPortfolioGroup(project) === "current" ? "6% btw mogelijk in plaats van 21% btw" : "");
+}
+
+function getProjectSalesOffice(project) {
+  return project.salesOffice || "SBC Vastgoed";
+}
+
+function getProjectSalesUrl(project) {
+  return project.salesUrl || project.cta || "https://www.sbcvastgoed.be/";
+}
+
+function getProjectSalesStart(project) {
+  return project.salesStart || "Timing volgt";
 }
 
 function getInquiryQueue() {
@@ -363,6 +559,21 @@ function saveProjectCatalog(items) {
   safeStorageSet(SITE.admin.projectKey, items);
 }
 
+function getSocialIcon(label) {
+  const normalized = String(label || "").toLowerCase();
+  const iconAttrs = 'viewBox="0 0 24 24" aria-hidden="true" focusable="false"';
+  if (normalized.includes("instagram")) {
+    return `<svg ${iconAttrs}><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg>`;
+  }
+  if (normalized.includes("facebook")) {
+    return `<svg ${iconAttrs}><path d="M14 8.2h2.4V4.3c-.4-.1-1.8-.3-3.4-.3-3.3 0-5.5 2-5.5 5.7V13H4v4.4h3.5V24H12v-6.6h3.5L16 13h-4V10.1c0-1.3.4-1.9 2-1.9Z"></path></svg>`;
+  }
+  if (normalized.includes("linkedin")) {
+    return `<svg ${iconAttrs}><path d="M5.1 8.8H1.4V21h3.7V8.8ZM3.3 3C2.1 3 1.2 3.9 1.2 5s.9 2 2.1 2 2.1-.9 2.1-2-.9-2-2.1-2ZM21.8 14.2c0-3.7-2-5.7-4.8-5.7-2.2 0-3.2 1.2-3.8 2.1V8.8H9.6V21h3.7v-6.1c0-1.6.3-3.2 2.3-3.2s2 1.9 2 3.3v6h3.7v-6.8Z"></path></svg>`;
+  }
+  return `<span>${escapeHtml(String(label || "?").slice(0, 2))}</span>`;
+}
+
 function renderHeader() {
   const active = document.body.dataset.activeNav || "home";
   const mount = document.getElementById("site-header");
@@ -379,25 +590,23 @@ function renderHeader() {
   const social = SITE.socials
     .map(
       (item) =>
-        `<a href="${item.href}" target="_blank" rel="noreferrer" aria-label="${item.label}">${item.label[0]}</a>`
+        `<a href="${item.href}" target="_blank" rel="noreferrer" aria-label="${item.label}">${getSocialIcon(item.label)}</a>`
     )
     .join("");
 
   const header = `
     <div class="site-header__inner container">
-      <a class="brand" href="./index.html" aria-label="${SITE.brand.title}">
+      <a class="brand" href="./index.php" aria-label="${SITE.brand.title}">
         <img src="${SITE.brand.logo}" alt="${SITE.brand.title}" />
       </a>
       <nav class="nav" aria-label="Hoofdnavigatie">
         ${links}
       </nav>
       <div class="header-actions">
-        <div class="social-icons" aria-label="Social media">
-          ${social}
-        </div>
-        <a class="btn btn--primary" href="./contact.html">Contact</a>
-        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Menu openen">
-          Menu
+        ${social ? `<div class="social-icons" aria-label="Social media">${social}</div>` : ""}
+        <a class="btn btn--primary" href="./contact.php">Contact</a>
+        <button class="menu-toggle" type="button" data-menu-toggle aria-label="Menu openen" aria-expanded="false">
+          <span data-menu-toggle-label>Menu openen</span>
         </button>
       </div>
     </div>
@@ -407,8 +616,8 @@ function renderHeader() {
           ${links}
         </div>
         <div class="button-row">
-          <a class="btn btn--primary" href="./contact.html">Contact</a>
-          <a class="btn btn--secondary" href="./voorwaarden.html">Voorwaarden</a>
+          <a class="btn btn--primary" href="./contact.php">Contact</a>
+          <a class="btn btn--secondary" href="./grond-gezocht.php">Grond gezocht</a>
         </div>
       </div>
     </div>
@@ -417,43 +626,252 @@ function renderHeader() {
   mount.innerHTML = header;
 }
 
+function renderAnnouncement() {
+  const mount = document.querySelector(".announcement__inner");
+  if (!mount) return;
+  const contact = getContactInfo();
+  mount.innerHTML = `
+    <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a>
+    <a href="${escapeHtml(getPhoneHref(contact.phone))}">${escapeHtml(contact.phone)}</a>
+  `;
+}
+
 function renderFooter() {
   const mount = document.getElementById("site-footer");
   if (!mount) return;
+  const contact = getContactInfo();
+  const socialFooter = SITE.socials
+    .map((item) => `<a class="footer-social" href="${item.href}" target="_blank" rel="noreferrer" aria-label="${item.label}">${getSocialIcon(item.label)}<span>${item.label}</span></a>`)
+    .join("");
   const footer = `
     <div class="site-footer__inner container">
+      <div class="site-footer__column site-footer__brand">
+        <strong>Dalia Projects</strong>
+        <p>Belgische vastgoedontwikkeling met focus op vertrouwen, kwaliteit en langetermijnwaarde.</p>
+      </div>
       <div class="site-footer__column">
-        <strong>Chateaux Real Estate</strong>
-        <p>Bannerlaan 50</p>
-        <p>2280 Grobbendonk</p>
-        <a href="tel:+3214302100">+32 (0)1 430 21 00</a>
-        <a href="mailto:sales@disseurope.be">sales@disseurope.be</a>
+        <strong>Contact</strong>
+        <a href="${escapeHtml(getPhoneHref(contact.phone))}">${escapeHtml(contact.phone)}</a>
+        <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a>
       </div>
       <div class="site-footer__column">
         <strong>Overzicht</strong>
-        <a href="./projecten.html">Projecten</a>
-        <a href="./over.html">Over ons</a>
-        <a href="./contact.html">Contact</a>
-        <a href="./voorwaarden.html">Voorwaarden</a>
+        <a href="./projecten.php">Projecten</a>
+        <a href="./over.php">Over ons</a>
+        <a href="./contact.php">Contact</a>
+        <a href="./voorwaarden.php">Voorwaarden</a>
       </div>
+      ${socialFooter ? `
       <div class="site-footer__column">
         <strong>Social</strong>
-        <a href="https://www.instagram.com/grouponclin/" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://www.facebook.com/ChateauxRealEstate.Hasselt" target="_blank" rel="noreferrer">Facebook</a>
-        <a href="https://www.linkedin.com/company/chateaux-real-estate/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <div class="site-footer__socials">${socialFooter}</div>
       </div>
+      ` : ""}
       <div class="site-footer__column">
         <strong>Website</strong>
-        <p>Gemaakt door COCO media</p>
-        <a href="./cookies.html">Cookiebeleid</a>
-        <a href="./admin.html">Admin</a>
+        <a href="./cookies.php">Cookiebeleid</a>
+        <a href="./admin/">Admin</a>
+        <a href="https://www.digisteps.be" target="_blank" rel="noopener">© Digisteps</a>
       </div>
     </div>
     <div class="site-footer__bottom container">
-      <span>© <span data-year></span> CHATEAUX REAL ESTATE. Alle rechten zijn voorbehouden.</span>
+      <span>© <span data-year></span> Dalia Projects. Alle rechten zijn voorbehouden.</span>
+      <span class="site-footer__credits">
+        <a href="./admin/" aria-label="Adminpaneel">Admin</a>
+        <a href="https://www.digisteps.be" target="_blank" rel="noopener">© Digisteps</a>
+      </span>
     </div>
   `;
   mount.innerHTML = footer;
+}
+
+function renderContactSocials() {
+  const mount = document.querySelector("[data-contact-socials]");
+  if (!mount) return;
+
+  const socials = normalizeSocials(SITE.socials);
+  if (!socials.length) {
+    mount.innerHTML = `
+      <p>
+        De sociale kanalen worden later toegevoegd. Voor nu verloopt alle communicatie
+        rechtstreeks via e-mail of telefoon.
+      </p>
+    `;
+    return;
+  }
+
+  mount.innerHTML = `
+    <div class="social-list">
+      ${socials
+        .map(
+          (item) => `
+            <a href="${escapeHtml(item.href)}" target="_blank" rel="noreferrer">
+              ${getSocialIcon(item.label)}
+              ${escapeHtml(item.label)}
+            </a>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderContactDetails() {
+  const mount = document.querySelector("[data-contact-details]");
+  if (!mount) return;
+  const contact = getContactInfo();
+  mount.innerHTML = `
+    <p class="eyebrow">Contact</p>
+    <h2>Wij nemen discreet contact op.</h2>
+    <p>Voor projectvragen, grond te koop of algemene informatie kan u ons rechtstreeks bereiken.</p>
+    <p><a href="${escapeHtml(getPhoneHref(contact.phone))}">${escapeHtml(contact.phone)}</a></p>
+    <p><a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(contact.email)}</a></p>
+  `;
+
+  document.querySelectorAll("[data-contact-phone]").forEach((link) => {
+    link.setAttribute("href", getPhoneHref(contact.phone));
+    link.textContent = `Bel ${contact.phone}`;
+  });
+  document.querySelectorAll("[data-contact-email]").forEach((link) => {
+    link.setAttribute("href", `mailto:${contact.email}`);
+  });
+}
+
+function renderContactMap() {
+  const mount = document.querySelector("[data-contact-map]");
+  if (!mount) return;
+  const contact = getContactInfo();
+  if (!contact.mapsEmbedUrl) {
+    mount.remove();
+    return;
+  }
+  const mapLink = contact.mapsLinkUrl || contact.mapsEmbedUrl;
+  mount.innerHTML = `
+    <div class="map-card__frame">
+      <iframe
+        title="Google Maps locatie Dalia Projects"
+        src="${escapeHtml(contact.mapsEmbedUrl)}"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="map-card__body">
+      <p class="eyebrow">Google Maps</p>
+      <h2>${escapeHtml(contact.addressLine1)}</h2>
+      <p>${escapeHtml(contact.addressLine2)}</p>
+      <a class="text-link" href="${escapeHtml(mapLink)}" target="_blank" rel="noopener">Open in Google Maps</a>
+    </div>
+  `;
+}
+
+function renderProjectSelects() {
+  const currentProjects = getProjectCatalog().filter((project) => getPortfolioGroup(project) === "current");
+  document.querySelectorAll("[data-project-select]").forEach((select) => {
+    const selected = select.value;
+    const options = currentProjects
+      .map((project) => `<option value="${escapeHtml(project.title)}">${escapeHtml(project.title)}</option>`)
+      .join("");
+    select.innerHTML = `<option value="">Kies een lopend project</option>${options}`;
+    if (selected) select.value = selected;
+  });
+}
+
+function renderPersonnel(personnel = []) {
+  const mount = document.querySelector("[data-personnel-grid]");
+  if (!mount) return;
+  if (!personnel.length) {
+    mount.innerHTML = '<p class="portfolio-empty">Er zijn momenteel geen medewerkers gepubliceerd.</p>';
+    return;
+  }
+
+  mount.innerHTML = personnel
+    .map((person) => {
+      const roleLine = [...person.roles, person.biv ? `BIV ${person.biv}` : ""].filter(Boolean).join(" - ");
+      return `
+        <article class="person-card" data-reveal>
+          <div class="person-card__photo">
+            <img src="${escapeHtml(person.photo || "./Webimages/Logo.png")}" alt="${escapeHtml(person.name)}" loading="lazy" />
+          </div>
+          <div class="person-card__body">
+            <h3>${escapeHtml(person.name)}</h3>
+            <p class="person-card__roles">${escapeHtml(roleLine)}</p>
+            ${person.phone ? `<a class="person-card__contact person-card__contact--phone" href="${escapeHtml(getPhoneHref(person.phone))}">${escapeHtml(person.phone)}</a>` : ""}
+            ${person.email ? `<a class="person-card__contact person-card__contact--mail" href="mailto:${escapeHtml(person.email)}">${escapeHtml(person.email)}</a>` : ""}
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function getVideoMimeType(url) {
+  const normalized = String(url || "").toLowerCase();
+  if (normalized.endsWith(".webm") || normalized.includes(".webm?")) {
+    return "video/webm";
+  }
+  if (normalized.endsWith(".mov") || normalized.includes(".mov?")) {
+    return "video/quicktime";
+  }
+  return "video/mp4";
+}
+
+function renderHomeHero() {
+  const mount = document.querySelector("[data-home-hero-media]");
+  if (!mount) return;
+
+  const render = (settings = {}) => {
+    const videoUrl = String(settings.heroVideoUrl || "").trim();
+    const posterUrl = String(settings.heroPosterUrl || "").trim() || DEFAULT_HOME_HERO_IMAGE;
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+    const frame = videoUrl && !reducedMotion
+      ? `
+          <video class="hero-media__video" autoplay muted loop playsinline preload="auto" poster="${escapeHtml(posterUrl)}">
+            <source src="${escapeHtml(videoUrl)}" type="${escapeHtml(getVideoMimeType(videoUrl))}" />
+          </video>
+        `
+      : `
+          <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Dalia Projects hero" loading="eager" />
+        `;
+
+    mount.innerHTML = `
+      <div class="hero-media__frame">
+        ${frame}
+      </div>
+      <div class="hero-media__scrim"></div>
+    `;
+
+    const video = mount.querySelector("video");
+    if (video) {
+      const playAttempt = video.play?.();
+      if (playAttempt && typeof playAttempt.catch === "function") {
+        playAttempt.catch(() => {});
+      }
+      video.addEventListener("error", () => {
+        mount.innerHTML = `
+          <div class="hero-media__frame">
+            <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Dalia Projects hero" loading="eager" />
+          </div>
+          <div class="hero-media__scrim"></div>
+        `;
+      }, { once: true });
+    }
+  };
+
+  render(DEFAULT_SITE_SETTINGS);
+
+  const endpoint = SITE.admin.settingsEndpoint || "./admin/settings.php";
+  fetch(endpoint, { cache: "no-store" })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((settings) => {
+      if (settings && typeof settings === "object") {
+        render(settings);
+      }
+    })
+    .catch(() => {
+      render();
+    });
 }
 
 function renderProjectCards(target, projects, featuredOnly = false) {
@@ -461,30 +879,84 @@ function renderProjectCards(target, projects, featuredOnly = false) {
   const selected = featuredOnly ? catalog.slice(0, 6) : catalog;
   target.innerHTML = selected
     .map(
-      (project) => `
-        <a class="project-card" href="./project.html?slug=${encodeURIComponent(project.slug)}">
+      (project) => {
+        const isCurrent = getPortfolioGroup(project) === "current";
+        const tag = isCurrent ? "a" : "article";
+        const attrs = isCurrent ? `href="./project.php?slug=${encodeURIComponent(project.slug)}"` : 'aria-label="Projecttegel"';
+        return `
+        <${tag} class="project-card" ${attrs} data-reveal>
           <div class="project-card__media">
-            <img src="${project.hero}" alt="${escapeHtml(project.title)}" loading="lazy" />
+            <img src="${escapeHtml(project.hero)}" alt="${escapeHtml(project.title)}" loading="lazy" />
             <span class="project-card__badge">${escapeHtml(project.status)}</span>
           </div>
           <div class="project-card__body">
-            <p class="eyebrow">${escapeHtml(project.location)}</p>
+            <div class="project-card__meta">
+              <span>${escapeHtml(project.type)}</span>
+              <span>${escapeHtml(project.location)}</span>
+            </div>
             <h3>${escapeHtml(project.title)}</h3>
             <p>${escapeHtml(project.summary)}</p>
+            ${isCurrent ? '<span class="project-card__link">Bekijk project</span>' : ""}
           </div>
-        </a>
-      `
+        </${tag}>
+      `;
+      }
     )
     .join("");
 }
 
+function renderProjectTile(project) {
+  const group = getPortfolioGroup(project);
+  const isCurrent = group === "current";
+  const href = isCurrent ? `./project.php?slug=${encodeURIComponent(project.slug)}` : "";
+  const tag = isCurrent ? "a" : "article";
+  const attrs = isCurrent ? `href="${href}"` : 'aria-label="Projecttegel"';
+  const secondary =
+    group === "future"
+      ? `Start verkoop: ${getProjectSalesStart(project)}`
+      : group === "realized"
+        ? "Verkocht"
+        : project.type;
+
+  return `
+    <${tag} class="portfolio-tile portfolio-tile--${group}" ${attrs} data-reveal>
+      <div class="portfolio-tile__media">
+        <img src="${escapeHtml(project.hero)}" alt="${escapeHtml(project.title)}" loading="lazy" />
+        <span class="portfolio-tile__badge">${escapeHtml(group === "realized" ? "Verkocht" : project.status)}</span>
+      </div>
+      <div class="portfolio-tile__body">
+        <span>${escapeHtml(secondary)}</span>
+        <h3>${escapeHtml(project.title)}</h3>
+        <p>${escapeHtml(project.location)}</p>
+        ${isCurrent ? '<strong>Bekijk project</strong>' : ""}
+      </div>
+    </${tag}>
+  `;
+}
+
+function renderPortfolioSections() {
+  const sections = {
+    current: document.querySelector('[data-project-section="current"]'),
+    future: document.querySelector('[data-project-section="future"]'),
+    realized: document.querySelector('[data-project-section="realized"]'),
+  };
+  const catalog = getProjectCatalog();
+  Object.entries(sections).forEach(([group, mount]) => {
+    if (!mount) return;
+    const items = catalog.filter((project) => getPortfolioGroup(project) === group);
+    mount.innerHTML = items.length
+      ? items.map(renderProjectTile).join("")
+      : `<p class="portfolio-empty">Er zijn momenteel geen projecten in deze categorie.</p>`;
+  });
+}
+
 function renderGalleryRail(target) {
-  const railProjects = getProjectCatalog().slice(1, 7);
+  const railProjects = getProjectCatalog().filter((project) => getPortfolioGroup(project) === "current").slice(0, 6);
   target.innerHTML = railProjects
     .map(
       (project) => `
-        <a class="gallery-card" href="./project.html?slug=${encodeURIComponent(project.slug)}">
-          <img src="${project.hero}" alt="${escapeHtml(project.title)}" loading="lazy" />
+        <a class="gallery-card" href="./project.php?slug=${encodeURIComponent(project.slug)}">
+          <img src="${escapeHtml(project.hero)}" alt="${escapeHtml(project.title)}" loading="lazy" />
           <span class="gallery-card__label">${escapeHtml(project.title)}</span>
         </a>
       `
@@ -500,10 +972,11 @@ function renderProjectPage() {
   const slug = getSlug();
   const catalog = getProjectCatalog();
   const project = catalog.find((item) => item.slug === slug) || catalog[0];
-  document.title = `${project.title} — CHATEAUX REAL ESTATE`;
+  document.title = `${project.title} — Dalia Projects`;
 
   const location = document.querySelector("[data-project-location]");
   const title = document.querySelector("[data-project-title]");
+  const bannerTitle = document.querySelector("[data-project-banner-title]");
   const intro = document.querySelector("[data-project-intro]");
   const meta = document.querySelector("[data-project-meta]");
   const hero = document.querySelector("[data-project-hero]");
@@ -511,9 +984,13 @@ function renderProjectPage() {
   const context = document.querySelector("[data-project-context]");
   const cta = document.querySelector("[data-project-cta]");
   const gallery = document.querySelector("[data-project-gallery]");
+  const highlight = document.querySelector("[data-project-highlight]");
+  const salesOffice = document.querySelector("[data-project-sales-office]");
+  const salesUrl = getProjectSalesUrl(project);
 
   if (location) location.textContent = project.location;
   if (title) title.textContent = project.title;
+  if (bannerTitle) bannerTitle.textContent = project.title;
   if (intro) intro.textContent = project.summary;
   if (meta) {
     meta.innerHTML = `
@@ -528,9 +1005,15 @@ function renderProjectPage() {
   }
   if (quote) quote.textContent = project.quote;
   if (context) context.textContent = project.context;
+  if (highlight) highlight.textContent = getProjectHighlight(project);
+  if (salesOffice) salesOffice.textContent = `Info en verkoop: ${getProjectSalesOffice(project)}`;
   if (cta) {
-    cta.href = project.cta;
-    cta.textContent = project.ctaLabel;
+    cta.href = salesUrl;
+    cta.textContent = project.ctaLabel || "Contacteer ons";
+    if (/^https?:\/\//i.test(salesUrl)) {
+      cta.setAttribute("target", "_blank");
+      cta.setAttribute("rel", "noopener");
+    }
   }
   if (gallery) {
     const list = project.gallery && project.gallery.length ? project.gallery : [project.hero];
@@ -538,7 +1021,7 @@ function renderProjectPage() {
       .map(
         (src) => `
           <div class="gallery-card">
-            <img src="${src}" alt="${escapeHtml(project.title)}" loading="lazy" />
+            <img src="${escapeHtml(src)}" alt="${escapeHtml(project.title)}" loading="lazy" />
           </div>
         `
       )
@@ -552,14 +1035,20 @@ function initCookieBanner() {
 
   const key = "cre-cookie-choice";
   const stored = localStorage.getItem(key);
-  if (!stored) {
-    banner.hidden = false;
+  if (stored) {
+    banner.hidden = true;
+    banner.style.display = "none";
+    return;
   }
+
+  banner.hidden = false;
+  banner.style.display = "";
 
   banner.querySelectorAll("[data-cookie]").forEach((button) => {
     button.addEventListener("click", () => {
       localStorage.setItem(key, button.dataset.cookie);
       banner.hidden = true;
+      banner.style.display = "none";
     });
   });
 }
@@ -568,14 +1057,60 @@ function initMenu() {
   const toggle = document.querySelector("[data-menu-toggle]");
   const panel = document.querySelector("[data-menu-panel]");
   if (!toggle || !panel) return;
+  const label = toggle.querySelector("[data-menu-toggle-label]");
 
   toggle.addEventListener("click", () => {
-    panel.classList.toggle("is-open");
+    const isOpen = panel.classList.toggle("is-open");
+    document.body.classList.toggle("is-menu-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Menu sluiten" : "Menu openen");
+    if (label) label.textContent = isOpen ? "Menu sluiten" : "Menu openen";
   });
 
   panel.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => panel.classList.remove("is-open"));
+    link.addEventListener("click", () => {
+      panel.classList.remove("is-open");
+      document.body.classList.remove("is-menu-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Menu openen");
+      if (label) label.textContent = "Menu openen";
+    });
   });
+}
+
+function initHeaderScroll() {
+  const header = document.getElementById("site-header");
+  if (!header) return;
+
+  const sync = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+  };
+
+  sync();
+  window.addEventListener("scroll", sync, { passive: true });
+}
+
+function initRevealAnimations() {
+  const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
+  if (!nodes.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach((node) => node.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  nodes.forEach((node) => observer.observe(node));
 }
 
 function setYear() {
@@ -588,19 +1123,34 @@ function initPageContent() {
   const page = document.body.dataset.page;
 
   if (page === "home") {
+    renderHomeHero();
     const grid = document.querySelector('[data-project-grid="featured"]');
-    if (grid) renderProjectCards(grid, getProjectCatalog(), true);
+    if (grid) renderProjectCards(grid, getProjectCatalog(), false);
   }
 
   if (page === "projects") {
-    const grid = document.querySelector('[data-project-grid="all"]');
     const rail = document.querySelector("[data-gallery-rail]");
-    if (grid) renderProjectCards(grid, getProjectCatalog(), false);
+    renderPortfolioSections();
     if (rail) renderGalleryRail(rail);
   }
 
   if (page === "project") {
     renderProjectPage();
+  }
+
+  if (page === "contact") {
+    renderContactDetails();
+    renderContactSocials();
+    renderContactMap();
+    renderProjectSelects();
+  }
+
+  if (page === "land-search") {
+    renderProjectSelects();
+  }
+
+  if (page === "about") {
+    renderPersonnel();
   }
 }
 
@@ -613,6 +1163,237 @@ function initLinks() {
     });
   });
 }
+
+const inlineEditor = {
+  authenticated: false,
+  csrf: "",
+  dirty: false,
+  editing: false,
+  initialized: false,
+  page: "",
+  toolbar: null,
+  presence: null,
+  button: null,
+  status: null,
+  elements: [],
+  content: {},
+};
+
+function getInlinePageKey() {
+  const page = window.location.pathname.split("/").pop();
+  return page || "index.php";
+}
+
+function getInlineEditableElements() {
+  const root = document.querySelector("main");
+  if (!root) return [];
+
+  const selector = [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "p",
+    "blockquote",
+    "li",
+    "a.btn",
+    "a.text-link",
+    ".project-card__meta span",
+    ".project-card__body h3",
+    ".project-card__body p",
+    ".project-card__link",
+    ".gallery-card__label",
+    ".brand-visual__frame figcaption span",
+    ".brand-visual__frame figcaption strong",
+    ".land-lead__points span",
+    ".land-lead__points strong",
+  ].join(",");
+
+  return Array.from(root.querySelectorAll(selector)).filter((element) => {
+    if (element.closest("[data-inline-ignore], .cookie-banner, .admin-inline-toolbar, .admin-session-pill")) return false;
+    if (element.querySelector("img, video, iframe, input, textarea, select")) return false;
+    return element.textContent.trim() !== "";
+  });
+}
+
+function assignInlineKeys(elements) {
+  elements.forEach((element, index) => {
+    element.dataset.inlineKey = `text_${String(index + 1).padStart(3, "0")}`;
+  });
+}
+
+function applyInlineContent(content = {}) {
+  const elements = getInlineEditableElements();
+  assignInlineKeys(elements);
+  elements.forEach((element) => {
+    const key = element.dataset.inlineKey;
+    if (key && Object.prototype.hasOwnProperty.call(content, key)) {
+      element.textContent = String(content[key]);
+    }
+  });
+  inlineEditor.elements = elements;
+}
+
+function setInlineDirty(value) {
+  inlineEditor.dirty = value;
+  if (inlineEditor.status) {
+    inlineEditor.status.textContent = value ? "Niet opgeslagen" : "Opgeslagen";
+  }
+}
+
+function setInlineEditing(value) {
+  inlineEditor.editing = value;
+  document.body.classList.toggle("is-inline-editing", value);
+  inlineEditor.elements = getInlineEditableElements();
+  assignInlineKeys(inlineEditor.elements);
+
+  inlineEditor.elements.forEach((element) => {
+    element.classList.toggle("is-inline-editable", value);
+    if (value) {
+      element.setAttribute("contenteditable", "true");
+      element.setAttribute("spellcheck", "true");
+    } else {
+      element.removeAttribute("contenteditable");
+      element.removeAttribute("spellcheck");
+    }
+  });
+
+  if (inlineEditor.button) {
+    inlineEditor.button.textContent = value ? "Status opslaan" : "Bewerken";
+  }
+}
+
+function collectInlineUpdates() {
+  const updates = {};
+  inlineEditor.elements = getInlineEditableElements();
+  assignInlineKeys(inlineEditor.elements);
+  inlineEditor.elements.forEach((element) => {
+    const key = element.dataset.inlineKey;
+    if (key) updates[key] = element.textContent.replace(/\s+/g, " ").trim();
+  });
+  return updates;
+}
+
+function saveInlineContent() {
+  if (!inlineEditor.authenticated || !inlineEditor.csrf) return Promise.resolve(false);
+
+  const form = new FormData();
+  form.set("page", inlineEditor.page);
+  form.set("csrf", inlineEditor.csrf);
+  form.set("updates", JSON.stringify(collectInlineUpdates()));
+
+  if (inlineEditor.button) inlineEditor.button.textContent = "Opslaan...";
+  if (inlineEditor.status) inlineEditor.status.textContent = "Opslaan...";
+
+  return fetch("./admin/content.php", {
+    method: "POST",
+    body: form,
+    cache: "no-store",
+  })
+    .then((response) => (response.ok ? response.json() : Promise.reject(new Error("save-failed"))))
+    .then((payload) => {
+      if (!payload.ok) throw new Error(payload.message || "save-failed");
+      inlineEditor.content = payload.content || {};
+      setInlineDirty(false);
+      setInlineEditing(false);
+      return true;
+    })
+    .catch(() => {
+      if (inlineEditor.button) inlineEditor.button.textContent = "Status opslaan";
+      if (inlineEditor.status) inlineEditor.status.textContent = "Opslaan mislukt";
+      return false;
+    });
+}
+
+function createInlineToolbar() {
+  if (inlineEditor.toolbar || !inlineEditor.authenticated) return;
+
+  const toolbar = document.createElement("div");
+  toolbar.className = "admin-inline-toolbar";
+  toolbar.setAttribute("data-inline-ignore", "true");
+  toolbar.innerHTML = `
+    <span class="admin-inline-toolbar__status">Pagina bewerken</span>
+    <button class="btn btn--primary btn--small" type="button">Bewerken</button>
+  `;
+
+  document.body.appendChild(toolbar);
+  inlineEditor.toolbar = toolbar;
+  inlineEditor.status = toolbar.querySelector(".admin-inline-toolbar__status");
+  inlineEditor.button = toolbar.querySelector("button");
+
+  inlineEditor.button.addEventListener("click", () => {
+    if (!inlineEditor.editing) {
+      setInlineEditing(true);
+      if (inlineEditor.status) inlineEditor.status.textContent = "Klik tekst om te wijzigen";
+      return;
+    }
+
+    saveInlineContent();
+  });
+}
+
+function createAdminPresenceButton() {
+  if (inlineEditor.presence || !inlineEditor.authenticated) return;
+
+  const link = document.createElement("a");
+  link.className = "admin-session-pill";
+  link.href = "./admin/";
+  link.setAttribute("data-inline-ignore", "true");
+  link.setAttribute("aria-label", "Terug naar adminpaneel");
+  link.innerHTML = `
+    <span>Aangemeld</span>
+    <strong>Admin</strong>
+  `;
+
+  document.body.appendChild(link);
+  inlineEditor.presence = link;
+}
+
+function initInlineEditor() {
+  if (activePage === "admin") return;
+  inlineEditor.page = getInlinePageKey();
+
+  fetch(`./admin/content.php?page=${encodeURIComponent(inlineEditor.page)}`, { cache: "no-store" })
+    .then((response) => (response.ok ? response.json() : null))
+    .then((payload) => {
+      if (!payload || typeof payload !== "object") return;
+      inlineEditor.authenticated = payload.authenticated === true;
+      inlineEditor.csrf = payload.csrf || "";
+      inlineEditor.content = payload.content || {};
+      applyInlineContent(inlineEditor.content);
+      createAdminPresenceButton();
+      createInlineToolbar();
+      inlineEditor.initialized = true;
+    })
+    .catch(() => {});
+}
+
+document.addEventListener("input", (event) => {
+  if (!inlineEditor.editing) return;
+  if (!event.target.closest?.(".is-inline-editable")) return;
+  setInlineDirty(true);
+});
+
+document.addEventListener("paste", (event) => {
+  if (!inlineEditor.editing || !event.target.closest?.(".is-inline-editable")) return;
+  event.preventDefault();
+  const text = event.clipboardData?.getData("text/plain") || "";
+  document.execCommand("insertText", false, text);
+});
+
+document.addEventListener("click", (event) => {
+  if (!inlineEditor.editing) return;
+  const link = event.target.closest?.("main a");
+  if (link) event.preventDefault();
+}, true);
+
+window.addEventListener("beforeunload", (event) => {
+  if (!inlineEditor.dirty) return;
+  event.preventDefault();
+  event.returnValue = "";
+});
 
 function isAdminSignedIn() {
   return safeStorageGet(SITE.admin.sessionKey, false) === true;
@@ -720,6 +1501,12 @@ function fillAdminProjectForm(form, project) {
   if (hero) hero.value = project.hero || "";
 }
 
+function fillAdminSettingsForm(form, settings) {
+  if (!form || !settings) return;
+  form.querySelector('[name="heroVideoUrl"]').value = settings.heroVideoUrl || "";
+  form.querySelector('[name="heroPosterUrl"]').value = settings.heroPosterUrl || "";
+}
+
 function readAdminProjectForm(form, currentProject) {
   return {
     ...currentProject,
@@ -736,6 +1523,13 @@ function readAdminProjectForm(form, currentProject) {
   };
 }
 
+function readAdminSettingsForm(form) {
+  return {
+    heroVideoUrl: form.querySelector('[name="heroVideoUrl"]').value.trim(),
+    heroPosterUrl: form.querySelector('[name="heroPosterUrl"]').value.trim(),
+  };
+}
+
 function initAdminPage() {
   const authCard = document.querySelector("[data-admin-auth]");
   const dashboard = document.querySelector("[data-admin-dashboard]");
@@ -749,6 +1543,10 @@ function initAdminPage() {
   const form = document.querySelector("[data-admin-project-form]");
   const saveButton = document.querySelector("[data-admin-project-save]");
   const resetButton = document.querySelector("[data-admin-project-reset]");
+  const settingsForm = document.querySelector("[data-admin-settings-form]");
+  const settingsSaveButton = document.querySelector("[data-admin-settings-save]");
+  const settingsResetButton = document.querySelector("[data-admin-settings-reset]");
+  const settingsStatus = document.querySelector("[data-admin-settings-status]");
 
   const syncDashboard = () => {
     const currentProjects = getProjectCatalog();
@@ -768,6 +1566,7 @@ function initAdminPage() {
     if (kpis) renderAdminKpis(kpis, currentProjects, currentInquiries);
     if (table) renderAdminProjectTable(table, currentProjects);
     if (inquiryList) renderAdminInquiries(inquiryList, currentInquiries);
+    fillAdminSettingsForm(settingsForm, getSiteSettings());
 
     const selectedSlug = select?.value || currentSelection;
     const selected = currentProjects.find((project) => project.slug === selectedSlug) || currentProjects[0];
@@ -841,6 +1640,30 @@ function initAdminPage() {
     syncDashboard();
   });
 
+  settingsForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    saveSiteSettings(readAdminSettingsForm(settingsForm));
+    if (settingsStatus) {
+      settingsStatus.textContent = "Homepage film opgeslagen.";
+    }
+    if (settingsSaveButton) {
+      const original = settingsSaveButton.textContent;
+      settingsSaveButton.textContent = "Opgeslagen";
+      window.setTimeout(() => {
+        settingsSaveButton.textContent = original;
+      }, 1200);
+    }
+    syncDashboard();
+  });
+
+  settingsResetButton?.addEventListener("click", () => {
+    saveSiteSettings({ ...DEFAULT_SITE_SETTINGS });
+    if (settingsStatus) {
+      settingsStatus.textContent = "Homepage film gereset naar de standaardafbeelding.";
+    }
+    syncDashboard();
+  });
+
   table?.addEventListener("click", (event) => {
     const trigger = event.target.closest("[data-admin-select]");
     if (!trigger) return;
@@ -867,6 +1690,7 @@ function initAdminPage() {
   resetButton?.addEventListener("click", () => {
     localStorage.removeItem(SITE.admin.projectKey);
     localStorage.removeItem(SITE.admin.inquiryKey);
+    localStorage.removeItem(SITE.admin.settingsKey);
     syncDashboard();
   });
 }
@@ -877,10 +1701,29 @@ if (activePage === "admin") {
   initAdminPage();
 } else {
   renderHeader();
+  renderAnnouncement();
   renderFooter();
   setYear();
+  initHeaderScroll();
   initMenu();
   initCookieBanner();
   initPageContent();
   initLinks();
+  initRevealAnimations();
+  Promise.all([fetchPublicSettings(), fetchPublicProjects(), fetchPublicPersonnel()]).then(([, , personnel]) => {
+    renderHeader();
+    renderAnnouncement();
+    renderFooter();
+    setYear();
+    initHeaderScroll();
+    initMenu();
+    initPageContent();
+    renderContactDetails();
+    renderContactSocials();
+    renderContactMap();
+    renderProjectSelects();
+    renderPersonnel(personnel);
+    initRevealAnimations();
+    initInlineEditor();
+  });
 }
