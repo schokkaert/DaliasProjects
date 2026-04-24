@@ -36,7 +36,7 @@ body.admin-app {
   align-items: end;
   justify-content: space-between;
   gap: 20px;
-  padding: 28px 0;
+  padding: 20px 0 18px;
 }
 
 .admin-topbar h1 {
@@ -67,7 +67,7 @@ body.admin-app {
 }
 
 .admin-main {
-  padding: 28px 0 48px;
+  padding: 18px 0 34px;
 }
 
 .admin-breadcrumb {
@@ -75,7 +75,7 @@ body.admin-app {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
   color: rgba(43, 43, 43, 0.62);
   font-size: 0.92rem;
 }
@@ -130,15 +130,15 @@ body.admin-app {
 .admin-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .admin-auth-grid,
 .admin-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
-  gap: 18px;
+  gap: 12px;
 }
 
 .admin-grid {
@@ -149,7 +149,7 @@ body.admin-app {
   border: 1px solid var(--line);
   background: rgba(255, 251, 245, 0.9);
   box-shadow: var(--shadow);
-  padding: 24px;
+  padding: 18px;
 }
 
 .admin-card--wide {
@@ -166,12 +166,12 @@ body.admin-app {
   align-items: end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .admin-alert {
-  margin-bottom: 18px;
-  padding: 14px 16px;
+  margin-bottom: 12px;
+  padding: 12px 14px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.8);
 }
@@ -246,13 +246,13 @@ body.admin-app {
 
 .admin-form {
   display: grid;
-  gap: 14px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .admin-form-row {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .admin-form-row--two {
@@ -260,7 +260,7 @@ body.admin-app {
 }
 
 .admin-form[data-floating-submit] {
-  padding-bottom: 96px;
+  padding-bottom: 84px;
 }
 
 .admin-floating-submit {
@@ -280,10 +280,10 @@ body.admin-app {
 
 .admin-form fieldset {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
   margin: 0;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid rgba(43, 43, 43, 0.12);
   background: rgba(255, 255, 255, 0.42);
 }
@@ -295,9 +295,9 @@ body.admin-app {
 .admin-media-preview {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
-  gap: 14px;
+  gap: 12px;
   align-items: center;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid rgba(43, 43, 43, 0.12);
   background: rgba(255, 255, 255, 0.55);
 }
@@ -330,7 +330,7 @@ body.admin-app {
 
 .admin-form label {
   display: grid;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.94rem;
 }
 
@@ -338,8 +338,8 @@ body.admin-app {
 .admin-form select,
 .admin-form textarea {
   width: 100%;
-  min-height: 56px;
-  padding: 14px 16px;
+  min-height: 46px;
+  padding: 10px 14px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.92);
@@ -399,7 +399,7 @@ body.admin-app {
 }
 
 .admin-note {
-  margin-top: 16px;
+  margin-top: 12px;
   color: var(--muted);
 }
 
@@ -412,7 +412,7 @@ body.admin-app {
 .admin-social-row {
   display: grid;
   grid-template-columns: minmax(130px, 0.45fr) minmax(360px, 1.55fr) auto;
-  gap: 12px;
+  gap: 10px;
   align-items: end;
 }
 
@@ -423,7 +423,7 @@ body.admin-app {
 .admin-settings-layout {
   display: grid;
   grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: 18px;
+  gap: 12px;
   align-items: start;
 }
 
@@ -432,21 +432,21 @@ body.admin-app {
   top: 18px;
   display: grid;
   gap: 6px;
-  padding: 18px;
+  padding: 14px;
   border: 1px solid var(--line);
   background: rgba(255, 251, 245, 0.9);
   box-shadow: var(--shadow);
 }
 
 .admin-settings-menu .eyebrow {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .admin-settings-menu a {
   display: flex;
   align-items: center;
-  min-height: 40px;
-  padding: 10px 12px;
+  min-height: 36px;
+  padding: 8px 10px;
   border: 1px solid transparent;
   color: rgba(43, 43, 43, 0.78);
   text-decoration: none;
@@ -481,7 +481,7 @@ body.admin-app {
 }
 
 .admin-social-block .admin-social-row {
-  padding: 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid rgba(43, 43, 43, 0.1);
 }
 
@@ -490,7 +490,7 @@ body.admin-app {
 }
 
 .admin-project-form {
-  gap: 22px;
+  gap: 14px;
 }
 
 .admin-project-fieldset {
@@ -500,15 +500,15 @@ body.admin-app {
 .admin-project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 10px;
 }
 
 .admin-person-preview {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
-  gap: 14px;
+  gap: 12px;
   align-items: center;
-  padding: 12px;
+  padding: 10px;
   border: 1px solid rgba(43, 43, 43, 0.12);
   background: rgba(255, 255, 255, 0.58);
 }
@@ -533,25 +533,25 @@ body.admin-app {
 .admin-role-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 14px;
+  gap: 8px 10px;
 }
 
 .admin-list {
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   padding-left: 18px;
   color: rgba(43, 43, 43, 0.76);
-  line-height: 1.7;
+  line-height: 1.55;
 }
 
 .admin-stats {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .admin-stat {
-  padding: 18px;
+  padding: 14px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.62);
 }
@@ -566,7 +566,7 @@ body.admin-app {
 
 .admin-stat strong {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   font-size: 2rem;
   font-weight: 400;
 }
@@ -582,7 +582,7 @@ body.admin-app {
 
 .admin-table th,
 .admin-table td {
-  padding: 14px 10px;
+  padding: 10px 8px;
   border-bottom: 1px solid rgba(43, 43, 43, 0.1);
   text-align: left;
   vertical-align: top;
