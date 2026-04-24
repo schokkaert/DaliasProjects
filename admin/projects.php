@@ -682,6 +682,13 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
     <p class="eyebrow">Projecten</p>
     <div class="admin-settings-menu__group">
       <p class="admin-settings-menu__title">Beheer</p>
+      <div class="admin-project-menu-summary">
+        <span class="admin-pill is-on">Actief <?= maatlas_admin_e($activeProjectCount) ?></span>
+        <span class="admin-pill is-off">Uit <?= maatlas_admin_e($inactiveProjectCount) ?></span>
+        <span class="admin-pill">Lopend <?= maatlas_admin_e(dalia_admin_project_stat_count($projects, 'current')) ?></span>
+        <span class="admin-pill">Toekomstig <?= maatlas_admin_e(dalia_admin_project_stat_count($projects, 'future')) ?></span>
+        <span class="admin-pill">Gerealiseerd <?= maatlas_admin_e(dalia_admin_project_stat_count($projects, 'realized')) ?></span>
+      </div>
       <?php if ($projects === []): ?>
         <p class="admin-muted">Nog geen projecten beschikbaar.</p>
       <?php else: ?>

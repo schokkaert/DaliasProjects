@@ -502,6 +502,18 @@ body.admin-app {
   text-transform: uppercase;
 }
 
+.admin-project-menu-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 2px 4px;
+}
+
+.admin-project-menu-summary .admin-pill {
+  padding: 5px 8px;
+  font-size: 0.67rem;
+}
+
 .admin-settings-menu a {
   position: relative;
   display: flex;
