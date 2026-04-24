@@ -67,6 +67,46 @@ function maatlas_admin_flash(?string $message = null, string $type = 'info'): ?a
     return is_array($flash) ? $flash : null;
 }
 
+function maatlas_admin_old_input(?array $data = null): array
+{
+    if ($data !== null) {
+        $_SESSION['maatlas_admin_old_input'] = $data;
+        return $data;
+    }
+
+    $stored = $_SESSION['maatlas_admin_old_input'] ?? [];
+    unset($_SESSION['maatlas_admin_old_input']);
+
+    return is_array($stored) ? $stored : [];
+}
+
+function maatlas_admin_old_input_value(array $input, string $key, string $default = ''): string
+{
+    return trim((string) ($input[$key] ?? $default));
+}
+
+function maatlas_admin_compose_full_name(string $firstName, string $lastName, string $fallback = ''): string
+{
+    $fullName = trim($firstName . ' ' . $lastName);
+    return $fullName !== '' ? $fullName : trim($fallback);
+}
+
+function maatlas_admin_split_full_name(string $fullName): array
+{
+    $normalized = preg_replace('~\s+~', ' ', trim($fullName)) ?? '';
+    if ($normalized === '') {
+        return ['first_name' => '', 'last_name' => ''];
+    }
+
+    $parts = explode(' ', $normalized);
+    if (count($parts) === 1) {
+        return ['first_name' => $parts[0], 'last_name' => ''];
+    }
+
+    $firstName = array_shift($parts) ?: '';
+    return ['first_name' => $firstName, 'last_name' => implode(' ', $parts)];
+}
+
 function maatlas_admin_csrf_token(): string
 {
     if (empty($_SESSION['maatlas_admin_csrf'])) {
@@ -251,6 +291,8 @@ function maatlas_admin_temporary_admin(): array
     return [
         'id' => 'temp-admin',
         'username' => 'admin',
+        'first_name' => 'Tijdelijke',
+        'last_name' => 'beheerder',
         'full_name' => 'Tijdelijke beheerder',
         'email' => '',
         'role' => 'superadmin',
@@ -279,11 +321,17 @@ function maatlas_admin_normalize_admin(array $admin): ?array
 
     $active = filter_var($admin['active'] ?? false, FILTER_VALIDATE_BOOLEAN);
     $temporary = filter_var($admin['temporary'] ?? false, FILTER_VALIDATE_BOOLEAN);
+    $nameParts = maatlas_admin_split_full_name(trim((string) ($admin['full_name'] ?? $admin['name'] ?? '')));
+    $firstName = trim((string) ($admin['first_name'] ?? $nameParts['first_name'] ?? ''));
+    $lastName = trim((string) ($admin['last_name'] ?? $nameParts['last_name'] ?? ''));
+    $fullName = maatlas_admin_compose_full_name($firstName, $lastName, (string) ($admin['full_name'] ?? $admin['name'] ?? $username));
 
     return [
         'id' => trim((string) ($admin['id'] ?? '')) ?: 'admin-' . bin2hex(random_bytes(6)),
         'username' => $username,
-        'full_name' => trim((string) ($admin['full_name'] ?? $admin['name'] ?? $username)),
+        'first_name' => $firstName,
+        'last_name' => $lastName,
+        'full_name' => $fullName !== '' ? $fullName : $username,
         'email' => trim((string) ($admin['email'] ?? '')),
         'role' => $role,
         'active' => $active,
@@ -638,7 +686,21 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
       </div>
     </header>
     <main class="admin-shell admin-main">
-      <?php if ($flash): ?>
+      <?php if ($flash && ($flash['type'] ?? 'info') === 'error'): ?>
+        <div class="admin-modal-backdrop" data-admin-modal-backdrop>
+          <div class="admin-modal" role="alertdialog" aria-modal="true" aria-labelledby="admin-modal-title">
+            <div class="admin-modal__header">
+              <p class="eyebrow">Controleer de velden</p>
+              <button class="admin-modal__close" type="button" aria-label="Popup sluiten" data-admin-modal-close>&times;</button>
+            </div>
+            <h2 id="admin-modal-title">Opslaan is niet gelukt</h2>
+            <p class="admin-modal__message"><?= maatlas_admin_e($flash['message'] ?? '') ?></p>
+            <div class="button-row">
+              <button class="btn btn--primary" type="button" data-admin-modal-close>Sluiten</button>
+            </div>
+          </div>
+        </div>
+      <?php elseif ($flash): ?>
         <div class="admin-alert admin-alert--<?= maatlas_admin_e($flash['type'] ?? 'info') ?>">
           <?= maatlas_admin_e($flash['message'] ?? '') ?>
         </div>
@@ -651,6 +713,22 @@ function maatlas_admin_render_footer(): void
     ?>
     </main>
     <script>
+      document.querySelectorAll('[data-admin-modal-close]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const backdrop = document.querySelector('[data-admin-modal-backdrop]');
+          if (backdrop) backdrop.remove();
+        });
+      });
+
+      const adminModalBackdrop = document.querySelector('[data-admin-modal-backdrop]');
+      if (adminModalBackdrop) {
+        adminModalBackdrop.addEventListener('click', (event) => {
+          if (event.target === adminModalBackdrop) {
+            adminModalBackdrop.remove();
+          }
+        });
+      }
+
       document.querySelectorAll('input[type="password"]').forEach((input) => {
         if (input.closest('.admin-password-field')) return;
 

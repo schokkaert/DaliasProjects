@@ -129,10 +129,77 @@ body.admin-app {
   background: rgba(192, 23, 34, 0.08);
 }
 
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(26, 24, 20, 0.42);
+  backdrop-filter: blur(8px);
+}
+
+.admin-modal {
+  width: min(100%, 520px);
+  padding: 24px;
+  border: 1px solid rgba(192, 23, 34, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 251, 245, 0.98);
+  box-shadow: 0 30px 70px rgba(26, 24, 20, 0.18);
+}
+
+.admin-modal__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-modal__header .eyebrow {
+  margin-bottom: 0;
+}
+
+.admin-modal__close {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(43, 43, 43, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.admin-modal h2 {
+  margin-top: 8px;
+  font-size: clamp(30px, 4vw, 42px);
+}
+
+.admin-modal__message {
+  margin: 14px 0 0;
+  color: rgba(43, 43, 43, 0.78);
+  line-height: 1.65;
+}
+
 .admin-form {
   display: grid;
   gap: 14px;
   margin-top: 18px;
+}
+
+.admin-form-row {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-form-row--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .admin-form fieldset {
@@ -529,6 +596,7 @@ body.admin-app {
   .admin-stats,
   .admin-settings-layout,
   .admin-form--single,
+  .admin-form-row--two,
   .admin-social-row,
   .admin-project-grid,
   .admin-role-grid {

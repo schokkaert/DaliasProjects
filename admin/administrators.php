@@ -40,6 +40,7 @@ function maatlas_admin_require_unique_username(array $admins, string $username):
 $currentAdmin = maatlas_admin_require_login();
 $setupMode = !empty($currentAdmin['temporary']);
 $csrf = maatlas_admin_csrf_token();
+$setupOldInput = $setupMode ? maatlas_admin_old_input() : [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -53,12 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $username = trim((string) ($_POST['username'] ?? ''));
-            $fullName = trim((string) ($_POST['full_name'] ?? ''));
+            $firstName = trim((string) ($_POST['first_name'] ?? ''));
+            $lastName = trim((string) ($_POST['last_name'] ?? ''));
             $email = trim((string) ($_POST['email'] ?? ''));
             $password = (string) ($_POST['password'] ?? '');
+            $fullName = maatlas_admin_compose_full_name($firstName, $lastName);
 
-            if ($username === '' || $fullName === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new RuntimeException('Vul gebruikersnaam, volledige naam en een geldig e-mailadres in.');
+            if ($username === '' || $firstName === '' || $lastName === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                throw new RuntimeException('Vul gebruikersnaam, voornaam, achternaam en een geldig e-mailadres in.');
             }
 
             $passwordError = maatlas_admin_validate_password($password, $username);
@@ -73,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $newAdmin = [
                 'id' => 'admin-' . bin2hex(random_bytes(6)),
                 'username' => $username,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
                 'full_name' => $fullName,
                 'email' => $email,
                 'role' => 'superadmin',
@@ -250,6 +255,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         throw new RuntimeException('Onbekende actie.');
     } catch (Throwable $exception) {
+        if ($setupMode && $action === 'create_setup_admin') {
+            maatlas_admin_old_input([
+                'username' => trim((string) ($_POST['username'] ?? '')),
+                'first_name' => trim((string) ($_POST['first_name'] ?? '')),
+                'last_name' => trim((string) ($_POST['last_name'] ?? '')),
+                'email' => trim((string) ($_POST['email'] ?? '')),
+            ]);
+        }
         maatlas_admin_flash($exception->getMessage(), 'error');
         maatlas_admin_redirect($setupMode ? './administrators.php?setup=1' : './administrators.php');
     }
@@ -271,15 +284,21 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
         <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
         <label>
           Gebruikersnaam
-          <input type="text" name="username" autocomplete="username" required />
+          <input type="text" name="username" autocomplete="username" value="<?= maatlas_admin_e(maatlas_admin_old_input_value($setupOldInput, 'username')) ?>" required />
         </label>
-        <label>
-          Volledige naam
-          <input type="text" name="full_name" autocomplete="name" required />
-        </label>
+        <div class="admin-form-row admin-form-row--two">
+          <label>
+            Voornaam
+            <input type="text" name="first_name" autocomplete="given-name" value="<?= maatlas_admin_e(maatlas_admin_old_input_value($setupOldInput, 'first_name')) ?>" required />
+          </label>
+          <label>
+            Achternaam
+            <input type="text" name="last_name" autocomplete="family-name" value="<?= maatlas_admin_e(maatlas_admin_old_input_value($setupOldInput, 'last_name')) ?>" required />
+          </label>
+        </div>
         <label>
           E-mailadres
-          <input type="email" name="email" autocomplete="email" required />
+          <input type="email" name="email" autocomplete="email" value="<?= maatlas_admin_e(maatlas_admin_old_input_value($setupOldInput, 'email')) ?>" required />
         </label>
         <label>
           Veilig wachtwoord
