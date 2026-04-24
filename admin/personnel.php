@@ -149,7 +149,7 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
     <h2>Personeel beheren</h2>
     <p class="admin-help">Upload een foto, kies functies en vul contactgegevens in. Functies worden op de site met koppeltekens weergegeven.</p>
 
-    <form method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form">
+    <form method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form" data-floating-submit>
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
 
       <?php foreach ($people as $index => $person): ?>

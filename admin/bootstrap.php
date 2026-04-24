@@ -650,10 +650,27 @@ function maatlas_admin_send_mail(string $to, string $subject, string $body): boo
     return mail($to, $subject, $body, implode("\r\n", $headers));
 }
 
+function maatlas_admin_current_script(): string
+{
+    return basename((string) ($_SERVER['SCRIPT_NAME'] ?? 'index.php'));
+}
+
+function maatlas_admin_dashboard_label(): string
+{
+    return 'Admin overzicht';
+}
+
+function maatlas_admin_breadcrumb_label(string $title): string
+{
+    return $title === 'Admin' ? maatlas_admin_dashboard_label() : $title;
+}
+
 function maatlas_admin_render_header(string $title, ?array $currentAdmin = null): void
 {
     $admin = $currentAdmin ?? maatlas_admin_current_admin();
     $flash = maatlas_admin_flash();
+    $currentLabel = maatlas_admin_breadcrumb_label($title);
+    $isDashboard = maatlas_admin_current_script() === 'index.php';
     ?>
 <!doctype html>
 <html lang="nl-BE">
@@ -678,6 +695,9 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
             <span><?= maatlas_admin_e($admin['full_name'] ?: $admin['username']) ?></span>
             <small><?= maatlas_admin_e(maatlas_admin_role_label((string) $admin['role'])) ?></small>
             <div class="admin-topbar__actions">
+              <?php if (!$isDashboard): ?>
+                <a class="btn btn--secondary btn--small" href="./">Admin home</a>
+              <?php endif; ?>
               <a class="btn btn--primary btn--small" href="../index.php">Bekijk site</a>
               <a class="btn btn--secondary btn--small" href="./logout.php">Uitloggen</a>
             </div>
@@ -686,6 +706,22 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
       </div>
     </header>
     <main class="admin-shell admin-main">
+      <nav class="admin-breadcrumb" aria-label="Breadcrumb">
+        <?php if ($isDashboard): ?>
+          <span class="admin-breadcrumb__current"><?= maatlas_admin_e($currentLabel) ?></span>
+        <?php else: ?>
+          <a href="./"><?= maatlas_admin_e(maatlas_admin_dashboard_label()) ?></a>
+          <span class="admin-breadcrumb__separator">/</span>
+          <span class="admin-breadcrumb__current"><?= maatlas_admin_e($currentLabel) ?></span>
+        <?php endif; ?>
+      </nav>
+      <?php if ($admin): ?>
+        <aside class="admin-session-indicator" aria-label="Aangemelde gebruiker">
+          <span>Aangemeld als</span>
+          <strong><?= maatlas_admin_e($admin['full_name'] ?: $admin['username']) ?></strong>
+          <small><?= maatlas_admin_e(maatlas_admin_role_label((string) $admin['role'])) ?></small>
+        </aside>
+      <?php endif; ?>
       <?php if ($flash && ($flash['type'] ?? 'info') === 'error'): ?>
         <div class="admin-modal-backdrop" data-admin-modal-backdrop>
           <div class="admin-modal" role="alertdialog" aria-modal="true" aria-labelledby="admin-modal-title">
@@ -728,6 +764,25 @@ function maatlas_admin_render_footer(): void
           }
         });
       }
+
+      document.querySelectorAll('[data-floating-submit]').forEach((form) => {
+        if (form.querySelector('.admin-floating-submit')) return;
+
+        const submit = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (!submit) return;
+
+        const dock = document.createElement('div');
+        dock.className = 'admin-floating-submit';
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = submit.className || 'btn btn--primary';
+        button.textContent = submit.textContent.trim() || submit.value || 'Opslaan';
+        button.addEventListener('click', () => form.requestSubmit(submit));
+
+        dock.appendChild(button);
+        form.appendChild(dock);
+      });
 
       document.querySelectorAll('input[type="password"]').forEach((input) => {
         if (input.closest('.admin-password-field')) return;

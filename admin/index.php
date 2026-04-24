@@ -171,7 +171,7 @@ maatlas_admin_render_header('Admin', $currentAdmin);
   <article class="admin-card admin-settings-panel">
     <p class="eyebrow">Site-instellingen</p>
     <h2>Homepage, contact, socials en mailafzender</h2>
-    <form method="post" class="admin-form admin-form--single">
+    <form method="post" class="admin-form admin-form--single" data-floating-submit>
       <input type="hidden" name="action" value="save_settings" />
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
 

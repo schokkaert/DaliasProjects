@@ -279,7 +279,7 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
       <p class="eyebrow">Eerste setup</p>
       <h2>Maak de eerste echte beheerder aan</h2>
       <p class="lead">Na het opslaan wordt de tijdelijke admin/admin automatisch verwijderd en word je ingelogd als superadmin.</p>
-      <form method="post" class="admin-form">
+      <form method="post" class="admin-form" data-floating-submit>
         <input type="hidden" name="action" value="create_setup_admin" />
         <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
         <label>
