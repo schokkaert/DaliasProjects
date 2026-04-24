@@ -469,13 +469,17 @@ body.admin-app {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 40px;
   padding: 10px 14px 10px 18px;
-  border: 1px solid rgba(43, 43, 43, 0);
+  border: 1px solid rgba(43, 43, 43, 0.14);
   border-radius: 14px;
-  color: rgba(43, 43, 43, 0.78);
+  background: rgba(255, 255, 255, 0.78);
+  color: rgba(43, 43, 43, 0.86);
   text-decoration: none;
   font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
   transition:
     transform 140ms ease,
     border-color 140ms ease,
@@ -500,10 +504,20 @@ body.admin-app {
     opacity 140ms ease;
 }
 
+.admin-settings-menu a::after {
+  content: "\203A";
+  font-size: 1.15rem;
+  line-height: 1;
+  color: rgba(43, 43, 43, 0.42);
+  transition:
+    transform 140ms ease,
+    color 140ms ease;
+}
+
 .admin-settings-menu a:hover,
 .admin-settings-menu a:focus-visible {
   border-color: rgba(29, 122, 63, 0.18);
-  background: linear-gradient(90deg, rgba(29, 122, 63, 0.12), rgba(255, 255, 255, 0.76));
+  background: linear-gradient(90deg, rgba(29, 122, 63, 0.14), rgba(255, 255, 255, 0.9));
   color: var(--ink);
   box-shadow: 0 10px 22px rgba(29, 122, 63, 0.08);
   transform: translateX(4px);
@@ -513,6 +527,12 @@ body.admin-app {
 .admin-settings-menu a:focus-visible::before {
   height: 22px;
   opacity: 1;
+}
+
+.admin-settings-menu a:hover::after,
+.admin-settings-menu a:focus-visible::after {
+  color: #1d7a3f;
+  transform: translateX(2px);
 }
 
 .admin-settings-panel {
