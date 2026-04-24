@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/includes/site.php';
 $pageTitle = 'Portfolio — Dalia Projects';
-$pageDescription = 'Portfolio van Dalia Projects met lopende, toekomstige en gerealiseerde vastgoedprojecten.';
+$pageDescription = 'Portfolio van Dalia Projects met lopende projecten, projecten in voorbereiding, toekomstige projecten en gerealiseerde referenties.';
 $activeNav = 'projecten';
 $bodyPage = 'projects';
 $canonicalPath = './projecten.php';
@@ -13,7 +13,7 @@ require __DIR__ . '/includes/header.php';
           <div class="page-hero__copy">
             <p class="eyebrow">Portfolio</p>
             <h1>Projecten met focus op ligging, architectuur en duurzame waarde.</h1>
-            <p class="lead">Een helder overzicht van lopende projecten in verkoop, toekomstige projecten in voorbereiding en gerealiseerde referenties.</p>
+            <p class="lead">Een helder overzicht van lopende projecten in verkoop, projecten in voorbereiding, toekomstige projecten en gerealiseerde referenties.</p>
           </div>
           <div class="page-hero__panel panel panel--gallery">
             <div class="gallery-rail">
@@ -28,7 +28,12 @@ require __DIR__ . '/includes/header.php';
         </div>
       </section>
 
-      <?php foreach (['current' => ['1.1', 'Lopende projecten'], 'future' => ['1.2', 'Toekomstige projecten'], 'realized' => ['1.3', 'Gerealiseerde projecten']] as $group => [$number, $title]): ?>
+      <?php foreach ([
+        'current' => ['1.1', 'Lopende projecten'],
+        'preparation' => ['1.2', 'Projecten in voorbereiding'],
+        'future' => ['1.3', 'Toekomstige projecten'],
+        'realized' => ['1.4', 'Gerealiseerde projecten'],
+      ] as $group => [$number, $title]): ?>
         <section class="section portfolio-section <?= $group === 'future' ? 'portfolio-section--quiet' : '' ?>" id="<?= dalia_e($group) ?>">
           <div class="container">
             <div class="section__heading">

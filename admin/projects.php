@@ -32,6 +32,7 @@ function dalia_admin_project_group_labels(): array
 {
     return [
         'current' => 'Lopend',
+        'preparation' => 'Voorbereiding',
         'future' => 'Toekomstig',
         'realized' => 'Gerealiseerd',
     ];
@@ -465,7 +466,7 @@ function dalia_admin_normalize_project(array $project, int $index): ?array
     }
 
     $group = trim((string) ($project['group'] ?? 'current'));
-    if (!in_array($group, ['current', 'future', 'realized'], true)) {
+    if (!in_array($group, ['current', 'preparation', 'future', 'realized'], true)) {
         $group = 'current';
     }
 

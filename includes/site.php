@@ -118,13 +118,16 @@ function dalia_projects(): array
 function dalia_project_group(array $project): string
 {
     $group = strtolower(trim((string) ($project['group'] ?? '')));
-    if (in_array($group, ['current', 'future', 'realized'], true)) {
+    if (in_array($group, ['current', 'preparation', 'future', 'realized'], true)) {
         return $group;
     }
 
     $status = strtolower((string) ($project['status'] ?? ''));
     if (str_contains($status, 'verkocht')) {
         return 'realized';
+    }
+    if (str_contains($status, 'voorbereid') || str_contains($status, 'voorbereiding')) {
+        return 'preparation';
     }
     if (str_contains($status, 'verwacht') || str_contains($status, 'binnenkort')) {
         return 'future';
@@ -148,8 +151,15 @@ function dalia_project_by_slug(string $slug): ?array
         }
     }
 
-    $current = dalia_projects_by_group('current');
-    return $current[0] ?? null;
+    foreach (['current', 'preparation', 'future', 'realized'] as $group) {
+        $projects = dalia_projects_by_group($group);
+        if ($projects !== []) {
+            return $projects[0];
+        }
+    }
+
+    $projects = dalia_projects();
+    return $projects[0] ?? null;
 }
 
 function dalia_gallery(array $project): array
@@ -213,9 +223,11 @@ function dalia_render_project_tile(array $project): void
     $isCurrent = $group === 'current';
     $tag = $isCurrent ? 'a' : 'article';
     $href = $isCurrent ? ' href="./project.php?slug=' . rawurlencode((string) ($project['slug'] ?? '')) . '"' : ' aria-label="Projecttegel"';
-    $secondary = $group === 'future'
-        ? 'Start verkoop: ' . ((string) ($project['sales_start'] ?? '') ?: 'Timing volgt')
-        : ($group === 'realized' ? 'Verkocht' : (string) ($project['type'] ?? ''));
+    $secondary = $group === 'preparation'
+        ? 'In voorbereiding'
+        : ($group === 'future'
+            ? 'Start verkoop: ' . ((string) ($project['sales_start'] ?? '') ?: 'Timing volgt')
+            : ($group === 'realized' ? 'Verkocht' : (string) ($project['type'] ?? '')));
     ?>
     <<?= $tag ?> class="portfolio-tile portfolio-tile--<?= dalia_e($group) ?>"<?= $href ?> data-reveal>
       <div class="portfolio-tile__media">
