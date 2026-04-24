@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-const DALIA_ASSET_VERSION = '20260424-page-title';
+const DALIA_ASSET_VERSION = '20260424-page-title-admin';
 const DALIA_ROOT = __DIR__ . '/..';
 const DALIA_STORAGE_DIR = DALIA_ROOT . '/admin/storage';
 const DALIA_SETTINGS_FILE = DALIA_STORAGE_DIR . '/settings.php';
@@ -28,6 +28,9 @@ function dalia_default_settings(): array
     return [
         'heroVideoUrl' => '/Webimages/dalia-hero-building-timelapse.mp4',
         'heroPosterUrl' => '/Webimages/dalia-hero-building-timelapse-poster.jpg',
+        'pageTitleBarHeight' => 72,
+        'pageTitleBarRadiusLeft' => 18,
+        'pageTitleBarRadiusRight' => 18,
         'public_email' => 'info@daliasprojects.be',
         'public_phone' => 'Jens 0499/10.50.11',
         'socials' => [
@@ -39,6 +42,37 @@ function dalia_default_settings(): array
 function dalia_settings(): array
 {
     return array_replace_recursive(dalia_default_settings(), dalia_storage_read(DALIA_SETTINGS_FILE, []));
+}
+
+function dalia_setting_int(array $settings, string $key, int $default, int $min, int $max): int
+{
+    $value = filter_var($settings[$key] ?? null, FILTER_VALIDATE_INT);
+    if ($value === false) {
+        return $default;
+    }
+
+    return max($min, min($max, $value));
+}
+
+function dalia_page_title_bar_settings(): array
+{
+    $settings = dalia_settings();
+
+    return [
+        'height' => dalia_setting_int($settings, 'pageTitleBarHeight', 72, 44, 140),
+        'radiusLeft' => dalia_setting_int($settings, 'pageTitleBarRadiusLeft', 18, 0, 80),
+        'radiusRight' => dalia_setting_int($settings, 'pageTitleBarRadiusRight', 18, 0, 80),
+    ];
+}
+
+function dalia_page_title_bar_style(array $settings): string
+{
+    return sprintf(
+        '--page-title-height:%dpx;--page-title-radius-left:%dpx;--page-title-radius-right:%dpx;',
+        (int) ($settings['height'] ?? 72),
+        (int) ($settings['radiusLeft'] ?? 18),
+        (int) ($settings['radiusRight'] ?? 18)
+    );
 }
 
 function dalia_contact(): array

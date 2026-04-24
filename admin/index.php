@@ -16,6 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $heroVideoUrl = trim((string) ($_POST['heroVideoUrl'] ?? ''));
         $heroPosterUrl = trim((string) ($_POST['heroPosterUrl'] ?? ''));
+        $pageTitleBarHeight = filter_var($_POST['pageTitleBarHeight'] ?? null, FILTER_VALIDATE_INT);
+        $pageTitleBarRadiusLeft = filter_var($_POST['pageTitleBarRadiusLeft'] ?? null, FILTER_VALIDATE_INT);
+        $pageTitleBarRadiusRight = filter_var($_POST['pageTitleBarRadiusRight'] ?? null, FILTER_VALIDATE_INT);
         $contactSenderEmail = trim((string) ($_POST['contact_sender_email'] ?? ''));
         $publicEmail = trim((string) ($_POST['public_email'] ?? ''));
         $privacyEmail = trim((string) ($_POST['privacy_email'] ?? ''));
@@ -31,6 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($heroPosterUrl !== '' && !preg_match('~^(https?://|/|\\./|[A-Za-z0-9_-]+/)~', $heroPosterUrl)) {
             throw new RuntimeException('Gebruik een geldige poster-URL of lokaal pad.');
+        }
+
+        if ($pageTitleBarHeight === false || $pageTitleBarHeight < 44 || $pageTitleBarHeight > 140) {
+            throw new RuntimeException('Gebruik voor de titelbalkhoogte een geheel getal tussen 44 en 140 pixels.');
+        }
+
+        if ($pageTitleBarRadiusLeft === false || $pageTitleBarRadiusLeft < 0 || $pageTitleBarRadiusLeft > 80) {
+            throw new RuntimeException('Gebruik voor de linker afronding een geheel getal tussen 0 en 80 pixels.');
+        }
+
+        if ($pageTitleBarRadiusRight === false || $pageTitleBarRadiusRight < 0 || $pageTitleBarRadiusRight > 80) {
+            throw new RuntimeException('Gebruik voor de rechter afronding een geheel getal tussen 0 en 80 pixels.');
         }
 
         foreach ([$contactSenderEmail, $publicEmail, $privacyEmail] as $email) {
@@ -75,6 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         maatlas_admin_save_settings([
             'heroVideoUrl' => $heroVideoUrl,
             'heroPosterUrl' => $heroPosterUrl ?: MAATLAS_ADMIN_DEFAULT_HERO_IMAGE,
+            'pageTitleBarHeight' => $pageTitleBarHeight,
+            'pageTitleBarRadiusLeft' => $pageTitleBarRadiusLeft,
+            'pageTitleBarRadiusRight' => $pageTitleBarRadiusRight,
             'contact_sender_email' => $contactSenderEmail,
             'public_email' => $publicEmail,
             'privacy_email' => $privacyEmail,
@@ -141,6 +159,7 @@ maatlas_admin_render_header('Admin', $currentAdmin);
   <aside class="admin-settings-menu" aria-label="Instellingen menu">
     <p class="eyebrow">Rubrieken</p>
     <a href="#homepage-film">Homepage film</a>
+    <a href="#titelbalk">Titelbalk</a>
     <a href="#contactgegevens">Contactgegevens</a>
     <a href="./projects.php">Projecten beheren</a>
     <a href="./personnel.php">Personeel</a>
@@ -183,6 +202,23 @@ maatlas_admin_render_header('Admin', $currentAdmin);
           <input type="text" name="heroPosterUrl" value="<?= maatlas_admin_e($settings['heroPosterUrl'] ?? '') ?>" placeholder="/Webimages/poster.jpg" />
         </label>
         <p class="admin-help">Deze afbeelding wordt getoond tijdens laden, bij fout of wanneer bezoekers minder beweging verkiezen.</p>
+      </fieldset>
+
+      <fieldset id="titelbalk" class="admin-settings-section">
+        <legend>Titelbalk onder de header</legend>
+        <label>
+          Hoogte titelbalk
+          <input type="number" name="pageTitleBarHeight" min="44" max="140" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarHeight'] ?? 72) ?>" />
+        </label>
+        <label>
+          Afronding links onderaan
+          <input type="number" name="pageTitleBarRadiusLeft" min="0" max="80" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusLeft'] ?? 18) ?>" />
+        </label>
+        <label>
+          Afronding rechts onderaan
+          <input type="number" name="pageTitleBarRadiusRight" min="0" max="80" step="1" value="<?= maatlas_admin_e($settings['pageTitleBarRadiusRight'] ?? 18) ?>" />
+        </label>
+        <p class="admin-help">De bovenkant blijft altijd recht zodat de balk visueel aan de header hangt. Alleen de onderste linker- en rechterhoek zijn instelbaar.</p>
       </fieldset>
 
       <fieldset id="contactgegevens" class="admin-settings-section">

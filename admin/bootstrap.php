@@ -112,6 +112,9 @@ function maatlas_admin_seed_settings(): array
     return [
         'heroVideoUrl' => '',
         'heroPosterUrl' => MAATLAS_ADMIN_DEFAULT_HERO_IMAGE,
+        'pageTitleBarHeight' => 72,
+        'pageTitleBarRadiusLeft' => 18,
+        'pageTitleBarRadiusRight' => 18,
         'contact_sender_email' => '',
         'public_email' => 'info@daliasprojects.be',
         'privacy_email' => '',
@@ -138,6 +141,16 @@ function maatlas_admin_seed_settings(): array
             ],
         ],
     ];
+}
+
+function maatlas_admin_clamp_int(mixed $value, int $default, int $min, int $max): int
+{
+    $intValue = filter_var($value, FILTER_VALIDATE_INT);
+    if ($intValue === false) {
+        return $default;
+    }
+
+    return max($min, min($max, $intValue));
 }
 
 function maatlas_admin_normalize_social(array $social): ?array
@@ -188,6 +201,9 @@ function maatlas_admin_normalize_settings(array $settings): array
     return [
         'heroVideoUrl' => trim((string) ($settings['heroVideoUrl'] ?? $seed['heroVideoUrl'])),
         'heroPosterUrl' => trim((string) ($settings['heroPosterUrl'] ?? $seed['heroPosterUrl'])) ?: $seed['heroPosterUrl'],
+        'pageTitleBarHeight' => maatlas_admin_clamp_int($settings['pageTitleBarHeight'] ?? $seed['pageTitleBarHeight'], $seed['pageTitleBarHeight'], 44, 140),
+        'pageTitleBarRadiusLeft' => maatlas_admin_clamp_int($settings['pageTitleBarRadiusLeft'] ?? $seed['pageTitleBarRadiusLeft'], $seed['pageTitleBarRadiusLeft'], 0, 80),
+        'pageTitleBarRadiusRight' => maatlas_admin_clamp_int($settings['pageTitleBarRadiusRight'] ?? $seed['pageTitleBarRadiusRight'], $seed['pageTitleBarRadiusRight'], 0, 80),
         'contact_sender_email' => trim((string) ($settings['contact_sender_email'] ?? $seed['contact_sender_email'])),
         'public_email' => trim((string) ($settings['public_email'] ?? $seed['public_email'])),
         'privacy_email' => trim((string) ($settings['privacy_email'] ?? $seed['privacy_email'])),

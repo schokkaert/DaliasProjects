@@ -9,6 +9,7 @@ $activeNav = $activeNav ?? 'home';
 $bodyPage = $bodyPage ?? $activeNav;
 $canonicalPath = $canonicalPath ?? './index.php';
 $pageBannerTitle = $pageBannerTitle ?? dalia_page_banner_title($activeNav, $pageTitle, $bodyPage);
+$pageTitleBarSettings = dalia_page_title_bar_settings();
 $contact = dalia_contact();
 $socials = dalia_socials();
 $nav = [
@@ -75,7 +76,7 @@ $nav = [
         </div>
       </div>
     </header>
-    <div class="page-title-strip" aria-label="Paginatitel">
+    <div class="page-title-strip" aria-label="Paginatitel" style="<?= dalia_e(dalia_page_title_bar_style($pageTitleBarSettings)) ?>">
       <div class="container page-title-strip__inner">
         <div class="page-title-pill">
           <p class="page-title-pill__text"><?= dalia_e($pageBannerTitle) ?></p>
