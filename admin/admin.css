@@ -102,17 +102,20 @@ body.admin-app {
 }
 
 .admin-session-indicator {
-  position: fixed;
-  left: 18px;
-  bottom: 18px;
-  z-index: 90;
+  position: sticky;
+  top: 14px;
+  z-index: 20;
   display: grid;
-  gap: 2px;
-  min-width: 210px;
-  padding: 12px 14px;
-  border: 1px solid rgba(43, 43, 43, 0.12);
-  background: rgba(255, 251, 245, 0.96);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  gap: 3px;
+  width: fit-content;
+  min-width: 220px;
+  margin: 0 0 12px auto;
+  padding: 10px 12px;
+  border: 1px solid rgba(43, 43, 43, 0.1);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 243, 236, 0.94));
+  box-shadow: 0 14px 30px rgba(43, 34, 22, 0.08);
   backdrop-filter: blur(10px);
 }
 
@@ -455,8 +458,8 @@ body.admin-app {
 
 .admin-settings-layout {
   display: grid;
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
 }
 
@@ -464,16 +467,18 @@ body.admin-app {
   position: sticky;
   top: 18px;
   display: grid;
-  gap: 8px;
-  max-height: calc(100vh - 36px);
+  gap: 10px;
+  max-height: calc(100vh - 44px);
   overflow-y: auto;
-  padding: 16px;
-  border: 1px solid rgba(43, 43, 43, 0.1);
-  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(43, 43, 43, 0.08);
+  border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(250, 245, 237, 0.96)),
-    rgba(255, 251, 245, 0.9);
-  box-shadow: 0 18px 44px rgba(43, 34, 22, 0.08);
+    radial-gradient(circle at top left, rgba(29, 122, 63, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(247, 242, 234, 0.97));
+  box-shadow:
+    0 18px 44px rgba(43, 34, 22, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
   scrollbar-width: thin;
 }
 
@@ -503,14 +508,15 @@ body.admin-app {
 }
 
 .admin-project-menu-summary {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6px;
-  padding: 0 2px 4px;
+  padding: 0 2px 6px;
 }
 
 .admin-project-menu-summary .admin-pill {
-  padding: 5px 8px;
+  justify-content: center;
+  padding: 6px 8px;
   font-size: 0.67rem;
 }
 
@@ -519,14 +525,14 @@ body.admin-app {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 40px;
-  padding: 10px 14px 10px 18px;
-  border: 1px solid rgba(43, 43, 43, 0.14);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.78);
+  min-height: 38px;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid rgba(43, 43, 43, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
   color: rgba(43, 43, 43, 0.86);
   text-decoration: none;
-  font-size: 0.94rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition:
@@ -566,10 +572,10 @@ body.admin-app {
 .admin-settings-menu a:hover,
 .admin-settings-menu a:focus-visible {
   border-color: rgba(29, 122, 63, 0.18);
-  background: linear-gradient(90deg, rgba(29, 122, 63, 0.14), rgba(255, 255, 255, 0.9));
+  background: linear-gradient(90deg, rgba(29, 122, 63, 0.12), rgba(255, 255, 255, 0.92));
   color: var(--ink);
-  box-shadow: 0 10px 22px rgba(29, 122, 63, 0.08);
-  transform: translateX(4px);
+  box-shadow: 0 10px 24px rgba(29, 122, 63, 0.08);
+  transform: translateX(3px);
 }
 
 .admin-settings-menu a:hover::before,
@@ -593,18 +599,20 @@ body.admin-app {
 }
 
 .admin-settings-menu a.admin-project-menu-link.is-on {
-  border-color: rgba(29, 122, 63, 0.18);
-  background: rgba(29, 122, 63, 0.08);
+  border-color: rgba(29, 122, 63, 0.16);
+  background: linear-gradient(90deg, rgba(29, 122, 63, 0.09), rgba(255, 255, 255, 0.8));
 }
 
 .admin-settings-menu a.admin-project-menu-link.is-off {
   border-color: rgba(161, 101, 19, 0.18);
-  background: rgba(161, 101, 19, 0.07);
+  background: linear-gradient(90deg, rgba(161, 101, 19, 0.07), rgba(255, 255, 255, 0.8));
 }
 
 .admin-project-menu-link__name {
   min-width: 0;
   flex: 1 1 auto;
+  font-size: 0.96rem;
+  line-height: 1.25;
 }
 
 .admin-settings-panel {
@@ -1160,8 +1168,10 @@ body.admin-app {
   }
 
   .admin-session-indicator {
-    bottom: 84px;
+    position: static;
+    width: auto;
     min-width: 0;
+    margin: 0 0 12px;
   }
 
   .admin-floating-submit {
