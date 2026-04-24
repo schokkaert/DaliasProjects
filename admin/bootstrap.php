@@ -680,8 +680,8 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
     <title><?= maatlas_admin_e($title) ?> - Dalia Projects Admin</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="../Webimages/Logo.png" />
-    <link rel="stylesheet" href="../styles.css?v=20260424-projects" />
-    <link rel="stylesheet" href="./admin.css?v=20260424-projects" />
+    <link rel="stylesheet" href="../styles.css?v=20260424-projects-compact" />
+    <link rel="stylesheet" href="./admin.css?v=20260424-projects-compact" />
   </head>
   <body class="admin-app">
     <header class="admin-topbar">

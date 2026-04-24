@@ -673,7 +673,7 @@ body.admin-app {
 }
 
 .admin-project-form {
-  gap: 14px;
+  gap: 10px;
 }
 
 .admin-project-toolbar {
@@ -681,7 +681,7 @@ body.admin-app {
   align-items: start;
   justify-content: space-between;
   gap: 12px;
-  margin: 12px 0 4px;
+  margin: 8px 0 2px;
 }
 
 .admin-project-toolbar .admin-help {
@@ -700,9 +700,9 @@ body.admin-app {
 }
 
 .admin-project-card {
-  gap: 12px !important;
-  padding: 14px !important;
-  border-radius: 18px;
+  gap: 10px !important;
+  padding: 12px !important;
+  border-radius: 16px;
 }
 
 .admin-project-card.is-active {
@@ -719,14 +719,14 @@ body.admin-app {
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 12px;
+  gap: 10px;
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(43, 43, 43, 0.08);
 }
 
 .admin-project-card__summary {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   min-width: 0;
 }
 
@@ -738,7 +738,7 @@ body.admin-app {
 
 .admin-project-card__summary h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
   line-height: 1.15;
 }
 
@@ -755,41 +755,78 @@ body.admin-app {
 .admin-project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
 }
 
 .admin-project-grid--meta {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.admin-project-grid--details {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .admin-project-grid--text {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 8px;
 }
 
 .admin-project-field--wide {
-  grid-column: 1 / -1;
+  grid-column: span 2;
 }
 
 .admin-project-fieldset label {
-  gap: 5px;
-  font-size: 0.9rem;
+  gap: 4px;
+  font-size: 0.86rem;
 }
 
 .admin-project-fieldset input,
 .admin-project-fieldset select,
 .admin-project-fieldset textarea {
-  min-height: 40px;
-  padding: 8px 12px;
-  font-size: 0.95rem;
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 0.92rem;
 }
 
 .admin-project-fieldset textarea {
-  min-height: 88px;
+  min-height: 78px;
   resize: vertical;
+}
+
+.admin-project-extra {
+  border: 1px solid rgba(43, 43, 43, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.admin-project-extra summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.admin-project-extra summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-project-extra summary::after {
+  content: "+";
+  font-size: 1rem;
+  color: rgba(43, 43, 43, 0.56);
+}
+
+.admin-project-extra[open] summary::after {
+  content: "-";
+}
+
+.admin-project-extra[open] summary {
+  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
+}
+
+.admin-project-extra > .admin-project-grid {
+  padding: 10px 12px 12px;
 }
 
 .admin-project-empty {
@@ -980,7 +1017,6 @@ body.admin-app {
   .admin-social-row,
   .admin-project-grid,
   .admin-project-grid--meta,
-  .admin-project-grid--details,
   .admin-project-grid--text,
   .admin-role-grid {
     grid-template-columns: 1fr;

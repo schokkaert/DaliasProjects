@@ -329,7 +329,7 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
     <p class="eyebrow">Portfolio</p>
     <h2>Projecten beheren</h2>
     <div class="admin-project-toolbar">
-      <p class="admin-help">Compact beheer voor aanmaken, activeren, deactiveren en verwijderen. Bij verwijderen worden niet-gedeelde lokale beelden uit <code>Images/</code> of <code>Webimages/</code> ook mee verwijderd.</p>
+      <p class="admin-help">Snel beheer van projecten. Lange beschrijvingen en galerij zitten per project in een uitklapdeel.</p>
       <div class="admin-project-toolbar__actions">
         <form method="post">
           <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
@@ -402,9 +402,6 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
               Start verkoop
               <input type="text" name="projects[<?= maatlas_admin_e($index) ?>][sales_start]" value="<?= maatlas_admin_e($project['sales_start'] ?? '') ?>" />
             </label>
-          </div>
-
-          <div class="admin-project-grid admin-project-grid--details">
             <label>
               Belangrijke info
               <input type="text" name="projects[<?= maatlas_admin_e($index) ?>][highlight]" value="<?= maatlas_admin_e($project['highlight'] ?? '') ?>" />
@@ -423,24 +420,27 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
             </label>
           </div>
 
-          <div class="admin-project-grid admin-project-grid--text">
-            <label>
-              Korte omschrijving
-              <textarea name="projects[<?= maatlas_admin_e($index) ?>][summary]" rows="2"><?= maatlas_admin_e($project['summary'] ?? '') ?></textarea>
-            </label>
-            <label>
-              Projectomschrijving detailpagina
-              <textarea name="projects[<?= maatlas_admin_e($index) ?>][quote]" rows="3"><?= maatlas_admin_e($project['quote'] ?? '') ?></textarea>
-            </label>
-            <label>
-              Context detailpagina
-              <textarea name="projects[<?= maatlas_admin_e($index) ?>][context]" rows="3"><?= maatlas_admin_e($project['context'] ?? '') ?></textarea>
-            </label>
-            <label>
-              Slideshow beelden, 1 URL of pad per regel
-              <textarea name="projects[<?= maatlas_admin_e($index) ?>][gallery]" rows="3"><?= maatlas_admin_e(implode("\n", is_array($project['gallery'] ?? null) ? $project['gallery'] : [])) ?></textarea>
-            </label>
-          </div>
+          <details class="admin-project-extra">
+            <summary>Beschrijving, detailtekst en galerij</summary>
+            <div class="admin-project-grid admin-project-grid--text">
+              <label>
+                Korte omschrijving
+                <textarea name="projects[<?= maatlas_admin_e($index) ?>][summary]" rows="2"><?= maatlas_admin_e($project['summary'] ?? '') ?></textarea>
+              </label>
+              <label>
+                Projectomschrijving detailpagina
+                <textarea name="projects[<?= maatlas_admin_e($index) ?>][quote]" rows="3"><?= maatlas_admin_e($project['quote'] ?? '') ?></textarea>
+              </label>
+              <label>
+                Context detailpagina
+                <textarea name="projects[<?= maatlas_admin_e($index) ?>][context]" rows="3"><?= maatlas_admin_e($project['context'] ?? '') ?></textarea>
+              </label>
+              <label>
+                Slideshow beelden, 1 URL of pad per regel
+                <textarea name="projects[<?= maatlas_admin_e($index) ?>][gallery]" rows="3"><?= maatlas_admin_e(implode("\n", is_array($project['gallery'] ?? null) ? $project['gallery'] : [])) ?></textarea>
+              </label>
+            </div>
+          </details>
         </fieldset>
       <?php endforeach; ?>
 
