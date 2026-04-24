@@ -116,7 +116,6 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
   <article class="admin-card admin-settings-panel">
     <p class="eyebrow">Portfolio</p>
     <h2>Lopende, toekomstige en gerealiseerde projecten</h2>
-    <p class="admin-help">De groep bepaalt waar de tegel verschijnt. Alleen lopende projecten klikken door naar een detailpagina.</p>
 
     <form method="post" class="admin-form admin-form--single admin-project-form" data-floating-submit>
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
