@@ -681,7 +681,7 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" type="image/png" href="../Webimages/Logo.png" />
     <link rel="stylesheet" href="../styles.css?v=20260424-project-cards-modern" />
-    <link rel="stylesheet" href="./admin.css?v=20260424-project-cards-modern" />
+    <link rel="stylesheet" href="./admin.css?v=20260424-floating-right" />
   </head>
   <body class="admin-app">
     <header class="admin-topbar">

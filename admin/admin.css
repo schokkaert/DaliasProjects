@@ -102,21 +102,22 @@ body.admin-app {
 }
 
 .admin-session-indicator {
-  position: sticky;
-  top: 14px;
-  z-index: 20;
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  z-index: 92;
   display: grid;
   gap: 3px;
   width: fit-content;
-  min-width: 220px;
-  margin: 0 0 12px auto;
-  padding: 10px 12px;
+  min-width: 190px;
+  padding: 8px 10px;
   border: 1px solid rgba(43, 43, 43, 0.1);
-  border-radius: 16px;
+  border-radius: 22px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(248, 243, 236, 0.94));
   box-shadow: 0 14px 30px rgba(43, 34, 22, 0.08);
   backdrop-filter: blur(10px);
+  transform: translateY(-115%);
 }
 
 .admin-session-indicator span,
@@ -126,7 +127,7 @@ body.admin-app {
 }
 
 .admin-session-indicator strong {
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   line-height: 1.3;
 }
 
@@ -282,16 +283,23 @@ body.admin-app {
 .admin-floating-submit {
   position: fixed;
   right: 18px;
-  bottom: 18px;
+  top: 50%;
   z-index: 95;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px;
+  padding: 8px;
   border: 1px solid rgba(43, 43, 43, 0.12);
+  border-radius: 999px;
   background: rgba(255, 251, 245, 0.96);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
   backdrop-filter: blur(10px);
+  transform: translateY(30%);
+}
+
+.admin-floating-submit .btn {
+  border-radius: 999px;
+  padding: 10px 16px;
 }
 
 .admin-form fieldset {
@@ -1247,13 +1255,18 @@ body.admin-app {
 
   .admin-session-indicator {
     position: static;
+    top: auto;
     width: auto;
     min-width: 0;
     margin: 0 0 12px;
+    transform: none;
   }
 
   .admin-floating-submit {
+    top: auto;
+    bottom: 12px;
     justify-content: stretch;
+    transform: none;
   }
 
   .admin-floating-submit .btn {
