@@ -186,6 +186,19 @@ body.admin-app {
   background: rgba(192, 23, 34, 0.08);
 }
 
+.btn--danger {
+  border-color: rgba(192, 23, 34, 0.24);
+  background: rgba(192, 23, 34, 0.1);
+  color: #7d1018;
+}
+
+.btn--danger:hover,
+.btn--danger:focus-visible {
+  border-color: rgba(192, 23, 34, 0.34);
+  background: rgba(192, 23, 34, 0.16);
+  color: #640a12;
+}
+
 .admin-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -556,6 +569,29 @@ body.admin-app {
   transform: translateX(2px);
 }
 
+.admin-settings-menu a.admin-project-menu-link {
+  gap: 10px;
+}
+
+.admin-settings-menu a.admin-project-menu-link::after {
+  content: none;
+}
+
+.admin-settings-menu a.admin-project-menu-link.is-on {
+  border-color: rgba(29, 122, 63, 0.18);
+  background: rgba(29, 122, 63, 0.08);
+}
+
+.admin-settings-menu a.admin-project-menu-link.is-off {
+  border-color: rgba(161, 101, 19, 0.18);
+  background: rgba(161, 101, 19, 0.07);
+}
+
+.admin-project-menu-link__name {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
 .admin-settings-panel {
   min-width: 0;
 }
@@ -640,14 +676,135 @@ body.admin-app {
   gap: 14px;
 }
 
+.admin-project-toolbar {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 4px;
+}
+
+.admin-project-toolbar .admin-help {
+  margin: 0;
+  max-width: 68ch;
+}
+
+.admin-project-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .admin-project-fieldset {
   scroll-margin-top: 24px;
+}
+
+.admin-project-card {
+  gap: 12px !important;
+  padding: 14px !important;
+  border-radius: 18px;
+}
+
+.admin-project-card.is-active {
+  border-color: rgba(29, 122, 63, 0.2);
+  background: linear-gradient(180deg, rgba(244, 250, 245, 0.96), rgba(255, 255, 255, 0.72));
+}
+
+.admin-project-card.is-inactive {
+  border-color: rgba(161, 101, 19, 0.18);
+  background: linear-gradient(180deg, rgba(251, 247, 240, 0.96), rgba(255, 255, 255, 0.72));
+}
+
+.admin-project-card__top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
+}
+
+.admin-project-card__summary {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-project-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-project-card__summary h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.admin-project-card__summary p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.admin-actions--project {
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .admin-project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
+}
+
+.admin-project-grid--meta {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-project-grid--details {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-project-grid--text {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.admin-project-field--wide {
+  grid-column: 1 / -1;
+}
+
+.admin-project-fieldset label {
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+.admin-project-fieldset input,
+.admin-project-fieldset select,
+.admin-project-fieldset textarea {
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+}
+
+.admin-project-fieldset textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.admin-project-empty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px dashed rgba(43, 43, 43, 0.18);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.admin-project-empty p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .admin-person-preview {
@@ -822,12 +979,21 @@ body.admin-app {
   .admin-form-row--two,
   .admin-social-row,
   .admin-project-grid,
+  .admin-project-grid--meta,
+  .admin-project-grid--details,
+  .admin-project-grid--text,
   .admin-role-grid {
     grid-template-columns: 1fr;
   }
 
   .admin-settings-menu {
     position: static;
+  }
+
+  .admin-project-toolbar,
+  .admin-project-card__top,
+  .admin-project-empty {
+    flex-direction: column;
   }
 
   .admin-settings-group {
