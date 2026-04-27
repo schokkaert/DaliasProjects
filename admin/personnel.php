@@ -159,6 +159,7 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
 <section class="admin-settings-layout">
   <aside class="admin-settings-menu" aria-label="Personeel menu">
     <p class="eyebrow">Personeel</p>
+    <button class="admin-settings-menu__button" type="submit" name="add_person" value="1" form="personnel-form" formnovalidate>Nieuw personeelslid</button>
     <?php foreach ($people as $index => $person): ?>
       <a href="#person-<?= maatlas_admin_e($index) ?>"><?= maatlas_admin_e($person['name'] ?? 'Persoon') ?></a>
     <?php endforeach; ?>
@@ -168,12 +169,6 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
     <p class="eyebrow">Over ons</p>
     <h2>Personeel beheren</h2>
     <p class="admin-help">Upload een foto, kies functies en vul contactgegevens in. Functies worden op de site met koppeltekens weergegeven.</p>
-    <div class="admin-project-toolbar">
-      <p class="admin-help">Maak eerst een nieuw personeelslid aan, vul daarna de velden in en sla op.</p>
-      <div class="admin-project-toolbar__actions">
-        <button class="btn btn--secondary btn--small" type="submit" name="add_person" value="1" form="personnel-form" formnovalidate>Nieuw personeelslid</button>
-      </div>
-    </div>
 
     <form id="personnel-form" method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form" data-floating-submit>
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />

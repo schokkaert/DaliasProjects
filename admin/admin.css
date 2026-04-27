@@ -566,6 +566,26 @@ body.admin-app {
     color 140ms ease;
 }
 
+.admin-settings-menu__button {
+  min-height: 42px;
+  padding: 10px 12px 10px 16px;
+  border: 1px solid rgba(29, 122, 63, 0.2);
+  border-radius: 18px;
+  background: linear-gradient(90deg, rgba(29, 122, 63, 0.12), rgba(255, 255, 255, 0.9));
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-settings-menu__button:hover,
+.admin-settings-menu__button:focus-visible {
+  border-color: rgba(29, 122, 63, 0.34);
+  background: linear-gradient(90deg, rgba(29, 122, 63, 0.18), rgba(255, 255, 255, 0.96));
+}
+
 .admin-settings-menu a::before {
   content: "";
   position: absolute;
