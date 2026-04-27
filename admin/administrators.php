@@ -37,6 +37,11 @@ function maatlas_admin_require_unique_username(array $admins, string $username):
     }
 }
 
+function maatlas_admin_is_protected_digisteps_user(array $admin): bool
+{
+    return strcasecmp((string) ($admin['username'] ?? ''), 'digistepsbelgium') === 0;
+}
+
 $currentAdmin = maatlas_admin_require_login();
 $setupMode = !empty($currentAdmin['temporary']);
 $csrf = maatlas_admin_csrf_token();
@@ -204,8 +209,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 throw new RuntimeException('Beheerder niet gevonden.');
             }
 
-            if ($adminId === ($currentAdmin['id'] ?? '')) {
+            $targetAdmin = $admins[$index];
+            $isProtectedDigistepsUser = maatlas_admin_is_protected_digisteps_user($targetAdmin);
+            $isCurrentAdmin = $adminId === ($currentAdmin['id'] ?? '');
+
+            if ($isProtectedDigistepsUser && !$isCurrentAdmin) {
+                throw new RuntimeException('Digistepsbelgium kan alleen door die gebruiker zelf verwijderd worden.');
+            }
+
+            if ($isCurrentAdmin && !$isProtectedDigistepsUser) {
                 throw new RuntimeException('Je kunt jezelf niet verwijderen.');
+            }
+
+            if ($isProtectedDigistepsUser) {
+                $confirmOne = (string) ($_POST['digisteps_delete_confirm_1'] ?? '');
+                $confirmTwo = (string) ($_POST['digisteps_delete_confirm_2'] ?? '');
+                if ($confirmOne !== '1' || $confirmTwo !== '1') {
+                    throw new RuntimeException('Dubbele bevestiging ontbreekt. Digistepsbelgium is niet verwijderd.');
+                }
             }
 
             if (!empty($admins[$index]['active']) && maatlas_admin_active_real_admin_count($admins) <= 1) {
@@ -353,6 +374,14 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
           <tbody>
             <?php foreach ($realAdmins as $admin): ?>
               <?php $expired = maatlas_admin_invitation_expired($admin); ?>
+              <?php
+                $isCurrentAdmin = ($admin['id'] ?? '') === ($currentAdmin['id'] ?? '');
+                $isProtectedDigistepsUser = maatlas_admin_is_protected_digisteps_user($admin);
+                $canDeleteAdmin = (!$isCurrentAdmin && !$isProtectedDigistepsUser) || ($isCurrentAdmin && $isProtectedDigistepsUser);
+                $deleteConfirm = $isProtectedDigistepsUser && $isCurrentAdmin
+                    ? "return confirm('Eerste waarschuwing: je gaat het beschermde Digistepsbelgium account verwijderen. Doorgaan?') && confirm('Tweede waarschuwing: dit kan de Digisteps-toegang verwijderen. Definitief verwijderen?');"
+                    : "return confirm('Beheerder verwijderen?');";
+              ?>
               <tr>
                 <td><?= maatlas_admin_e($admin['username']) ?></td>
                 <td>
@@ -373,7 +402,7 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
                       <input type="hidden" name="action" value="toggle_admin" />
                       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
                       <input type="hidden" name="admin_id" value="<?= maatlas_admin_e($admin['id']) ?>" />
-                      <button class="btn btn--secondary btn--small" type="submit" <?= ($admin['id'] === ($currentAdmin['id'] ?? '')) ? 'disabled' : '' ?>>
+                      <button class="btn btn--secondary btn--small" type="submit" <?= $isCurrentAdmin ? 'disabled' : '' ?>>
                         <?= !empty($admin['active']) ? 'Deactiveer' : 'Activeer' ?>
                       </button>
                     </form>
@@ -385,11 +414,15 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
                         <button class="btn btn--secondary btn--small" type="submit">Mail opnieuw</button>
                       </form>
                     <?php endif; ?>
-                    <form method="post" onsubmit="return confirm('Beheerder verwijderen?');">
+                    <form method="post" onsubmit="<?= maatlas_admin_e($deleteConfirm) ?>">
                       <input type="hidden" name="action" value="delete_admin" />
                       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
                       <input type="hidden" name="admin_id" value="<?= maatlas_admin_e($admin['id']) ?>" />
-                      <button class="btn btn--secondary btn--small" type="submit" <?= ($admin['id'] === ($currentAdmin['id'] ?? '')) ? 'disabled' : '' ?>>Verwijder</button>
+                      <?php if ($isProtectedDigistepsUser && $isCurrentAdmin): ?>
+                        <input type="hidden" name="digisteps_delete_confirm_1" value="1" />
+                        <input type="hidden" name="digisteps_delete_confirm_2" value="1" />
+                      <?php endif; ?>
+                      <button class="btn btn--secondary btn--small" type="submit" <?= $canDeleteAdmin ? '' : 'disabled' ?>>Verwijder</button>
                     </form>
                   </div>
                 </td>
