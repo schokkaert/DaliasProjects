@@ -1,7 +1,7 @@
 const SITE = {
   brand: {
-    title: "Dalia Projects",
-    logo: "./Webimages/Logo.png",
+    title: "Daliasprojects",
+    logo: "./Webimages/logo.png",
   },
   nav: [
     { label: "Home", href: "./index.php", key: "home" },
@@ -39,7 +39,7 @@ const SITE = {
       quote:
         "Een project start met de juiste locatie en eindigt met een leefomgeving die nog jaren relevant blijft.",
       context:
-        "De kaart van Paal past in de bredere strategie van Dalia Projects: kwalitatieve projecten op plekken met structureel potentieel.",
+        "De kaart van Paal past in de bredere strategie van Daliasprojects: kwalitatieve projecten op plekken met structureel potentieel.",
       cta: "./contact.php",
       ctaLabel: "Meer info aanvragen",
     },
@@ -98,7 +98,7 @@ const SITE = {
       quote:
         "Rongese Park zet in op open leefruimtes, groen en privacy aan de rand van de stad.",
       context:
-        "Dit project toont de typische Dalia Projects-mix van stedelijke bereikbaarheid en een zachte woonomgeving.",
+        "Dit project toont de typische Daliasprojects-mix van stedelijke bereikbaarheid en een zachte woonomgeving.",
       cta: "https://www.rongese-park.be/",
       ctaLabel: "Ontdek het project",
       external: true,
@@ -157,7 +157,7 @@ const SITE = {
       quote:
         "The Mill vertaalt stadswonen naar een rustige, verfijnde woonervaring.",
       context:
-        "Het project is een voorbeeld van hoe Dalia Projects waarde creëert op een drukke, centrale locatie.",
+        "Het project is een voorbeeld van hoe Daliasprojects waarde creëert op een drukke, centrale locatie.",
       cta: "./contact.php",
       ctaLabel: "Meer info",
     },
@@ -195,7 +195,7 @@ const SITE = {
       quote:
         "Quartier Bleu is een stadsontwikkeling waarin water, wonen en beleving samenkomen.",
       context:
-        "Dit is een van de meest herkenbare projecten in de portfolio van Dalia Projects en positioneert het merk sterk in Hasselt.",
+        "Dit is een van de meest herkenbare projecten in de portfolio van Daliasprojects en positioneert het merk sterk in Hasselt.",
       cta: "./contact.php",
       ctaLabel: "Meer info",
     },
@@ -265,8 +265,8 @@ const DEFAULT_HOME_HERO_IMAGE =
   "https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/23413f2c-1b56-4540-b1da-c6d19755084a/Chateaux+real+estate+%2844+van+86%29.jpg";
 
 const DEFAULT_SITE_SETTINGS = {
-  heroVideoUrl: "/Webimages/dalia-hero-building-timelapse.mp4",
-  heroPosterUrl: "/Webimages/dalia-hero-building-timelapse-poster.jpg",
+  heroVideoUrl: "./Webimages/dalia-hero-building-timelapse.mp4",
+  heroPosterUrl: "./Webimages/dalia-hero-building-timelapse-poster.jpg",
   public_email: "info@daliasprojects.be",
   public_phone: "Jens 0499/10.50.11",
   contact_address_line_1: "",
@@ -281,14 +281,14 @@ const DEFAULT_SITE_SETTINGS = {
 let currentSiteSettings = { ...DEFAULT_SITE_SETTINGS };
 
 const PAGE_TITLES = {
-  home: "Dalia Projects | Ontdek duurzame vastgoedmogelijkheden",
-  projects: "Projecten — Dalia Projects",
-  about: "Over — Dalia Projects",
-  contact: "Contact — Dalia Projects",
-  legal: "Dalia Projects",
-  land-search: "Grond gezocht — Dalia Projects",
-  project: "Project — Dalia Projects",
-  admin: "Admin — Dalia Projects",
+  home: "Daliasprojects | Ontdek duurzame vastgoedmogelijkheden",
+  projects: "Projecten — Daliasprojects",
+  about: "Over — Daliasprojects",
+  contact: "Contact — Daliasprojects",
+  legal: "Daliasprojects",
+  land-search: "Grond gezocht — Daliasprojects",
+  project: "Project — Daliasprojects",
+  admin: "Admin — Daliasprojects",
 };
 
 const DEFAULT_INQUIRIES = [
@@ -646,7 +646,7 @@ function renderFooter() {
   const footer = `
     <div class="site-footer__inner container">
       <div class="site-footer__column site-footer__brand">
-        <strong>Dalia Projects</strong>
+        <strong>Daliasprojects</strong>
         <p>Belgische vastgoedontwikkeling met focus op vertrouwen, kwaliteit en langetermijnwaarde.</p>
       </div>
       <div class="site-footer__column">
@@ -675,7 +675,7 @@ function renderFooter() {
       </div>
     </div>
     <div class="site-footer__bottom container">
-      <span>© <span data-year></span> Dalia Projects. Alle rechten zijn voorbehouden.</span>
+      <span>© <span data-year></span> Daliasprojects. Alle rechten zijn voorbehouden.</span>
       <span class="site-footer__credits">
         <a href="./admin/" aria-label="Adminpaneel">Admin</a>
         <a href="https://www.digisteps.be" target="_blank" rel="noopener">© Digisteps</a>
@@ -749,7 +749,7 @@ function renderContactMap() {
   mount.innerHTML = `
     <div class="map-card__frame">
       <iframe
-        title="Google Maps locatie Dalia Projects"
+        title="Google Maps locatie Daliasprojects"
         src="${escapeHtml(contact.mapsEmbedUrl)}"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -791,7 +791,7 @@ function renderPersonnel(personnel = []) {
       return `
         <article class="person-card" data-reveal>
           <div class="person-card__photo">
-            <img src="${escapeHtml(person.photo || "./Webimages/Logo.png")}" alt="${escapeHtml(person.name)}" loading="lazy" />
+            <img src="${escapeHtml(person.photo || "./Webimages/logo.png")}" alt="${escapeHtml(person.name)}" loading="lazy" />
           </div>
           <div class="person-card__body">
             <h3>${escapeHtml(person.name)}</h3>
@@ -832,7 +832,7 @@ function renderHomeHero() {
           </video>
         `
       : `
-          <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Dalia Projects hero" loading="eager" />
+          <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Daliasprojects hero" loading="eager" />
         `;
 
     mount.innerHTML = `
@@ -851,7 +851,7 @@ function renderHomeHero() {
       video.addEventListener("error", () => {
         mount.innerHTML = `
           <div class="hero-media__frame">
-            <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Dalia Projects hero" loading="eager" />
+            <img class="hero-media__image" src="${escapeHtml(posterUrl)}" alt="Daliasprojects hero" loading="eager" />
           </div>
           <div class="hero-media__scrim"></div>
         `;
@@ -972,7 +972,7 @@ function renderProjectPage() {
   const slug = getSlug();
   const catalog = getProjectCatalog();
   const project = catalog.find((item) => item.slug === slug) || catalog[0];
-  document.title = `${project.title} — Dalia Projects`;
+  document.title = `${project.title} — Daliasprojects`;
 
   const location = document.querySelector("[data-project-location]");
   const title = document.querySelector("[data-project-title]");
@@ -1027,6 +1027,56 @@ function renderProjectPage() {
       )
       .join("");
   }
+}
+
+function initProjectGalleryViewer() {
+  document.querySelectorAll("[data-project-viewer]").forEach((viewer) => {
+    if (viewer.dataset.projectViewerReady === "true") return;
+
+    const stageImage = viewer.querySelector("[data-project-stage-image]");
+    const thumbs = Array.from(viewer.querySelectorAll("[data-project-thumb]"));
+    const navButtons = Array.from(viewer.querySelectorAll("[data-project-nav]"));
+    if (!stageImage || !thumbs.length) return;
+
+    viewer.dataset.projectViewerReady = "true";
+    let activeIndex = Math.max(
+      0,
+      thumbs.findIndex((thumb) => thumb.classList.contains("is-active"))
+    );
+
+    const setActive = (nextIndex) => {
+      const normalizedIndex = (nextIndex + thumbs.length) % thumbs.length;
+      const nextThumb = thumbs[normalizedIndex];
+      const nextSrc = nextThumb?.dataset.projectSrc;
+      if (!nextSrc) return;
+
+      activeIndex = normalizedIndex;
+      stageImage.src = nextSrc;
+      thumbs.forEach((thumb, index) => {
+        const isActive = index === activeIndex;
+        thumb.classList.toggle("is-active", isActive);
+        thumb.setAttribute("aria-pressed", String(isActive));
+      });
+    };
+
+    thumbs.forEach((thumb, index) => {
+      thumb.addEventListener("click", () => setActive(index));
+    });
+
+    navButtons.forEach((button) => {
+      button.hidden = thumbs.length < 2;
+      button.addEventListener("click", () => {
+        const direction = button.dataset.projectNav === "prev" ? -1 : 1;
+        setActive(activeIndex + direction);
+      });
+    });
+
+    viewer.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      setActive(activeIndex + (event.key === "ArrowLeft" ? -1 : 1));
+    });
+  });
 }
 
 function initCookieBanner() {
@@ -1136,6 +1186,7 @@ function initPageContent() {
 
   if (page === "project") {
     renderProjectPage();
+    initProjectGalleryViewer();
   }
 
   if (page === "contact") {
@@ -1336,6 +1387,12 @@ function createInlineToolbar() {
 
 function createAdminPresenceButton() {
   if (inlineEditor.presence || !inlineEditor.authenticated) return;
+
+  const existing = document.querySelector(".admin-session-pill");
+  if (existing) {
+    inlineEditor.presence = existing;
+    return;
+  }
 
   const link = document.createElement("a");
   link.className = "admin-session-pill";
@@ -1718,6 +1775,7 @@ if (activePage === "admin") {
     initHeaderScroll();
     initMenu();
     initPageContent();
+    initProjectGalleryViewer();
     renderContactDetails();
     renderContactSocials();
     renderContactMap();

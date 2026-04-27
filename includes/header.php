@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/site.php';
 
-$pageTitle = $pageTitle ?? 'Dalia Projects';
-$pageDescription = $pageDescription ?? 'Dalia Projects';
+$pageTitle = $pageTitle ?? 'Daliasprojects';
+$pageDescription = $pageDescription ?? 'Daliasprojects';
 $activeNav = $activeNav ?? 'home';
 $bodyPage = $bodyPage ?? $activeNav;
 $canonicalPath = $canonicalPath ?? './index.php';
 $pageBannerTitle = $pageBannerTitle ?? dalia_page_banner_title($activeNav, $pageTitle, $bodyPage);
 $pageTitleBarSettings = dalia_page_title_bar_settings();
+$publicAdmin = dalia_public_admin();
 $contact = dalia_contact();
 $socials = dalia_socials();
 $nav = [
@@ -28,7 +29,7 @@ $nav = [
     <title><?= dalia_e($pageTitle) ?></title>
     <meta name="description" content="<?= dalia_e($pageDescription) ?>" />
     <link rel="canonical" href="<?= dalia_e($canonicalPath) ?>" />
-    <link rel="icon" type="image/png" href="./Webimages/Logo.png" />
+    <link rel="icon" type="image/png" href="./Webimages/logo.png" />
     <link rel="stylesheet" href="./styles.css?v=<?= DALIA_ASSET_VERSION ?>" />
   </head>
   <body data-page="<?= dalia_e($bodyPage) ?>" data-active-nav="<?= dalia_e($activeNav) ?>">
@@ -40,8 +41,8 @@ $nav = [
     </div>
     <header class="site-header" id="site-header">
       <div class="site-header__inner container">
-        <a class="brand" href="./index.php" aria-label="Dalia Projects">
-          <img src="./Webimages/Logo.png" alt="Dalia Projects" />
+        <a class="brand" href="./index.php" aria-label="Daliasprojects">
+          <img src="./Webimages/logo.png" alt="Daliasprojects" />
         </a>
         <nav class="nav" aria-label="Hoofdnavigatie">
           <?php foreach ($nav as $item): ?>

@@ -13,21 +13,21 @@ function maatlas_admin_send_activation_link(array $admin, string $token): bool
 {
     $link = maatlas_admin_base_url() . '/activate.php?token=' . rawurlencode($token);
     $body = "Hallo " . ($admin['full_name'] ?: $admin['username']) . ",\n\n"
-        . "Er is een beheeraccount voor je aangemaakt op de website van Dalia Projects.\n"
+        . "Er is een beheeraccount voor je aangemaakt op de website van Daliasprojects.\n"
         . "Kies je wachtwoord via deze activatielink:\n\n"
         . $link . "\n\n"
         . "Deze link is 7 dagen geldig.\n";
 
-    return maatlas_admin_send_mail((string) $admin['email'], 'Activeer je Dalia Projects beheeraccount', $body);
+    return maatlas_admin_send_mail((string) $admin['email'], 'Activeer je Daliasprojects beheeraccount', $body);
 }
 
 function maatlas_admin_send_direct_notice(array $admin): bool
 {
     $body = "Hallo " . ($admin['full_name'] ?: $admin['username']) . ",\n\n"
-        . "Er is een actieve beheeraccount voor je aangemaakt op de website van Dalia Projects.\n"
+        . "Er is een actieve beheeraccount voor je aangemaakt op de website van Daliasprojects.\n"
         . "Het wachtwoord wordt om veiligheidsredenen niet per e-mail verzonden.\n";
 
-    return maatlas_admin_send_mail((string) $admin['email'], 'Je Dalia Projects beheeraccount is aangemaakt', $body);
+    return maatlas_admin_send_mail((string) $admin['email'], 'Je Daliasprojects beheeraccount is aangemaakt', $body);
 }
 
 function maatlas_admin_require_unique_username(array $admins, string $username): void
@@ -58,10 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $lastName = trim((string) ($_POST['last_name'] ?? ''));
             $email = trim((string) ($_POST['email'] ?? ''));
             $password = (string) ($_POST['password'] ?? '');
+            $passwordRepeat = (string) ($_POST['password_repeat'] ?? '');
             $fullName = maatlas_admin_compose_full_name($firstName, $lastName);
 
             if ($username === '' || $firstName === '' || $lastName === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new RuntimeException('Vul gebruikersnaam, voornaam, achternaam en een geldig e-mailadres in.');
+            }
+
+            if ($password !== $passwordRepeat) {
+                throw new RuntimeException('De wachtwoorden komen niet overeen.');
             }
 
             $passwordError = maatlas_admin_validate_password($password, $username);
@@ -108,6 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $role = (string) ($_POST['role'] ?? 'admin');
             $activationMethod = (string) ($_POST['activation_method'] ?? 'invite');
             $password = (string) ($_POST['password'] ?? '');
+            $passwordRepeat = (string) ($_POST['password_repeat'] ?? '');
 
             if ($username === '' || $fullName === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 throw new RuntimeException('Vul gebruikersnaam, volledige naam en een geldig e-mailadres in.');
@@ -137,6 +143,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ];
 
             if ($activationMethod === 'direct') {
+                if ($password !== $passwordRepeat) {
+                    throw new RuntimeException('De wachtwoorden komen niet overeen.');
+                }
+
                 $passwordError = maatlas_admin_validate_password($password, $username);
                 if ($passwordError !== null) {
                     throw new RuntimeException($passwordError);
@@ -304,6 +314,10 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
           Veilig wachtwoord
           <input type="password" name="password" autocomplete="new-password" required minlength="12" />
         </label>
+        <label>
+          Herhaal wachtwoord
+          <input type="password" name="password_repeat" autocomplete="new-password" required minlength="12" />
+        </label>
         <div class="button-row">
           <button class="btn btn--primary" type="submit">Eerste beheerder aanmaken</button>
         </div>
@@ -421,6 +435,10 @@ maatlas_admin_render_header($setupMode ? 'Eerste setup' : 'Beheerders', $current
         <label>
           Startwachtwoord bij directe activatie
           <input type="password" name="password" autocomplete="new-password" minlength="12" />
+        </label>
+        <label>
+          Herhaal startwachtwoord
+          <input type="password" name="password_repeat" autocomplete="new-password" minlength="12" />
         </label>
         <p class="admin-help">Bij activatie via e-mail kiest de nieuwe beheerder zelf een wachtwoord. Bij directe activatie wordt het wachtwoord niet gemaild.</p>
         <div class="button-row">

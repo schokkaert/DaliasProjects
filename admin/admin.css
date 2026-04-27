@@ -214,6 +214,10 @@ body.admin-app {
   backdrop-filter: blur(8px);
 }
 
+.admin-modal-backdrop--soft {
+  background: rgba(26, 24, 20, 0.24);
+}
+
 .admin-modal {
   width: min(100%, 520px);
   padding: 24px;
@@ -221,6 +225,13 @@ body.admin-app {
   border-radius: 18px;
   background: rgba(255, 251, 245, 0.98);
   box-shadow: 0 30px 70px rgba(26, 24, 20, 0.18);
+}
+
+.admin-modal--success {
+  width: min(100%, 380px);
+  padding: 20px;
+  border-color: rgba(29, 122, 63, 0.2);
+  box-shadow: 0 24px 54px rgba(26, 24, 20, 0.16);
 }
 
 .admin-modal__header {
@@ -253,6 +264,10 @@ body.admin-app {
 .admin-modal h2 {
   margin-top: 8px;
   font-size: clamp(30px, 4vw, 42px);
+}
+
+.admin-modal--success h2 {
+  font-size: clamp(24px, 3vw, 30px);
 }
 
 .admin-modal__message {
@@ -1030,7 +1045,7 @@ body.admin-app {
   overflow: hidden;
   border-radius: 50%;
   background:
-    url("../Webimages/Logo.png") center / 70% no-repeat,
+    url("../Webimages/logo.png") center / 70% no-repeat,
     #dedbd2;
 }
 

@@ -2382,6 +2382,112 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
   font-size: clamp(30px, 3.5vw, 54px);
 }
 
+.project-gallery-viewer {
+  display: grid;
+  gap: 16px;
+}
+
+.project-gallery-stage {
+  position: relative;
+  display: grid;
+  min-height: 0;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #dedbd2;
+}
+
+.project-gallery-stage__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-gallery-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 50%;
+  background: rgba(23, 23, 23, 0.58);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.project-gallery-nav:hover,
+.project-gallery-nav:focus-visible {
+  background: rgba(23, 23, 23, 0.82);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.project-gallery-nav--prev {
+  left: 16px;
+}
+
+.project-gallery-nav--next {
+  right: 16px;
+}
+
+.project-gallery-thumbs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(132px, 1fr);
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+
+.project-gallery-thumb {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #dedbd2;
+  cursor: pointer;
+}
+
+.project-gallery-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 3px solid transparent;
+  pointer-events: none;
+  transition: border-color 180ms ease;
+}
+
+.project-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.16);
+  transition:
+    filter 180ms ease,
+    transform 180ms ease;
+}
+
+.project-gallery-thumb:hover img,
+.project-gallery-thumb:focus-visible img,
+.project-gallery-thumb.is-active img {
+  filter: grayscale(0);
+  transform: scale(1.03);
+}
+
+.project-gallery-thumb.is-active::after {
+  border-color: #171717;
+}
+
 .site-form {
   display: grid;
   gap: 16px;
@@ -2433,6 +2539,30 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
 }
 
 .contact-side .social-list a {
+  color: #fff;
+}
+
+.mobile-quick-contact {
+  display: none;
+}
+
+.mobile-quick-contact__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #fff;
+  color: #171717;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mobile-quick-contact__link--primary {
+  background: #171717;
   color: #fff;
 }
 
@@ -2491,7 +2621,7 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
   top: 50%;
   width: 240px;
   height: 120px;
-  background: url("./Webimages/Logo.png") center / contain no-repeat;
+  background: url("./Webimages/logo.png") center / contain no-repeat;
   opacity: 0.035;
   transform: translateY(-50%);
   pointer-events: none;
@@ -2506,7 +2636,7 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
   border-radius: 50%;
   background:
     linear-gradient(rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.04)),
-    url("./Webimages/Logo.png") center / 72% no-repeat,
+    url("./Webimages/logo.png") center / 72% no-repeat,
     #d8d8d4;
 }
 
@@ -2584,13 +2714,150 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-bottom: 76px;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .container {
+    padding-inline: 16px;
+  }
+
+  .announcement__inner {
+    gap: 10px;
+    padding-block: 8px;
+    font-size: 0.9rem;
+  }
+
+  .brand img {
+    width: 116px;
+    height: auto;
+    max-height: 56px;
+  }
+
+  .page-title-pill {
+    width: 100%;
+    padding-inline: 18px;
+  }
+
+  .page-title-pill__text {
+    font-size: 1.35rem;
+  }
+
+  .hero--cinematic {
+    min-height: auto;
+  }
+
+  .hero--cinematic .hero__grid,
+  .page-hero__grid,
+  .project-hero__grid {
+    gap: 28px;
+    padding-top: 34px;
+    padding-bottom: 38px;
+  }
+
+  .hero--cinematic .hero__copy h1,
+  .page-hero__copy h1,
+  .project-hero__copy h1 {
+    font-size: clamp(42px, 14vw, 64px);
+    line-height: 0.96;
+  }
+
+  .hero__slogan {
+    font-size: clamp(26px, 9vw, 38px);
+  }
+
+  .lead,
+  .hero__intro {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .button-row,
+  .contact-form-grid .site-form {
+    gap: 10px;
+  }
+
+  .button-row,
+  .project-hero__copy .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn,
+  .site-form button[type="submit"] {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 16px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .project-meta {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .project-meta__item {
+    min-width: 0;
+  }
+
+  .portfolio-grid,
+  .portfolio-grid--current {
+    gap: 30px;
+  }
+
   .portfolio-tile__body h3 {
-    font-size: clamp(32px, 13vw, 54px);
+    font-size: clamp(30px, 11vw, 46px);
+    line-height: 1;
+  }
+
+  .portfolio-tile__badge {
+    max-width: calc(100% - 28px);
+    white-space: normal;
+  }
+
+  .project-gallery-stage {
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-gallery-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 1.7rem;
+  }
+
+  .project-gallery-nav--prev {
+    left: 10px;
+  }
+
+  .project-gallery-nav--next {
+    right: 10px;
+  }
+
+  .project-gallery-thumbs {
+    grid-auto-columns: minmax(96px, 42vw);
   }
 
   .site-form,
   .contact-side {
     padding: 20px;
+  }
+
+  .site-form input,
+  .site-form select,
+  .site-form textarea {
+    min-height: 56px;
+    font-size: 1rem;
+  }
+
+  .contact-side {
+    gap: 10px;
+  }
+
+  .contact-side h2 {
+    font-size: clamp(28px, 10vw, 42px);
   }
 
   .person-card {
@@ -2599,5 +2866,25 @@ a.portfolio-tile:focus-visible .portfolio-tile__body strong {
 
   .person-card__photo {
     width: 132px;
+  }
+
+  .mobile-quick-contact {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 45;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    padding: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+    background: rgba(247, 246, 242, 0.94);
+    box-shadow: 0 -12px 34px rgba(0, 0, 0, 0.14);
+    backdrop-filter: blur(12px);
+  }
+
+  .cookie-banner {
+    bottom: 82px;
   }
 }

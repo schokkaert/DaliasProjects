@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-const DALIA_ASSET_VERSION = '20260424-page-title-admin';
+const DALIA_ASSET_VERSION = '20260425-daliasprojects-brand';
 const DALIA_ROOT = __DIR__ . '/..';
 const DALIA_STORAGE_DIR = DALIA_ROOT . '/admin/storage';
 const DALIA_SETTINGS_FILE = DALIA_STORAGE_DIR . '/settings.php';
@@ -26,22 +26,67 @@ function dalia_storage_read(string $file, array $fallback = []): array
 function dalia_default_settings(): array
 {
     return [
-        'heroVideoUrl' => '/Webimages/dalia-hero-building-timelapse.mp4',
-        'heroPosterUrl' => '/Webimages/dalia-hero-building-timelapse-poster.jpg',
+        'heroVideoUrl' => './Webimages/dalia-hero-building-timelapse.mp4',
+        'heroPosterUrl' => './Webimages/dalia-hero-building-timelapse-poster.jpg',
         'pageTitleBarHeight' => 72,
         'pageTitleBarRadiusLeft' => 18,
         'pageTitleBarRadiusRight' => 18,
         'public_email' => 'info@daliasprojects.be',
         'public_phone' => 'Jens 0499/10.50.11',
+        'sectionVisibility' => dalia_default_section_visibility(),
         'socials' => [
             ['label' => 'LinkedIn', 'url' => 'https://be.linkedin.com/company/diss-europe-bv', 'active' => true],
         ],
     ];
 }
 
+function dalia_section_keys(): array
+{
+    return [
+        'home.hero',
+        'home.brand_visual',
+        'home.intro',
+        'home.projects',
+        'home.land_lead',
+        'projects.hero',
+        'projects.current',
+        'projects.preparation',
+        'projects.future',
+        'projects.realized',
+        'project.hero',
+        'project.sales',
+        'project.overview',
+        'project.gallery',
+        'about.hero',
+        'about.chapters',
+        'about.personnel',
+        'land.hero',
+        'land.form',
+        'contact.hero',
+        'contact.form',
+        'cookies.hero',
+        'cookies.content',
+        'terms.hero',
+        'terms.content',
+    ];
+}
+
+function dalia_default_section_visibility(): array
+{
+    return array_fill_keys(dalia_section_keys(), true);
+}
+
 function dalia_settings(): array
 {
     return array_replace_recursive(dalia_default_settings(), dalia_storage_read(DALIA_SETTINGS_FILE, []));
+}
+
+function dalia_section_enabled(string $key): bool
+{
+    $settings = dalia_settings();
+    $visibility = is_array($settings['sectionVisibility'] ?? null) ? $settings['sectionVisibility'] : [];
+
+    return filter_var($visibility[$key] ?? true, FILTER_VALIDATE_BOOLEAN);
 }
 
 function dalia_setting_int(array $settings, string $key, int $default, int $min, int $max): int
@@ -105,6 +150,22 @@ function dalia_socials(): array
     }
 
     return $socials;
+}
+
+function dalia_public_admin(): ?array
+{
+    if (empty($_COOKIE['maatlas_admin'])) {
+        return null;
+    }
+
+    require_once DALIA_ROOT . '/admin/bootstrap.php';
+    $admin = maatlas_admin_current_admin();
+
+    if (!is_array($admin) || !empty($admin['temporary'])) {
+        return null;
+    }
+
+    return $admin;
 }
 
 function dalia_projects(): array
@@ -205,7 +266,7 @@ function dalia_page_banner_title(string $activeNav, string $pageTitle, string $b
     }
 
     $fallbackTitle = trim((string) preg_split('/\s+[|—-]\s+/u', $pageTitle, 2)[0]);
-    return $fallbackTitle !== '' ? $fallbackTitle : 'Dalia Projects';
+    return $fallbackTitle !== '' ? $fallbackTitle : 'Daliasprojects';
 }
 
 function dalia_social_icon(string $label): string
@@ -251,7 +312,7 @@ function dalia_render_person_card(array $person): void
     ?>
     <article class="person-card" data-reveal>
       <div class="person-card__photo">
-        <img src="<?= dalia_e($person['photo'] ?? './Webimages/Logo.png') ?>" alt="<?= dalia_e($person['name'] ?? '') ?>" loading="lazy" />
+        <img src="<?= dalia_e($person['photo'] ?? './Webimages/logo.png') ?>" alt="<?= dalia_e($person['name'] ?? '') ?>" loading="lazy" />
       </div>
       <div class="person-card__body">
         <h3><?= dalia_e($person['name'] ?? '') ?></h3>

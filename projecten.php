@@ -1,13 +1,14 @@
 <?php
 require __DIR__ . '/includes/site.php';
-$pageTitle = 'Portfolio — Dalia Projects';
-$pageDescription = 'Portfolio van Dalia Projects met lopende projecten, projecten in voorbereiding, toekomstige projecten en gerealiseerde referenties.';
+$pageTitle = 'Portfolio — Daliasprojects';
+$pageDescription = 'Portfolio van Daliasprojects met lopende projecten, projecten in voorbereiding, toekomstige projecten en gerealiseerde referenties.';
 $activeNav = 'projecten';
 $bodyPage = 'projects';
 $canonicalPath = './projecten.php';
 require __DIR__ . '/includes/header.php';
 ?>
     <main class="site-main portfolio-page">
+      <?php if (dalia_section_enabled('projects.hero')): ?>
       <section class="page-hero page-hero--portfolio">
         <div class="container page-hero__grid">
           <div class="page-hero__copy">
@@ -27,6 +28,7 @@ require __DIR__ . '/includes/header.php';
           </div>
         </div>
       </section>
+      <?php endif; ?>
 
       <?php foreach ([
         'current' => ['1.1', 'Lopende projecten'],
@@ -34,6 +36,7 @@ require __DIR__ . '/includes/header.php';
         'future' => ['1.3', 'Toekomstige projecten'],
         'realized' => ['1.4', 'Gerealiseerde projecten'],
       ] as $group => [$number, $title]): ?>
+        <?php if (!dalia_section_enabled('projects.' . $group)) { continue; } ?>
         <section class="section portfolio-section <?= $group === 'future' ? 'portfolio-section--quiet' : '' ?>" id="<?= dalia_e($group) ?>">
           <div class="container">
             <div class="section__heading">

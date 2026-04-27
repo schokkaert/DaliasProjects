@@ -1,6 +1,6 @@
-# Dalia Projects rebuild
+# Daliasprojects rebuild
 
-PHP-based rebuild of the Dalia Projects website with shared includes and admin-backed content.
+PHP-based rebuild of the Daliasprojects website with shared includes and admin-backed content.
 
 ## Pages
 

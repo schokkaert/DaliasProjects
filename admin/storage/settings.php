@@ -1,7 +1,7 @@
 <?php
 return array (
-  'heroVideoUrl' => '/Webimages/dalia-hero-building-timelapse.mp4',
-  'heroPosterUrl' => '/Webimages/dalia-hero-building-timelapse-poster.jpg',
+  'heroVideoUrl' => './Webimages/dalia-hero-building-timelapse.mp4',
+  'heroPosterUrl' => './Webimages/dalia-hero-building-timelapse-poster.jpg',
   'contact_sender_email' => '',
   'public_email' => 'info@daliasprojects.be',
   'privacy_email' => '',

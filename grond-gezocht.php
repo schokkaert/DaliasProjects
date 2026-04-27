@@ -1,25 +1,28 @@
 <?php
 require __DIR__ . '/includes/site.php';
-$pageTitle = 'Grond te koop? — Dalia Projects';
-$pageDescription = 'Dalia Projects zoekt gronden en panden voor hoogwaardige vastgoedontwikkeling.';
+$pageTitle = 'Grond te koop? — Daliasprojects';
+$pageDescription = 'Daliasprojects zoekt gronden en panden voor hoogwaardige vastgoedontwikkeling.';
 $activeNav = 'grond-gezocht';
 $bodyPage = 'land-search';
 $canonicalPath = './grond-gezocht.php';
 require __DIR__ . '/includes/header.php';
 ?>
     <main class="site-main land-page">
+      <?php if (dalia_section_enabled('land.hero')): ?>
       <section class="page-hero page-hero--land">
         <div class="container page-hero__grid">
           <div class="page-hero__copy">
             <p class="eyebrow">Grond te koop?</p>
             <h1>Een discreet gesprek over uw grond of pand.</h1>
-            <p class="lead">Bent u eigenaar van een stuk grond of pand? Dalia Projects is continu op zoek naar interessante kansen voor hoogwaardige ontwikkeling. Wij zorgen voor een snelle en discrete afhandeling aan marktconforme prijzen.</p>
+            <p class="lead">Bent u eigenaar van een stuk grond of pand? Daliasprojects is continu op zoek naar interessante kansen voor hoogwaardige ontwikkeling. Wij zorgen voor een snelle en discrete afhandeling aan marktconforme prijzen.</p>
           </div>
           <div class="page-hero__panel panel">
-            <img src="https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/4c541007-4e78-48dc-bded-fe61b215d6b5/Chateaux+real+estate+%2818+van+86%29.jpg" alt="Ontwikkelingsgrond voor Dalia Projects" />
+            <img src="https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/4c541007-4e78-48dc-bded-fe61b215d6b5/Chateaux+real+estate+%2818+van+86%29.jpg" alt="Ontwikkelingsgrond voor Daliasprojects" />
           </div>
         </div>
       </section>
+      <?php endif; ?>
+      <?php if (dalia_section_enabled('land.form')): ?>
       <section class="section">
         <div class="container lead-form-grid">
           <div>
@@ -38,5 +41,6 @@ require __DIR__ . '/includes/header.php';
           </form>
         </div>
       </section>
+      <?php endif; ?>
     </main>
 <?php require __DIR__ . '/includes/footer.php'; ?>

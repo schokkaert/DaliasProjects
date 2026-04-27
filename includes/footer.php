@@ -9,7 +9,7 @@ $socials = dalia_socials();
     <footer class="site-footer" id="site-footer">
       <div class="site-footer__inner container">
         <div class="site-footer__column site-footer__brand">
-          <strong>Dalia Projects</strong>
+          <strong>Daliasprojects</strong>
           <p>Belgische vastgoedontwikkeling met focus op vertrouwen, kwaliteit en langetermijnwaarde.</p>
         </div>
         <div class="site-footer__column">
@@ -43,7 +43,7 @@ $socials = dalia_socials();
         </div>
       </div>
       <div class="site-footer__bottom container">
-        <span>© <?= date('Y') ?> Dalia Projects. Alle rechten zijn voorbehouden.</span>
+        <span>© <?= date('Y') ?> Daliasprojects. Alle rechten zijn voorbehouden.</span>
         <span class="site-footer__credits">
           <a href="./admin/" aria-label="Adminpaneel">Admin</a>
           <a href="https://www.digisteps.be" target="_blank" rel="noopener">© Digisteps</a>
@@ -61,6 +61,16 @@ $socials = dalia_socials();
         <button class="btn btn--primary btn--small" type="button" data-cookie="accept">Accepteer alles</button>
       </div>
     </div>
+    <div class="mobile-quick-contact" aria-label="Snel contact">
+      <a class="mobile-quick-contact__link" href="<?= dalia_e(dalia_phone_href($contact['phone'])) ?>">Bel ons</a>
+      <a class="mobile-quick-contact__link mobile-quick-contact__link--primary" href="./contact.php">Contact</a>
+    </div>
+    <?php if (!empty($publicAdmin) && is_array($publicAdmin)): ?>
+      <a class="admin-session-pill" href="./admin/" data-inline-ignore="true" aria-label="Terug naar adminpaneel">
+        <span>Aangemeld</span>
+        <strong><?= dalia_e($publicAdmin['full_name'] ?: $publicAdmin['username'] ?: 'Admin') ?></strong>
+      </a>
+    <?php endif; ?>
     <script src="./script.js?v=<?= DALIA_ASSET_VERSION ?>"></script>
   </body>
 </html>

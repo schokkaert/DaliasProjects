@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/includes/site.php';
-$pageTitle = 'Contact — Dalia Projects';
-$pageDescription = 'Contacteer Dalia Projects voor projectinformatie, grond te koop of algemene vastgoedvragen.';
+$pageTitle = 'Contact — Daliasprojects';
+$pageDescription = 'Contacteer Daliasprojects voor projectinformatie, grond te koop of algemene vastgoedvragen.';
 $activeNav = 'contact';
 $bodyPage = 'contact';
 $canonicalPath = './contact.php';
@@ -9,18 +9,21 @@ $contact = dalia_contact();
 require __DIR__ . '/includes/header.php';
 ?>
     <main class="site-main contact-page">
+      <?php if (dalia_section_enabled('contact.hero')): ?>
       <section class="page-hero page-hero--contact">
         <div class="container page-hero__grid">
           <div class="page-hero__copy">
             <p class="eyebrow">Contact</p>
-            <h1>Stel uw vraag rechtstreeks aan Dalia Projects.</h1>
+            <h1>Stel uw vraag rechtstreeks aan Daliasprojects.</h1>
             <p class="lead">Voor informatie over een lopend project, een mogelijke grondverkoop of een algemene vraag kan u onderstaand formulier gebruiken.</p>
           </div>
           <div class="page-hero__panel panel">
-            <img src="https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/636da066-40f8-4a35-ae62-55ac0c0d0e0d/Chateaux+real+estate+%289+van+86%29.jpg" alt="Dalia Projects contact" />
+            <img src="https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/636da066-40f8-4a35-ae62-55ac0c0d0e0d/Chateaux+real+estate+%289+van+86%29.jpg" alt="Daliasprojects contact" />
           </div>
         </div>
       </section>
+      <?php endif; ?>
+      <?php if (dalia_section_enabled('contact.form')): ?>
       <section class="section">
         <div class="container contact-form-grid">
           <form class="site-form site-form--large" action="./contact-submit.php" method="post">
@@ -54,5 +57,6 @@ require __DIR__ . '/includes/header.php';
           </aside>
         </div>
       </section>
+      <?php endif; ?>
     </main>
 <?php require __DIR__ . '/includes/footer.php'; ?>

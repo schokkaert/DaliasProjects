@@ -7,12 +7,12 @@ function maatlas_admin_send_password_reset_link(array $admin, string $token): bo
 {
     $link = maatlas_admin_base_url() . '/reset-password.php?token=' . rawurlencode($token);
     $body = "Hallo " . ($admin['full_name'] ?: $admin['username']) . ",\n\n"
-        . "Er werd een wachtwoordreset aangevraagd voor je Dalia Projects beheeraccount.\n"
+        . "Er werd een wachtwoordreset aangevraagd voor je Daliasprojects beheeraccount.\n"
         . "Kies een nieuw wachtwoord via deze link:\n\n"
         . $link . "\n\n"
         . "Deze link is 2 uur geldig. Heb je dit niet aangevraagd, dan mag je deze mail negeren.\n";
 
-    return maatlas_admin_send_mail((string) $admin['email'], 'Reset je Dalia Projects adminwachtwoord', $body);
+    return maatlas_admin_send_mail((string) $admin['email'], 'Reset je Daliasprojects adminwachtwoord', $body);
 }
 
 $currentAdmin = maatlas_admin_current_admin();

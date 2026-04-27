@@ -8,6 +8,9 @@ coverage/
 .env
 .env.*
 .vscode/sftp.json
+admin_cookies.txt
+admin/sessions/*
+!admin/sessions/.htaccess
 uploads/
 Objects/
 Webimages/Logo.png

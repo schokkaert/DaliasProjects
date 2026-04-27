@@ -34,7 +34,7 @@ if ($name === '' || $email === '' || $message === '' || !filter_var($email, FILT
     dalia_contact_redirect(false);
 }
 
-$subject = 'Website aanvraag Dalia Projects';
+$subject = 'Website aanvraag Daliasprojects';
 if ($subjectType !== '') {
     $subject .= ' - ' . $subjectType;
 }
@@ -53,7 +53,7 @@ $body = implode("\n", [
 ]);
 
 $headers = [
-    'From: Dalia Projects <' . DALIA_CONTACT_RECIPIENT . '>',
+    'From: Daliasprojects <' . DALIA_CONTACT_RECIPIENT . '>',
     'Reply-To: ' . $email,
     'Content-Type: text/plain; charset=UTF-8',
 ];

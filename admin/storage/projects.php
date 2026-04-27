@@ -37,7 +37,7 @@ return array (
     'sales_url' => 'https://www.sbcvastgoed.be/',
     'summary' => 'Wonen tussen stad en park, met veel licht, groen en een sterk gevoel van ruimte.',
     'quote' => 'Rongese Park zet in op open leefruimtes, groen en privacy aan de rand van de stad.',
-    'context' => 'Dit project toont de Dalia Projects-mix van stedelijke bereikbaarheid en een zachte woonomgeving.',
+    'context' => 'Dit project toont de Daliasprojects-mix van stedelijke bereikbaarheid en een zachte woonomgeving.',
     'hero' => 'https://images.squarespace-cdn.com/content/v1/66a1eaeaa923c50bf4382099/9b1834f5-fd48-4949-9336-3958489df9fa/970+2025_07_17+P3.jpg',
     'gallery' => 
     array (

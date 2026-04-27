@@ -163,6 +163,7 @@ function maatlas_admin_seed_settings(): array
         'contact_address_line_2' => '',
         'maps_embed_url' => '',
         'maps_link_url' => '',
+        'sectionVisibility' => maatlas_admin_default_section_visibility(),
         'socials' => [
             [
                 'label' => 'LinkedIn',
@@ -181,6 +182,63 @@ function maatlas_admin_seed_settings(): array
             ],
         ],
     ];
+}
+
+function maatlas_admin_section_groups(): array
+{
+    return [
+        'Homepage' => [
+            'home.hero' => 'Hero',
+            'home.brand_visual' => 'Architecturale visie',
+            'home.intro' => 'Visie / intro',
+            'home.projects' => 'Projecten selectie',
+            'home.land_lead' => 'Grond gezocht blok',
+        ],
+        'Projecten' => [
+            'projects.hero' => 'Hero',
+            'projects.current' => 'Lopende projecten',
+            'projects.preparation' => 'Projecten in voorbereiding',
+            'projects.future' => 'Toekomstige projecten',
+            'projects.realized' => 'Gerealiseerde projecten',
+        ],
+        'Projectdetail' => [
+            'project.hero' => 'Project hero',
+            'project.sales' => 'Belangrijke info en verkoop',
+            'project.overview' => 'Projectomschrijving en context',
+            'project.gallery' => 'Beelden / slideshow',
+        ],
+        'Over ons' => [
+            'about.hero' => 'Hero',
+            'about.chapters' => 'Wie zijn wij, waarden en vacatures',
+            'about.personnel' => 'Personeel',
+        ],
+        'Grond gezocht' => [
+            'land.hero' => 'Hero',
+            'land.form' => 'Aanpak en formulier',
+        ],
+        'Contact' => [
+            'contact.hero' => 'Hero',
+            'contact.form' => 'Contactformulier en gegevens',
+        ],
+        'Juridische pagina\'s' => [
+            'cookies.hero' => 'Cookiebeleid hero',
+            'cookies.content' => 'Cookiebeleid inhoud',
+            'terms.hero' => 'Voorwaarden hero',
+            'terms.content' => 'Voorwaarden inhoud',
+        ],
+    ];
+}
+
+function maatlas_admin_default_section_visibility(): array
+{
+    $visibility = [];
+    foreach (maatlas_admin_section_groups() as $sections) {
+        foreach ($sections as $key => $_label) {
+            $visibility[$key] = true;
+        }
+    }
+
+    return $visibility;
 }
 
 function maatlas_admin_clamp_int(mixed $value, int $default, int $min, int $max): int
@@ -219,6 +277,14 @@ function maatlas_admin_normalize_settings(array $settings): array
 {
     $seed = maatlas_admin_seed_settings();
     $socials = [];
+    $sectionVisibility = maatlas_admin_default_section_visibility();
+    $postedSectionVisibility = is_array($settings['sectionVisibility'] ?? null) ? $settings['sectionVisibility'] : [];
+
+    foreach ($sectionVisibility as $key => $_default) {
+        if (array_key_exists($key, $postedSectionVisibility)) {
+            $sectionVisibility[$key] = filter_var($postedSectionVisibility[$key], FILTER_VALIDATE_BOOLEAN);
+        }
+    }
 
     foreach (($settings['socials'] ?? $seed['socials']) as $social) {
         if (!is_array($social)) {
@@ -252,6 +318,7 @@ function maatlas_admin_normalize_settings(array $settings): array
         'contact_address_line_2' => trim((string) ($settings['contact_address_line_2'] ?? $seed['contact_address_line_2'])),
         'maps_embed_url' => trim((string) ($settings['maps_embed_url'] ?? $seed['maps_embed_url'])),
         'maps_link_url' => trim((string) ($settings['maps_link_url'] ?? $seed['maps_link_url'])),
+        'sectionVisibility' => $sectionVisibility,
         'socials' => $socials,
     ];
 }
@@ -642,7 +709,7 @@ function maatlas_admin_send_mail(string $to, string $subject, string $body): boo
 
     $from = maatlas_admin_mail_sender();
     $headers = [
-        'From: Dalia Projects <' . $from . '>',
+        'From: Daliasprojects <' . $from . '>',
         'Reply-To: ' . $from,
         'Content-Type: text/plain; charset=UTF-8',
     ];
@@ -677,9 +744,9 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title><?= maatlas_admin_e($title) ?> - Dalia Projects Admin</title>
+    <title><?= maatlas_admin_e($title) ?> - Daliasprojects Admin</title>
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="icon" type="image/png" href="../Webimages/Logo.png" />
+    <link rel="icon" type="image/png" href="../Webimages/logo.png" />
     <link rel="stylesheet" href="../styles.css?v=20260424-project-cards-modern" />
     <link rel="stylesheet" href="./admin.css?v=20260424-floating-right" />
   </head>
@@ -687,7 +754,7 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
     <header class="admin-topbar">
       <div class="admin-shell admin-topbar__inner">
         <div>
-          <p class="eyebrow">Dalia Projects</p>
+          <p class="eyebrow">Daliasprojects</p>
           <h1><?= maatlas_admin_e($title) ?></h1>
         </div>
         <?php if ($admin): ?>
@@ -734,6 +801,17 @@ function maatlas_admin_render_header(string $title, ?array $currentAdmin = null)
             <div class="button-row">
               <button class="btn btn--primary" type="button" data-admin-modal-close>Sluiten</button>
             </div>
+          </div>
+        </div>
+      <?php elseif ($flash && ($flash['type'] ?? 'info') === 'success'): ?>
+        <div class="admin-modal-backdrop admin-modal-backdrop--soft" data-admin-modal-backdrop>
+          <div class="admin-modal admin-modal--success" role="status" aria-live="polite" aria-labelledby="admin-modal-title">
+            <div class="admin-modal__header">
+              <p class="eyebrow">Opgeslagen</p>
+              <button class="admin-modal__close" type="button" aria-label="Popup sluiten" data-admin-modal-close>&times;</button>
+            </div>
+            <h2 id="admin-modal-title">Opslaan geslaagd</h2>
+            <p class="admin-modal__message"><?= maatlas_admin_e($flash['message'] ?? '') ?></p>
           </div>
         </div>
       <?php elseif ($flash): ?>

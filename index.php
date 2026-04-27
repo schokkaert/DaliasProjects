@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/includes/site.php';
-$pageTitle = 'Dalia Projects | Ontdek duurzame vastgoedmogelijkheden';
-$pageDescription = 'Dalia Projects ontwikkelt duurzame vastgoedprojecten met focus op vertrouwen, kwaliteit en meerwaarde.';
+$pageTitle = 'Daliasprojects | Ontdek duurzame vastgoedmogelijkheden';
+$pageDescription = 'Daliasprojects ontwikkelt duurzame vastgoedprojecten met focus op vertrouwen, kwaliteit en meerwaarde.';
 $activeNav = 'home';
 $bodyPage = 'home';
 $canonicalPath = './index.php';
@@ -10,6 +10,7 @@ $featuredProjects = array_slice(dalia_projects(), 0, 6);
 require __DIR__ . '/includes/header.php';
 ?>
     <main class="site-main">
+      <?php if (dalia_section_enabled('home.hero')): ?>
       <section class="hero hero--cinematic home-manifesto">
         <div class="hero__background" data-home-hero-media aria-hidden="true">
           <div class="hero-media__frame">
@@ -18,7 +19,7 @@ require __DIR__ . '/includes/header.php';
                 <source src="<?= dalia_e($settings['heroVideoUrl']) ?>" type="video/mp4" />
               </video>
             <?php else: ?>
-              <img class="hero-media__image" src="<?= dalia_e($settings['heroPosterUrl'] ?? './Webimages/dalia-hero-building-timelapse-poster.jpg') ?>" alt="Dalia Projects" />
+              <img class="hero-media__image" src="<?= dalia_e($settings['heroPosterUrl'] ?? './Webimages/dalia-hero-building-timelapse-poster.jpg') ?>" alt="Daliasprojects" />
             <?php endif; ?>
           </div>
           <div class="hero-media__scrim"></div>
@@ -26,7 +27,7 @@ require __DIR__ . '/includes/header.php';
         <div class="container hero__grid">
           <div class="hero__copy" data-reveal>
             <p class="eyebrow">Creating added value</p>
-            <h1>Dalia Projects</h1>
+            <h1>Daliasprojects</h1>
             <p class="hero__slogan">Building on trust</p>
             <p class="lead">Bouwen begint met vertrouwen. Door aandachtig te luisteren, helder te communiceren en duurzame oplossingen te ontwikkelen, creëren we vastgoed met blijvende meerwaarde voor bewoners, eigenaars, buurten en steden.</p>
             <p class="hero__intro">Onze projecten verbinden kwaliteit met functionaliteit: residentiële ontwikkelingen, kantoren, retail en gedeelde ruimtes die stedelijke transformatie versterken, groen integreren en waarde doorgeven aan toekomstige generaties.</p>
@@ -42,7 +43,9 @@ require __DIR__ . '/includes/header.php';
           </aside>
         </div>
       </section>
+      <?php endif; ?>
 
+      <?php if (dalia_section_enabled('home.brand_visual')): ?>
       <section class="brand-visual section--quiet" aria-label="Architecturale visie">
         <div class="container">
           <figure class="brand-visual__frame" data-reveal>
@@ -51,7 +54,9 @@ require __DIR__ . '/includes/header.php';
           </figure>
         </div>
       </section>
+      <?php endif; ?>
 
+      <?php if (dalia_section_enabled('home.intro')): ?>
       <section class="section intro-editorial">
         <div class="container intro-editorial__grid">
           <div class="intro-editorial__heading" data-reveal>
@@ -71,7 +76,9 @@ require __DIR__ . '/includes/header.php';
           </div>
         </div>
       </section>
+      <?php endif; ?>
 
+      <?php if (dalia_section_enabled('home.projects')): ?>
       <section class="section projects-showcase">
         <div class="container">
           <div class="section__heading">
@@ -89,13 +96,15 @@ require __DIR__ . '/includes/header.php';
           </div>
         </div>
       </section>
+      <?php endif; ?>
 
+      <?php if (dalia_section_enabled('home.land_lead')): ?>
       <section class="section land-lead">
         <div class="container land-lead__grid">
           <div class="land-lead__copy" data-reveal>
             <p class="eyebrow">Grond gezocht</p>
             <h2>Heeft u bouwgrond te koop?</h2>
-            <p>Dalia Projects is actief op zoek naar nieuwe projectlocaties. We beoordelen bouwgrond snel, correct en discreet, met oog voor een faire marktprijs, financiële haalbaarheid en volledige ontzorging.</p>
+            <p>Daliasprojects is actief op zoek naar nieuwe projectlocaties. We beoordelen bouwgrond snel, correct en discreet, met oog voor een faire marktprijs, financiële haalbaarheid en volledige ontzorging.</p>
             <div class="button-row">
               <a class="btn btn--primary" href="./contact.php">Neem contact op</a>
               <a class="btn btn--secondary" href="./grond-gezocht.php">Meer over grond verkopen</a>
@@ -108,5 +117,6 @@ require __DIR__ . '/includes/header.php';
           </div>
         </div>
       </section>
+      <?php endif; ?>
     </main>
 <?php require __DIR__ . '/includes/footer.php'; ?>

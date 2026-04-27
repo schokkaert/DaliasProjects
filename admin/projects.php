@@ -695,7 +695,6 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
         <?php endforeach; ?>
       <?php endif; ?>
     </div>
-    <a href="#opslaan">Opslaan</a>
   </aside>
 
   <article class="admin-card admin-settings-panel">
@@ -790,7 +789,7 @@ maatlas_admin_render_header('Projecten beheren', $currentAdmin);
             </label>
             <label class="admin-project-field--wide">
               Render / hoofdbeeld
-              <input type="text" name="projects[<?= maatlas_admin_e($index) ?>][hero]" value="<?= maatlas_admin_e($project['hero'] ?? '') ?>" placeholder="/Images/project.jpg of https://..." />
+              <input type="text" name="projects[<?= maatlas_admin_e($index) ?>][hero]" value="<?= maatlas_admin_e($project['hero'] ?? '') ?>" placeholder="./Images/project.jpg of https://..." />
             </label>
           </div>
 

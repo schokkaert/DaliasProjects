@@ -98,6 +98,7 @@ $currentAdmin = maatlas_admin_require_login();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         maatlas_admin_require_csrf();
+        $action = (string) ($_POST['action'] ?? 'save_personnel');
         $rawPeople = $_POST['people'] ?? [];
         if (!is_array($rawPeople)) {
             throw new RuntimeException('Personeelsgegevens konden niet worden gelezen.');
@@ -112,6 +113,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($normalized !== null) {
                 $people[] = $normalized;
             }
+        }
+
+        if ($action === 'add_person') {
+            $people[] = [
+                'id' => 'persoon-' . bin2hex(random_bytes(4)),
+                'name' => 'Nieuw personeelslid',
+                'roles' => [],
+                'biv' => '',
+                'phone' => '',
+                'email' => '',
+                'photo' => './Webimages/logo.png',
+                'active' => false,
+            ];
+
+            maatlas_admin_storage_write(DALIA_ADMIN_PERSONNEL_FILE, $people);
+            maatlas_admin_flash('Nieuw personeelslid toegevoegd. Vul de gegevens aan en sla op.', 'success');
+            maatlas_admin_redirect('./personnel.php#person-' . (count($people) - 1));
+        }
+
+        if ($action !== 'save_personnel') {
+            throw new RuntimeException('Onbekende actie.');
         }
 
         maatlas_admin_storage_write(DALIA_ADMIN_PERSONNEL_FILE, $people);
@@ -131,7 +153,6 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
 ?>
 <nav class="admin-nav" aria-label="Admin navigatie">
   <a class="btn btn--secondary btn--small" href="./">Instellingen</a>
-  <a class="btn btn--secondary btn--small" href="./projects.php">Projecten beheren</a>
   <a class="btn btn--secondary btn--small" href="../over.php#personeel">Personeel bekijken</a>
 </nav>
 
@@ -141,15 +162,20 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
     <?php foreach ($people as $index => $person): ?>
       <a href="#person-<?= maatlas_admin_e($index) ?>"><?= maatlas_admin_e($person['name'] ?? 'Persoon') ?></a>
     <?php endforeach; ?>
-    <a href="#opslaan">Opslaan</a>
   </aside>
 
   <article class="admin-card admin-settings-panel">
     <p class="eyebrow">Over ons</p>
     <h2>Personeel beheren</h2>
     <p class="admin-help">Upload een foto, kies functies en vul contactgegevens in. Functies worden op de site met koppeltekens weergegeven.</p>
+    <div class="admin-project-toolbar">
+      <p class="admin-help">Maak eerst een nieuw personeelslid aan, vul daarna de velden in en sla op.</p>
+      <div class="admin-project-toolbar__actions">
+        <button class="btn btn--secondary btn--small" type="submit" name="action" value="add_person" form="personnel-form" formnovalidate>Nieuw personeelslid</button>
+      </div>
+    </div>
 
-    <form method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form" data-floating-submit>
+    <form id="personnel-form" method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form" data-floating-submit>
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
 
       <?php foreach ($people as $index => $person): ?>
@@ -205,7 +231,7 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
       <?php endforeach; ?>
 
       <div id="opslaan" class="button-row admin-settings-section">
-        <button class="btn btn--primary" type="submit">Personeel opslaan</button>
+        <button class="btn btn--primary" type="submit" name="action" value="save_personnel">Personeel opslaan</button>
       </div>
     </form>
   </article>

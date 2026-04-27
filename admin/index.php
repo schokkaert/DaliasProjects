@@ -27,6 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $addressLine2 = trim((string) ($_POST['contact_address_line_2'] ?? ''));
         $mapsEmbedUrl = trim((string) ($_POST['maps_embed_url'] ?? ''));
         $mapsLinkUrl = trim((string) ($_POST['maps_link_url'] ?? ''));
+        $postedSectionVisibility = is_array($_POST['section_visibility'] ?? null) ? $_POST['section_visibility'] : [];
+        $sectionVisibility = [];
+
+        foreach (maatlas_admin_default_section_visibility() as $key => $_default) {
+            $sectionVisibility[$key] = isset($postedSectionVisibility[$key]);
+        }
 
         if ($heroVideoUrl !== '' && !preg_match('~\.(mp4|webm|mov)(\?.*)?$~i', $heroVideoUrl)) {
             throw new RuntimeException('Gebruik een directe .mp4, .webm of .mov videolink.');
@@ -101,6 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'contact_address_line_2' => $addressLine2,
             'maps_embed_url' => $mapsEmbedUrl,
             'maps_link_url' => $mapsLinkUrl,
+            'sectionVisibility' => $sectionVisibility,
             'socials' => $postedSocials,
         ]);
 
@@ -161,6 +168,7 @@ maatlas_admin_render_header('Admin', $currentAdmin);
     <div class="admin-settings-menu__group">
       <p class="admin-settings-menu__title">Layout & weergave</p>
       <a href="#layout-weergave">Overzicht layout</a>
+      <a href="#sections-zichtbaarheid">Sections tonen/verbergen</a>
       <a href="#homepage-film">Homepage film</a>
       <a href="#titelbalk">Titelbalk</a>
     </div>
@@ -177,7 +185,6 @@ maatlas_admin_render_header('Admin', $currentAdmin);
       <a href="./projects.php">Projecten beheren</a>
       <a href="./personnel.php">Personeel</a>
     </div>
-    <a href="#opslaan">Opslaan</a>
   </aside>
 
   <article class="admin-card admin-settings-panel">
@@ -193,6 +200,25 @@ maatlas_admin_render_header('Admin', $currentAdmin);
           <h3>Vormgeving van de site</h3>
           <p>Hier beheer je presentatie en visuele opbouw. Deze instellingen wijzigen de look van de site, niet de inhoudelijke contact- of bedrijfsgegevens.</p>
         </div>
+
+        <fieldset id="sections-zichtbaarheid" class="admin-settings-section">
+          <legend>Sections activeren of deactiveren</legend>
+          <?php $sectionVisibility = is_array($settings['sectionVisibility'] ?? null) ? $settings['sectionVisibility'] : maatlas_admin_default_section_visibility(); ?>
+          <?php foreach (maatlas_admin_section_groups() as $groupLabel => $sections): ?>
+            <div class="admin-settings-section">
+              <p class="admin-settings-menu__title"><?= maatlas_admin_e($groupLabel) ?></p>
+              <div class="admin-role-grid">
+                <?php foreach ($sections as $key => $label): ?>
+                  <label class="admin-check">
+                    <input type="checkbox" name="section_visibility[<?= maatlas_admin_e($key) ?>]" <?= !empty($sectionVisibility[$key]) ? 'checked' : '' ?> />
+                    <?= maatlas_admin_e($label) ?>
+                  </label>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          <?php endforeach; ?>
+          <p class="admin-help">Uitgevinkte sections worden niet gerenderd op de publieke site. Projecten en personeelsleden blijven apart beheerbaar via hun eigen actief/inactief status.</p>
+        </fieldset>
 
         <fieldset id="homepage-film" class="admin-fieldset--media admin-settings-section">
           <legend>Achtergrondfilm homepage</legend>
@@ -213,12 +239,12 @@ maatlas_admin_render_header('Admin', $currentAdmin);
           </div>
           <label>
             Movie URL
-            <input type="text" name="heroVideoUrl" value="<?= maatlas_admin_e($settings['heroVideoUrl'] ?? '') ?>" placeholder="/Webimages/homepage-film.mp4" />
+            <input type="text" name="heroVideoUrl" value="<?= maatlas_admin_e($settings['heroVideoUrl'] ?? '') ?>" placeholder="./Webimages/homepage-film.mp4" />
           </label>
           <p class="admin-help">Gebruik een directe link naar een .mp4, .webm of .mov bestand. Laat leeg om alleen de poster te tonen.</p>
           <label>
             Poster-afbeelding fallback
-            <input type="text" name="heroPosterUrl" value="<?= maatlas_admin_e($settings['heroPosterUrl'] ?? '') ?>" placeholder="/Webimages/poster.jpg" />
+            <input type="text" name="heroPosterUrl" value="<?= maatlas_admin_e($settings['heroPosterUrl'] ?? '') ?>" placeholder="./Webimages/poster.jpg" />
           </label>
           <p class="admin-help">Deze afbeelding wordt getoond tijdens laden, bij fout of wanneer bezoekers minder beweging verkiezen.</p>
         </fieldset>
@@ -315,7 +341,7 @@ maatlas_admin_render_header('Admin', $currentAdmin);
           </label>
           <label>
             Privacy e-mail
-            <input type="email" name="privacy_email" value="<?= maatlas_admin_e($settings['privacy_email'] ?? '') ?>" placeholder="privacy@daliaprojects.be" />
+            <input type="email" name="privacy_email" value="<?= maatlas_admin_e($settings['privacy_email'] ?? '') ?>" placeholder="privacy@daliasprojects.be" />
           </label>
           <p class="admin-help">Mail gebruikt eerst afzender e-mail, daarna publieke of privacy e-mail, daarna info@daliasprojects.be.</p>
         </fieldset>
