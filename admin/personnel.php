@@ -98,7 +98,7 @@ $currentAdmin = maatlas_admin_require_login();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         maatlas_admin_require_csrf();
-        $action = (string) ($_POST['action'] ?? 'save_personnel');
+        $action = isset($_POST['add_person']) ? 'add_person' : 'save_personnel';
         $rawPeople = $_POST['people'] ?? [];
         if (!is_array($rawPeople)) {
             throw new RuntimeException('Personeelsgegevens konden niet worden gelezen.');
@@ -171,12 +171,13 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
     <div class="admin-project-toolbar">
       <p class="admin-help">Maak eerst een nieuw personeelslid aan, vul daarna de velden in en sla op.</p>
       <div class="admin-project-toolbar__actions">
-        <button class="btn btn--secondary btn--small" type="submit" name="action" value="add_person" form="personnel-form" formnovalidate>Nieuw personeelslid</button>
+        <button class="btn btn--secondary btn--small" type="submit" name="add_person" value="1" form="personnel-form" formnovalidate>Nieuw personeelslid</button>
       </div>
     </div>
 
     <form id="personnel-form" method="post" enctype="multipart/form-data" class="admin-form admin-form--single admin-project-form" data-floating-submit>
       <input type="hidden" name="csrf" value="<?= maatlas_admin_e($csrf) ?>" />
+      <input type="hidden" name="action" value="save_personnel" />
 
       <?php foreach ($people as $index => $person): ?>
         <?php $selectedRoles = is_array($person['roles'] ?? null) ? $person['roles'] : []; ?>
@@ -231,7 +232,7 @@ maatlas_admin_render_header('Personeel', $currentAdmin);
       <?php endforeach; ?>
 
       <div id="opslaan" class="button-row admin-settings-section">
-        <button class="btn btn--primary" type="submit" name="action" value="save_personnel">Personeel opslaan</button>
+        <button class="btn btn--primary" type="submit" data-floating-submit-source>Personeel opslaan</button>
       </div>
     </form>
   </article>
